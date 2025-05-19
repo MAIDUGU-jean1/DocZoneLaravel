@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Hash;
 class AuthController extends Controller
 //This function randles the users registeration
 {
+<<<<<<< HEAD
     public function register(Request $request){
            
 if($request->role == 'patient'){
@@ -28,6 +29,21 @@ if($request->role == 'patient'){
      $imagePath = $request->file('profile_picture')->store('profiles', 'public');     
           
           User::create([
+=======
+    public function register(Request $request)
+    {
+
+        if ($request->role == 'patient') {
+            $validated = $request->validate([
+                'name' => 'required|string|max:255',
+                'email' => 'required|email|unique:users,email',
+                'phone' => 'nullable|string|max:20',
+                'role' => 'nullable|in:patient,doctor',
+                'password' => 'required|string|confirmed|min:6',
+                // 'terms' => 'accepted',
+            ]);
+            User::create([
+>>>>>>> 6dce89762061b36e3d4d903e84f430e2b2b59ce7
                 'name' => $validated['name'],
                 'email' => $validated['email'],
                 'phone' => $validated['phone'] ?? null,
@@ -37,6 +53,7 @@ if($request->role == 'patient'){
                 'profile_picture' => $imagePath
 
             ]);
+<<<<<<< HEAD
            $user->profile_picture = $imagePath;
             $user->save();
            
@@ -57,6 +74,22 @@ if($request->role == 'patient'){
     ]);
         
           User::create([
+=======
+
+            dd($request->all());
+        } else {
+            $validated = $request->validate([
+                'name' => 'required|string|max:255',
+                'email' => 'required|email|unique:users,email',
+                'phone' => 'nullable|string|max:20',
+                'specialization' => 'required_if:role,doctor|string|nullable|max:255',
+                'password' => 'required|string|confirmed|min:6',
+                'role' => 'required|string',
+
+                // 'terms' => 'accepted', 
+            ]);
+            User::create([
+>>>>>>> 6dce89762061b36e3d4d903e84f430e2b2b59ce7
                 'name' => $validated['name'],
                 'email' => $validated['email'],
                 'phone' => $validated['phone'] ?? null,
@@ -66,6 +99,7 @@ if($request->role == 'patient'){
                 'profile_picture' => $imagePath
 
             ]);
+<<<<<<< HEAD
             $user->profile_picture = $imagePath;
             $user->save();
            
@@ -88,4 +122,12 @@ if($request->role == 'patient'){
     }
         
 }
+=======
+        }
+>>>>>>> 6dce89762061b36e3d4d903e84f430e2b2b59ce7
 
+
+
+        return redirect()->back()->with('success', 'Registration successful!');
+    }
+}
