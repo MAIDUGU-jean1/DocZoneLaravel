@@ -22,10 +22,10 @@ class User extends Authenticatable
         'name', 'email', 'phone', 'role', 'specialization', 'password',
     ];
     
-    public function role()
-    {
-        return $this->belongsTo(Role::class);
-    }
+    // public function role()
+    // {
+    //     return $this->belongsTo(Role::class);
+    // }
 
 
 
