@@ -9,18 +9,19 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    public function register(Request $request){
-        
-if($request->role == 'patient'){
-    $validated = $request->validate([
-        'name' => 'required|string|max:255',
-        'email' => 'required|email|unique:users,email',
-        'phone' => 'nullable|string|max:20',
-        'role' => 'nullable|in:patient,doctor',
-        'password' => 'required|string|confirmed|min:6',
-        // 'terms' => 'accepted',
-    ]);
-          User::create([
+    public function register(Request $request)
+    {
+
+        if ($request->role == 'patient') {
+            $validated = $request->validate([
+                'name' => 'required|string|max:255',
+                'email' => 'required|email|unique:users,email',
+                'phone' => 'nullable|string|max:20',
+                'role' => 'nullable|in:patient,doctor',
+                'password' => 'required|string|confirmed|min:6',
+                // 'terms' => 'accepted',
+            ]);
+            User::create([
                 'name' => $validated['name'],
                 'email' => $validated['email'],
                 'phone' => $validated['phone'] ?? null,
@@ -29,21 +30,20 @@ if($request->role == 'patient'){
                 'role' => $request->role,
 
             ]);
-           
-         dd($request->all());
 
-} else{
-    $validated = $request->validate([
-        'name' => 'required|string|max:255',
-        'email' => 'required|email|unique:users,email',
-        'phone' => 'nullable|string|max:20',
-        'specialization' => 'required_if:role,doctor|string|nullable|max:255',
-        'password' => 'required|string|confirmed|min:6',
-        'role' => 'required|string',
+            dd($request->all());
+        } else {
+            $validated = $request->validate([
+                'name' => 'required|string|max:255',
+                'email' => 'required|email|unique:users,email',
+                'phone' => 'nullable|string|max:20',
+                'specialization' => 'required_if:role,doctor|string|nullable|max:255',
+                'password' => 'required|string|confirmed|min:6',
+                'role' => 'required|string',
 
-        // 'terms' => 'accepted', 
-    ]);
-          User::create([
+                // 'terms' => 'accepted', 
+            ]);
+            User::create([
                 'name' => $validated['name'],
                 'email' => $validated['email'],
                 'phone' => $validated['phone'] ?? null,
@@ -52,16 +52,10 @@ if($request->role == 'patient'){
                 'role' => $request->role,
 
             ]);
-           
-         dd($request->all());
-    
-
-}
-        
-     
-        
-            return redirect()->back()->with('success', 'Registration successful!');
         }
-        
-    }
 
+
+
+        return redirect()->back()->with('success', 'Registration successful!');
+    }
+}
