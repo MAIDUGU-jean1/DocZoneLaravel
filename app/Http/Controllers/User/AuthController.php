@@ -37,9 +37,10 @@ if($request->role == 'patient'){
                 'profile_picture' => $imagePath
 
             ]);
+           $user->profile_picture = $imagePath;
+            $user->save();
            
-           
-    return redirect()->back()->with('success', 'Registration successful!');
+    return redirect()->back()->with('success', 'Registration successful!',['user' => $user]);
 
 } else{
     $validated = $request->validate([
@@ -65,8 +66,10 @@ if($request->role == 'patient'){
                 'profile_picture' => $imagePath
 
             ]);
+            $user->profile_picture = $imagePath;
+            $user->save();
            
- return redirect()->back()->with('success', 'Registration successful!');
+ return redirect()->back()->with('success', 'Registration successful!', ['user' => $user]);
     
 }
         }

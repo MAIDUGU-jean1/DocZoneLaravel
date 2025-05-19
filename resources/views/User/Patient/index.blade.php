@@ -477,7 +477,7 @@
                     <!-- User Profile -->
                     <div class="relative " id="userProfileContainer">
                         <button id="accountBtn" class="relative flex items-center">
-                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User"
+                            <img src="{{ asset('storage/' . Auth::user()?->profile_picture) }}" alt="User"
                                 class="w-8 h-8 rounded-full border-2 border-primary">
                             <span
                                 class="absolute bottom-0 right-0 bg-green-500 h-3 w-3 rounded-full border-2 border-white dark:border-gray-900"></span>
