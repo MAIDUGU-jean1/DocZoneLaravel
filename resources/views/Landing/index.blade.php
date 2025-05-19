@@ -73,7 +73,8 @@
             <button onclick="toggleModal('registerModal')"
                 class="absolute top-4 right-6 text-black text-2xl font-bold">&times;</button>
             <h2 class="text-2xl mb-6 font-bold text-center text-[#5D5CDE]">Register</h2>
-    <form action="#" method="POST" class="space-y-5">
+    <form action="{{ route('register') }}" method="POST" class="space-y-5">
+        @csrf
             <div>
                 <label for="name" class="block text-sm font-medium text-gray-700">Full Name</label>
                 <input type="text" id="name" name="name" required class="mt-1 w-full px-4 py-1 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500" />
