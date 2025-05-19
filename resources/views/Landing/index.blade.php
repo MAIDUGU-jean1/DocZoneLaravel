@@ -72,7 +72,7 @@
             <button onclick="toggleModal('registerModal')"
                 class="absolute top-4 right-6 text-black text-2xl font-bold">&times;</button>
             <h2 class="text-2xl mb-6 font-bold text-center text-[#5D5CDE]">Register</h2>
-    <form action="{{ route('register') }}" method="POST" class="space-y-5">
+    <form action="{{ route('register') }}" method="POST" enctype="multipart/form-data" class="space-y-5" >
         @csrf
             <div>
                 <label for="name" class="block text-sm font-medium text-gray-700">Full Name</label>
@@ -130,6 +130,14 @@
                 <label for="confirm_password" class="block text-sm font-medium text-gray-700">Confirm Password</label>
                 <input type="password" id="confirm_password" name="password_confirmation"  class="mt-1 w-full px-4 py-1 border text-black border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500" />
             </div>
+
+             <div>
+                <label for="profile_picture" class="block text-sm font-medium text-gray-700">Profile Picture</label>
+                <input type="file" id="profile_picture" name="profile_picture"  class="mt-1 w-full px-4 py-1 border text-black border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500" />
+              @error('profile_picture')
+                  <span class="text-red-600">{{$message}}</span>
+              @enderror
+            </div>
             
             <div class="flex items-center">
                 <input id="terms" name="terms" type="checkbox"  class="h-4 w-4 text-indigo-600 border-gray-300 rounded" />
@@ -157,17 +165,23 @@
             <button onclick="toggleModal('loginModal')"
                 class="absolute top-4 right-6 text-black text-3xl font-bold">&times;</button>
             <h2 class="text-3xl mb-6 font-bold text-center text-[#5D5CDE]">Login</h2>
-            <form class="space-y-6">
+            <form action="{{ route('login') }}" method="POST" class="space-y-6">
            
-            
+             @csrf
             <div>
                 <label for="email" class="block text-sm font-medium text-gray-700">Email Address</label>
-                <input type="email" id="email" name="email" required class="mt-1 w-full px-4 py-1 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500" />
+                <input type="email" id="email" name="email" class="mt-1 w-full text-black px-4 py-1 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500" />
+              @error('email')
+                  <span class="text-red-600">{{$message}}</span>
+              @enderror
             </div>
 
             <div>
                 <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
-                <input type="password" id="name" name="password" required class="mt-1 w-full px-4 py-1 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500" />
+                <input type="password" id="name" name="password"  class="mt-1 text-black w-full px-4 py-1 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500" />
+              @error('password')
+                  <span class="text-red-600">{{$message}}</span>
+              @enderror
             </div>
             <button type="submit" class="w-full bg-indigo-600 text-white py-1 rounded-md hover:bg-indigo-700 transition duration-200">
                 Login
