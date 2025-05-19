@@ -12,5 +12,5 @@ Route::get('/', function () {
 
 Route::get('/index', [LandingPageController::class, 'Index'])->name('showLanding');
 Route::get('/user/index', [PatientController::class, 'UserIndex'])->name('ShowUserLanding');
-//Route to render the registeratin of users
 Route::post('/register', [AuthController::class, 'register'])->name('register')->middleware('web');
+Route::post('/login', [AuthController::class, 'login'])->name('login')->middleware('web');
