@@ -569,7 +569,7 @@
                                 class="hidden container  fixed right-0 w-fit bg-white dark:bg-gray-800 rounded-lg shadow-lg z-50">
                                 <div class="p-4 border-b border-gray-200 dark:border-gray-700">
                                     <div class="flex items-center">
-                                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User"
+                                        <img src="{{ asset('storage/' . Auth::user()?->profile_picture) }}" alt="User"
                                             class="w-14 h-14 rounded-full mr-3">
                                         <div>
                                             <h4 class="font-bold text-gray-900 dark:text-white">Michael Rodriguez</h4>
@@ -932,7 +932,7 @@
                     <!-- User Info -->
                     <div class="flex items-center">
                         <div class="relative">
-                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Michael Rodriguez"
+                            <img src="{{ asset('storage/' . Auth::user()?->profile_picture) }}" alt="Michael Rodriguez"
                                 class="w-16 h-16 rounded-full border-4 border-white dark:border-gray-700 shadow-md">
                             <span
                                 class="absolute bottom-0 right-0 bg-green-500 h-4 w-4 rounded-full border-2 border-white dark:border-gray-800"></span>
@@ -1071,7 +1071,7 @@
                         <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Profile
                             Photo</label>
                         <div class="flex items-center mt-2">
-                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Current Profile Photo"
+                            <img src="{{ asset('storage/' . Auth::user()?->profile_picture) }}" alt="Current Profile Photo"
                                 class="w-16 h-16 rounded-full object-cover">
                             <div class="ml-4">
                                 <button type="button"
@@ -1154,7 +1154,7 @@
                         <div
                             class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-md p-4">
                             <div class="flex items-center">
-                                <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
+                                <img src="{{ asset('storage/' . Auth::user()?->profile_picture) }}"
                                     alt="Dr. Marcus Johnson" class="w-12 h-12 rounded-full object-cover">
                                 <div class="ml-3">
                                     <h5 class="font-medium text-gray-900 dark:text-white">Dr. Marcus Johnson</h5>
