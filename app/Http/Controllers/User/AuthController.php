@@ -66,6 +66,7 @@ class AuthController extends Controller
             ]);
         }
         Auth::login($user);
+       
 
         return redirect()->route('ShowUserLanding')->with('success', 'Registration successful!');
     }
@@ -79,6 +80,9 @@ class AuthController extends Controller
         ]);
 
         if (Auth::attempt($validated)) {
+              if (Auth::user()->role =="Doctor"){
+           return redirect()->route('doctorindex');
+        }
            
             return redirect()->route('ShowUserLanding')->with('success', 'You have logged in successfully!');
         }
@@ -87,8 +91,11 @@ class AuthController extends Controller
     }
     
     public function logout(Request $request){
+    
         Auth::logout();
         $request->session()->regenerate();
+
+     
 
         return redirect()->route('showLanding'); 
     }
