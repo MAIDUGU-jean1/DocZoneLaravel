@@ -569,12 +569,13 @@
                                 class="hidden container  fixed right-0 w-fit bg-white dark:bg-gray-800 rounded-lg shadow-lg z-50">
                                 <div class="p-4 border-b border-gray-200 dark:border-gray-700">
                                     <div class="flex items-center">
-                                        <img src="{{ asset('storage/' . Auth::user()?->profile_picture) }}" alt="User"
-                                            class="w-14 h-14 rounded-full mr-3">
+                                        <img src="{{ asset('storage/' . Auth::user()?->profile_picture) }}"
+                                            alt="User" class="w-14 h-14 rounded-full mr-3">
                                         <div>
-                                            <h4 class="font-bold text-gray-900 dark:text-white">Michael Rodriguez</h4>
+                                            <h4 class="font-bold text-gray-900 dark:text-white">
+                                                {{ Auth::user()?->name }}</h4>
                                             <p class="text-sm text-gray-600 dark:text-gray-400">
-                                                michael.rodriguez@example.com</p>
+                                                {{ Auth::user()?->email }}</p>
                                             <span
                                                 class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary bg-opacity-10 text-primary mt-1">
                                                 <i class="fas fa-check-circle mr-1"></i> Premium Member
@@ -936,14 +937,16 @@
                     <!-- User Info -->
                     <div class="flex items-center">
                         <div class="relative">
-                            <img src="{{ asset('storage/' . Auth::user()?->profile_picture) }}" alt="Michael Rodriguez"
+                            <img src="{{ asset('storage/' . Auth::user()?->profile_picture) }}"
+                                alt="Michael Rodriguez"
                                 class="w-16 h-16 rounded-full border-4 border-white dark:border-gray-700 shadow-md">
                             <span
                                 class="absolute bottom-0 right-0 bg-green-500 h-4 w-4 rounded-full border-2 border-white dark:border-gray-800"></span>
                         </div>
                         <div class="ml-4">
-                            <h4 class="font-bold text-gray-900 dark:text-white">Michael Rodriguez</h4>
-                            <p class="text-sm text-gray-600 dark:text-gray-400">Member since 2022</p>
+                            <h4 class="font-bold text-gray-900 dark:text-white">{{ Auth::user()->name }}</h4>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Member since
+                                {{ Auth::user()->created_at->format('Y') }}</p>
                             <span
                                 class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary bg-opacity-10 text-primary mt-1">
                                 Premium Plan
@@ -1039,19 +1042,19 @@
                     <div>
                         <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Full
                             Name</label>
-                        <input type="text" value="Michael Rodriguez"
+                        <input type="text" value="{{ Auth::user()->name }}"
                             class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-base focus:outline-none focus:ring-2 focus:ring-primary">
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email
                             Address</label>
-                        <input type="email" value="michael.rodriguez@example.com"
+                        <input type="email" value="{{ Auth::user()->email }}"
                             class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-base focus:outline-none focus:ring-2 focus:ring-primary">
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Phone
                             Number</label>
-                        <input type="tel" value="(555) 123-4567"
+                        <input type="tel" value="{{ Auth::user()->phone }}"
                             class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-base focus:outline-none focus:ring-2 focus:ring-primary">
                     </div>
                     <div>
@@ -1075,8 +1078,8 @@
                         <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Profile
                             Photo</label>
                         <div class="flex items-center mt-2">
-                            <img src="{{ asset('storage/' . Auth::user()?->profile_picture) }}" alt="Current Profile Photo"
-                                class="w-16 h-16 rounded-full object-cover">
+                            <img src="{{ asset('storage/' . Auth::user()?->profile_picture) }}"
+                                alt="Current Profile Photo" class="w-16 h-16 rounded-full object-cover">
                             <div class="ml-4">
                                 <button type="button"
                                     class="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-md hover:bg-gray-300 dark:hover:bg-gray-600 text-sm">Change
