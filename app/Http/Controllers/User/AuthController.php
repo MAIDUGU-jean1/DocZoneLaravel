@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\PatientController;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -25,7 +26,7 @@ class AuthController extends Controller
 
             $imagePath = $request->file('profile_picture')->store('profiles', 'public');
 
-            User::create([
+           $user = User::create([
                 'name' => $validated['name'],
                 'email' => $validated['email'],
                 'phone' => $validated['phone'] ?? null,
@@ -34,6 +35,7 @@ class AuthController extends Controller
                 'role' => $request->role,
                 'profile_picture' => $imagePath,
             ]);
+                Auth::login($user);
         } else {
             $validated = $request->validate([
                 'name' => 'required|string|max:255',
@@ -48,7 +50,7 @@ class AuthController extends Controller
             $imagePath = $request->file('profile_picture')->store('profiles', 'public');
 
                 // 'terms' => 'accepted', 
-            User::create([
+            $user = User::create([
                 'name' => $validated['name'],
                 'email' => $validated['email'],
                 'phone' => $validated['phone'] ?? null,
@@ -58,6 +60,7 @@ class AuthController extends Controller
                 'profile_picture' => $imagePath,
             ]);
         }
+        Auth::login($user);
 
         return redirect()->route('ShowUserLanding')->with('success', 'Registration successful!');
     }
@@ -71,9 +74,17 @@ class AuthController extends Controller
         ]);
 
         if (Auth::attempt($validated)) {
+           
             return redirect()->route('ShowUserLanding')->with('success', 'You have logged in successfully!');
         }
 
         return redirect()->back()->with('error', 'Invalid credentials.');
+    }
+    
+    public function logout(Request $request){
+        Auth::logout();
+        $request->session()->regenerate();
+
+        return redirect()->route('showLanding'); 
     }
 }

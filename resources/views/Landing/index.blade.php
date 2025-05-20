@@ -62,6 +62,11 @@
             </div>
         </nav>
     </header>
+@if (session('success'))
+    <span class="alert alert-success">
+        {{ session('success') }}
+    </span>
+@endif
 
 
     <!-- Register Modal -->

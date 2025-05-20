@@ -611,10 +611,14 @@
                                     </a>
                                 </div>
                                 <div class="border-t border-gray-200 dark:border-gray-700 py-2">
-                                    <a href="#"
+                                  <form action="{{ route('logout') }}" method="POST">
+                                    @csrf
+                                       <a href=""
                                         class="flex text-red-500 items-center px-4 py-2 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">
-                                        <i class="fas fa-sign-out-alt mr-3 text-red-500 w-5"></i> Sign Out
+                                        <i class="fas fa-sign-out-alt mr-3 text-red-500 w-5"></i> <button type="submit">Sign Out</button>
                                     </a>
+                                  </form>
+                                
                                 </div>
                             </div>
                         </div>
