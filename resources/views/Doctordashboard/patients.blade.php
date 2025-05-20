@@ -1,25 +1,5 @@
-<!DOCTYPE html>
-<html lang="en" class="dark">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Doctor's Patients</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-    };
-  </script>
-</head>
-<body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-100">
-
-  <!-- Header -->
-  <header class="bg-white dark:bg-gray-800 shadow p-4 flex items-center justify-between">
-    <h1 class="text-2xl font-bold">Dr. Ahmed's Patients</h1>
-    <button id="toggleDark" class="bg-indigo-600 text-white px-3 py-1 rounded hover:bg-indigo-700 transition">
-      Toggle Dark Mode
-    </button>
-  </header>
+<x-app>
+    
 
   <!-- Patients List -->
   <main class="p-6 max-w-7xl mx-auto">
@@ -68,10 +48,6 @@
     </div>
   </main>
 
-  <script>
-    document.getElementById('toggleDark').addEventListener('click', () => {
-      document.documentElement.classList.toggle('dark');
-    });
-  </script>
-</body>
-</html>
+
+
+</x-app>

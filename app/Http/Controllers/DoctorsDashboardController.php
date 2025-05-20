@@ -17,4 +17,8 @@ class DoctorsDashboardController extends Controller
     public function doctorappointment(){
         return view('Doctordashboard.appointment');
     }
+
+    public function doctorpatient(){
+        return view('Doctordashboard.patients');
+    }
 }

@@ -49,13 +49,11 @@ class AuthController extends Controller
 
             $imagePath = $request->file('profile_picture')->store('profiles', 'public');
 
-<<<<<<< HEAD
-                // 'terms' => 'accepted', 
-            $user = User::create([
-=======
+
+         
+
             // 'terms' => 'accepted', 
             User::create([
->>>>>>> ddf04deceee67f12d7e869e2525cc06a644ed87d
                 'name' => $validated['name'],
                 'email' => $validated['email'],
                 'phone' => $validated['phone'] ?? null,
@@ -65,6 +63,7 @@ class AuthController extends Controller
                 'profile_picture' => $imagePath,
             ]);
         }
+        $user = Auth::user();
         Auth::login($user);
        
 
@@ -84,7 +83,7 @@ class AuthController extends Controller
            return redirect()->route('doctorindex');
         }
            
-            return redirect()->route('ShowUserLanding')->with('success', 'You have logged in successfully!');
+            return redirect()->route('doctorindex')->with('success', 'You have logged in successfully!');
         }
 
         return redirect()->back()->with('error', 'Invalid credentials.');

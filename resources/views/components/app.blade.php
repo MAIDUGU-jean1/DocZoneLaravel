@@ -42,7 +42,7 @@
             <nav class="space-y-4">
                 <a href="{{route('doctorindex')}}" class="block px-4 py-2 rounded hover:bg-blue-100 dark:hover:bg-gray-700 transition">Dashboard</a>
                 <a href="{{route('doctorappointment')}}" class="block px-4 py-2 rounded hover:bg-blue-100 dark:hover:bg-gray-700 transition">Appointments</a>
-                <a href="#" class="block px-4 py-2 rounded hover:bg-blue-100 dark:hover:bg-gray-700 transition">Patients</a>
+                <a href="{{route('doctorpatient')}}" class="block px-4 py-2 rounded hover:bg-blue-100 dark:hover:bg-gray-700 transition">Patients</a>
                 <a href="#" class="block px-4 py-2 rounded hover:bg-blue-100 dark:hover:bg-gray-700 transition">Messages</a>
                 <a href="{{route('doctorprofile')}}" class="block px-4 py-2 rounded hover:bg-blue-100 dark:hover:bg-gray-700 transition">Profile</a>
                   <button type="submit"

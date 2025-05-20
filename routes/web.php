@@ -22,3 +22,4 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/dashboard/index', [DoctorsDashboardController::class, 'doctorindex'])->name('doctorindex');
 Route::get('/dashboard/profile', [DoctorsDashboardController::class, 'doctorprofile'])->name('doctorprofile');
 Route::get('/dashboard/appointment', [DoctorsDashboardController::class, 'doctorappointment'])->name('doctorappointment');
+Route::get('/dashboard/patient', [DoctorsDashboardController::class, 'doctorpatient'])->name('doctorpatient');
