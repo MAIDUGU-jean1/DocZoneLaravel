@@ -20,7 +20,7 @@ class AuthController extends Controller
                 'phone' => 'nullable|string|max:20',
                 'role' => 'nullable|in:patient,doctor',
                 'password' => 'required|string|confirmed|min:6',
-                'profile_picture' => 'required|mimes:png,jpeg,jpg|max:2048',
+                'profile_picture' => 'required|mimes:png,jpeg,jpg|max:10048',
             ]);
 
             $imagePath = $request->file('profile_picture')->store('profiles', 'public');
@@ -47,7 +47,7 @@ class AuthController extends Controller
 
             $imagePath = $request->file('profile_picture')->store('profiles', 'public');
 
-                // 'terms' => 'accepted', 
+            // 'terms' => 'accepted', 
             User::create([
                 'name' => $validated['name'],
                 'email' => $validated['email'],
