@@ -465,132 +465,8 @@
                     userRating: false, // Tracks if current user has rated
                     ratings: [] // Will store individual user ratings
                 },
-                {
-                    id: 2,
-                    name: "Dr. Olivia Williams",
-                    specialty: "pediatrics",
-                    specialtyDisplay: "Pediatrics",
-                    description: "Dedicated pediatrician with a focus on newborn care, childhood development, and adolescent health issues.",
-                    image: "images/A woman in a white lab coat is standing in a room with a bottle of liquid _ Premium AI-generated image.jpeg",
-                    badge: "CHILD SPECIALIST",
-                    badgeColor: "bg-green-500",
-                    rating: 4.7,
-                    reviews: 98,
-                    availability: "Available tomorrow",
-                    experience: "12 years experience",
-                    specialtyColor: "green",
-                    verified: true, // Verified doctor in pediatrics
-                    userRating: false,
-                    ratings: []
-                },
-                {
-                    id: 3,
-                    name: "Dr. Michael Davis",
-                    specialty: "neurology",
-                    specialtyDisplay: "Neurology",
-                    description: "Expert neurologist specializing in brain disorders, spinal cord injuries, and neurodegenerative diseases.",
-                    image: "images/Doctor with Stethoscope Smiling Isolated on White Background _ Premium AI-generated image.jpeg",
-                    badge: "BRAIN SPECIALIST",
-                    badgeColor: "bg-purple-500",
-                    rating: 4.8,
-                    reviews: 84,
-                    availability: "Available in 2 days",
-                    experience: "18 years experience",
-                    specialtyColor: "purple",
-                    verified: true, // Verified doctor in neurology
-                    userRating: false,
-                    ratings: []
-                },
-                {
-                    id: 4,
-                    name: "Dr. Jasmine Carter",
-                    specialty: "dermatology",
-                    specialtyDisplay: "Dermatology",
-                    description: "Experienced dermatologist treating skin conditions, cosmetic concerns, and performing specialized dermatological procedures.",
-                    image: "images/download.jpeg",
-                    badge: "SKIN EXPERT",
-                    badgeColor: "bg-red-500",
-                    rating: 4.6,
-                    reviews: 112,
-                    availability: "Available today",
-                    experience: "5 years experience",
-                    specialtyColor: "red",
-                    verified: true, // Verified doctor in dermatology
-                    userRating: false,
-                    ratings: []
-                },
-                {
-                    id: 5,
-                    name: "Dr. James Peterson",
-                    specialty: "cardiology",
-                    specialtyDisplay: "Cardiology",
-                    description: "Cardiology specialist focused on preventive cardiology, heart failure management, and cardiac rehabilitation.",
-                    image: "images/In betwern services break_.jpeg",
-                    badge: "HEART EXPERT",
-                    badgeColor: "bg-primary",
-                    rating: 4.5,
-                    reviews: 75,
-                    availability: "Available tomorrow",
-                    experience: "14 years experience",
-                    specialtyColor: "blue",
-                    verified: false,
-                    userRating: false,
-                    ratings: []
-                },
-                {
-                    id: 6,
-                    name: "Dr. Amara Thompson",
-                    specialty: "dermatology",
-                    specialtyDisplay: "Dermatology",
-                    description: "Board-certified dermatologist with expertise in medical, surgical, and cosmetic dermatology procedures.",
-                    image: "images/Enfermagem - Ensaio fotográfico - Estúdio - Inspo - Poses.jpg",
-                    badge: "CERTIFIED",
-                    badgeColor: "bg-red-500",
-                    rating: 4.7,
-                    reviews: 92,
-                    availability: "Available in 3 days",
-                    experience: "9 years experience",
-                    specialtyColor: "red",
-                    verified: false,
-                    userRating: false,
-                    ratings: []
-                },
-                {
-                    id: 7,
-                    name: "Dr. Anchie Rosine",
-                    specialty: "neurology",
-                    specialtyDisplay: "Neurology",
-                    description: "Fellowship-trained neurologist specializing in movement disorders, epilepsy, and headache management.",
-                    image: "images/download (2).jpeg",
-                    badge: "SPECIALIZED",
-                    badgeColor: "bg-purple-500",
-                    rating: 4.9,
-                    reviews: 104,
-                    availability: "Available today",
-                    experience: "20 years experience",
-                    specialtyColor: "purple",
-                    verified: false,
-                    userRating: false,
-                    ratings: []
-                },
-                {
-                    id: 8,
-                    name: "Dr. Lisa Banks",
-                    specialty: "pediatrics",
-                    specialtyDisplay: "Pediatrics",
-                    description: "Compassionate pediatrician focusing on childhood wellness, behavioral health, and developmental disorders.",
-                    image: "images/download (3).jpeg",
-                    badge: "CHILD FRIENDLY",
-                    badgeColor: "bg-green-500",
-                    rating: 4.8,
-                    reviews: 88,
-                    availability: "Available tomorrow",
-                    experience: "11 years experience",
-                    specialtyColor: "green",
-                    verified: false,
-                    userRating: false,
-                    ratings: []
-                }
+           
+             
             ];
         
             // Function to generate star rating HTML
@@ -689,7 +565,7 @@
             let currentSpecialty = 'all';
             let currentSortMethod = 'rating';
             let searchQuery = '';
-            
+
             // Function to render all doctor cards
             function renderDoctors() {
                 // Clear existing content

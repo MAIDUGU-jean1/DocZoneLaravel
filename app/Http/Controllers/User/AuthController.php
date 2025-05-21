@@ -21,21 +21,24 @@ class AuthController extends Controller
                 'phone' => 'nullable|string|max:20',
                 'role' => 'nullable|in:patient,doctor',
                 'password' => 'required|string|confirmed|min:6',
+                // 'experience' => 'required',
                 'profile_picture' => 'required|mimes:png,jpeg,jpg|max:10048',
             ]);
 
             $imagePath = $request->file('profile_picture')->store('profiles', 'public');
 
-           $user = User::create([
+            $user = User::create([
                 'name' => $validated['name'],
                 'email' => $validated['email'],
                 'phone' => $validated['phone'] ?? null,
-                'specialistion' => null,
+                // 'specialization' => $validated['specialization'],
+                // 'experience' => $validated['experience'],
                 'password' => Hash::make($validated['password']),
                 'role' => $request->role,
+                // 'experience' => $validated['experience'],
                 'profile_picture' => $imagePath,
             ]);
-                Auth::login($user);
+            Auth::login($user);
         } else {
             $validated = $request->validate([
                 'name' => 'required|string|max:255',
@@ -44,28 +47,26 @@ class AuthController extends Controller
                 'specialization' => 'required|string|max:255',
                 'password' => 'required|string|confirmed|min:6',
                 'role' => 'required|in:doctor',
+                'experience' => 'required',
                 'profile_picture' => 'required|mimes:png,jpeg,jpg|max:2048',
             ]);
 
             $imagePath = $request->file('profile_picture')->store('profiles', 'public');
 
-
-         
-
             // 'terms' => 'accepted', 
-            User::create([
+            $user = User::create([
                 'name' => $validated['name'],
                 'email' => $validated['email'],
                 'phone' => $validated['phone'] ?? null,
-                'specialistion' => $validated['specialization'],
+                'specialization' => $validated['specialization'],
+                'experience' => $validated['experience'],
                 'password' => Hash::make($validated['password']),
                 'role' => $validated['role'],
                 'profile_picture' => $imagePath,
             ]);
         }
-        $user = Auth::user();
-        Auth::login($user);
-       
+
+        // Auth::login($user);
 
         return redirect()->route('ShowUserLanding')->with('success', 'Registration successful!');
     }
@@ -79,23 +80,30 @@ class AuthController extends Controller
         ]);
 
         if (Auth::attempt($validated)) {
-              if (Auth::user()->role =="Doctor"){
-           return redirect()->route('doctorindex');
-        }
-           
-            return redirect()->route('doctorindex')->with('success', 'You have logged in successfully!');
+            $user = Auth::user(); // Get the currently authenticated user
+
+            if ($user->role === 'doctor') {
+                if ($user->verification == 0) {
+                    return redirect()->back()->with('error', 'Your account is not verified yet.');
+                }
+                return redirect()->route('doctorindex');
+            }
+
+            return redirect()->route('ShowUserLanding')->with('success', 'You have logged in successfully!');
         }
 
         return redirect()->back()->with('error', 'Invalid credentials.');
     }
-    
-    public function logout(Request $request){
-    
+
+
+    public function logout(Request $request)
+    {
+
         Auth::logout();
         $request->session()->regenerate();
 
-     
 
-        return redirect()->route('showLanding'); 
+
+        return redirect()->route('showLanding');
     }
 }

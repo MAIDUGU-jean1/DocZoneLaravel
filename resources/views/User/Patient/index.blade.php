@@ -612,14 +612,15 @@
                                     </a>
                                 </div>
                                 <div class="border-t border-gray-200 dark:border-gray-700 py-2">
-                                  <form action="{{ route('logout') }}" method="POST">
-                                    @csrf
-                                       <a href=""
-                                        class="flex text-red-500 items-center px-4 py-2 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">
-                                        <i class="fas fa-sign-out-alt mr-3 text-red-500 w-5"></i> <button type="submit">Sign Out</button>
-                                    </a>
-                                  </form>
-                                
+                                    <form action="{{ route('logout') }}" method="POST">
+                                        @csrf
+                                        <a href=""
+                                            class="flex text-red-500 items-center px-4 py-2 text-gray-800 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                            <i class="fas fa-sign-out-alt mr-3 text-red-500 w-5"></i> <button
+                                                type="submit">Sign Out</button>
+                                        </a>
+                                    </form>
+
                                 </div>
                             </div>
                         </div>
@@ -944,7 +945,7 @@
                                 class="absolute bottom-0 right-0 bg-green-500 h-4 w-4 rounded-full border-2 border-white dark:border-gray-800"></span>
                         </div>
                         <div class="ml-4">
-                            <h4 class="font-bold text-gray-900 dark:text-white">{{ Auth::user()->name }}</h4>
+                            <h4 class="font-bold text-gray-900 dark:text-white">{{ Auth::user()?->name }}</h4>
                             <p class="text-sm text-gray-600 dark:text-gray-400">Member since
                                 {{ Auth::user()->created_at->format('Y') }}</p>
                             <span
@@ -1920,15 +1921,101 @@
                 </div>
             </div>
 
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                @foreach ($doctors as $doctor)
+                    <div
+                        class="bg-white dark:bg-gray-800 shadow-md rounded-lg overflow-hidden transition-transform transform hover:scale-105 duration-300">
+                        <div class="relative">
+                            <img src="{{ asset('storage/' . $doctor->profile_picture) ?? 'default.jpg' }}"
+                                alt="{{ $doctor->name }}" class="w-full h-48 object-cover">
+                            <span
+                                class="absolute top-4 right-4 px-2 py-1  text-white text-xs bg-blue-500 font-semibold rounded">BRAIN
+                                SPECIALIST</span>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="text-lg font-bold text-gray-900 dark:text-white">
+                                    {{ $doctor->name }}
+                                    @if ($doctor->verified)
+                                        <i class="fas fa-check-circle text-primary ml-1"
+                                            title="Verified Provider"></i>
+                                    @endif
+                                </h3>
+                                <button class="text-gray-400 hover:text-red-500 transition-colors">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                            </div>
+
+                            <span
+                                class="inline-block px-3 py-1 bg-purple-600dark:bg-purple-900 text-white dark:text-{{ $doctor->specialtyColor }}-200 rounded-full text-xs font-medium mb-3">
+                                gfgfgf
+                            </span>
+
+                            <div class="flex items-center mb-3">
+                                <div class="flex text-yellow-400 mr-1">
+                                    @for ($i = 1; $i <= 5; $i++)
+                                        @if ($i <= floor($doctor->rating))
+                                            <i class="fas fa-star"></i>
+                                        @elseif ($i - $doctor->rating < 1)
+                                            <i class="fas fa-star-half-alt"></i>
+                                        @else
+                                            <i class="far fa-star"></i>
+                                        @endif
+                                    @endfor
+                                </div>
+                                <span class="text-sm">
+                                    <span>{{ number_format($doctor->rating, 1) }}</span>
+                                    <span class="text-gray-500 dark:text-gray-400">({{ $doctor->reviews }})</span>
+                                </span>
+                            </div>
+
+                            <p class="text-gray-700 dark:text-gray-300 text-sm mb-4 line-clamp-2">
+                                {{ $doctor->specialization }}
+                            </p>
+
+                            <div
+                                class="flex justify-between items-center text-sm text-gray-600 dark:text-gray-400 mb-4">
+                                <span><i class="far fa-clock mr-1"></i> available today</span>
+                                <span><i class="fas fa-user-md mr-1"></i> {{ $doctor->experience }}years
+                                    experience</span>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-2">
+                                <button
+                                    class="w-full py-2 bg-primary hover:bg-opacity-90 text-white font-medium rounded transition-colors">
+                                    <i class="fas fa-video mr-1"></i> Video Call
+                                </button>
+                                <button
+                                    class="w-full py-2 border border-primary text-primary hover:bg-primary hover:bg-opacity-10 font-medium rounded transition-colors">
+                                    <i class="fas fa-comment-medical mr-1"></i> Chat
+                                </button>
+                                <!-- Trigger Button -->
+                                <label for="doctor-modal-toggle"
+                                    class="cursor-pointer inline-block bg-primary text-white px-4 py-2 rounded-lg font-medium hover:bg-opacity-90 transition">
+                                    Profile
+                                </label>
+                                <button
+                                    class="w-full py-2 bg-green-500 hover:bg-green-600 text-white font-medium rounded transition-colors"
+                                    data-toggle="Modal" data-target="#appointmentsModal">
+                                    <i class="fas fa-calendar-check mr-1"></i> Book
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+
+
             <!-- Doctor Cards Grid -->
             <div id="doctor-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 <!-- Doctor cards will be inserted here by JavaScript -->
             </div>
-
             <div class="text-center mt-8">
                 <a href="#"
                     class="inline-block px-8 py-3 bg-primary hover:bg-opacity-90 text-white font-bold rounded-lg transition-colors">
                     View All Doctors
+
+
                 </a>
             </div>
         </div>
@@ -2064,7 +2151,8 @@
     <section id="how-it-works" class="py-16 bg-gray-50 dark:bg-gray-900">
         <div class="container mx-auto px-4">
             <div class="text-center mb-16 fade-in">
-                <h2 class="text-3xl md:text-4xl font-bold font-display text-gray-900 dark:text-white mb-4">How It Works
+                <h2 class="text-3xl md:text-4xl font-bold font-display text-gray-900 dark:text-white mb-4">How It
+                    Works
                 </h2>
                 <p class="text-lg text-gray-700 dark:text-gray-300 max-w-2xl mx-auto">
                     Experience healthcare from the comfort of your home with our easy-to-use online consultation
@@ -2421,6 +2509,111 @@
             </div>
         </div>
     </section>
+
+    <!-- Hidden Checkbox Toggle -->
+    <input type="checkbox" id="doctor-modal-toggle" class="peer hidden">
+
+    <!-- Modal -->
+    <div
+        class="fixed inset-0 z-50 hidden peer-checked:flex items-center justify-center bg-black bg-opacity-50 transition-all duration-300">
+        <div class="bg-white dark:bg-dark-card w-full max-w-4xl rounded-lg shadow-xl p-6 mx-4 relative">
+            <!-- Close Button -->
+            <label for="doctor-modal-toggle"
+                class="absolute top-4 right-4 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white cursor-pointer">
+                <i class="fas fa-times"></i>
+            </label>
+
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-bold text-gray-900 dark:text-white">Doctor Profile</h3>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <div class="bg-gray-100 dark:bg-dark-bg rounded-lg overflow-hidden h-80">
+                        <img src="https://images.unsplash.com/photo-1622902046580-2b47f47f5471?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                            alt="Doctor Image" class="w-full h-full object-cover">
+                    </div>
+                    <div class="flex mt-4 gap-2">
+                        <div
+                            class="w-24 h-24 rounded-md overflow-hidden cursor-pointer hover:opacity-80 transition-opacity">
+                            <img src="https://images.unsplash.com/photo-1622902046580-2b47f47f5471?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80"
+                                alt="Thumbnail" class="w-full h-full object-cover">
+                        </div>
+                        <div
+                            class="w-24 h-24 rounded-md overflow-hidden cursor-pointer hover:opacity-80 transition-opacity">
+                            <img src="https://images.unsplash.com/photo-1651008376811-b90baee60c1f?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80"
+                                alt="Thumbnail" class="w-full h-full object-cover">
+                        </div>
+                        <div
+                            class="w-24 h-24 rounded-md overflow-hidden cursor-pointer hover:opacity-80 transition-opacity">
+                            <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80"
+                                alt="Thumbnail" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">Dr. Marcus Johnson</h2>
+                    <div class="flex items-center mb-4">
+                        <div class="flex text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <span class="ml-2 text-gray-600 dark:text-gray-400">4.9 (127 reviews)</span>
+                    </div>
+                    <div class="flex items-center mb-6">
+                        <span
+                            class="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 px-3 py-1 rounded-full text-sm font-medium">Cardiology</span>
+                        <span
+                            class="bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 px-3 py-1 rounded-full text-sm font-medium ml-2">Available
+                            Today</span>
+                    </div>
+                    <div class="mb-6">
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">About</h3>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            Dr. Marcus Johnson is a board-certified cardiologist with over 15 years of experience in
+                            diagnosing and treating heart conditions.
+                            He specializes in preventive cardiology, heart failure management, and cardiac
+                            rehabilitation.
+                            Dr. Johnson is passionate about patient education and empowering individuals to take control
+                            of
+                            their heart health.
+                        </p>
+                    </div>
+                    <div class="mb-6">
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Qualifications</h3>
+                        <ul class="space-y-2 text-gray-700 dark:text-gray-300">
+                            <li class="flex items-center"><i class="fas fa-graduation-cap text-primary mr-2"></i>
+                                MD,
+                                Howard
+                                University College of Medicine</li>
+                            <li class="flex items-center"><i class="fas fa-certificate text-primary mr-2"></i> Board
+                                Certified in Cardiovascular Disease</li>
+                            <li class="flex items-center"><i class="fas fa-hospital text-primary mr-2"></i> Fellow,
+                                American
+                                College of Cardiology</li>
+                            <li class="flex items-center"><i class="fas fa-clock text-primary mr-2"></i> 15+ Years
+                                Experience</li>
+                        </ul>
+                    </div>
+                    <div class="flex gap-4">
+                        <button
+                            class="btn-scale flex-1 py-3 bg-primary hover:bg-opacity-90 text-white font-bold rounded-lg transition-colors">
+                            Schedule Appointment
+                        </button>
+                        <button
+                            class="btn-scale px-4 py-3 border border-primary text-primary hover:bg-primary hover:bg-opacity-10 font-bold rounded-lg transition-colors">
+                            <i class="fas fa-video"></i> Video Call
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 
     <!-- FAQ Section -->
     <section id="faq" class="py-16 bg-white dark:bg-dark-card">
