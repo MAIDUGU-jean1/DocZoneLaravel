@@ -1986,56 +1986,68 @@
                        </div>
                      <div id="doctor-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
     @foreach ($doctors as $doctor)
-        <div class="flex flex-col border shadow-xl hover:shadow-2xl hover:scale-105 rounded-lg">
-            <div class="relative flex flex-col">
-                <img src="{{ asset('storage/' . $doctor->profile_picture) }}" alt="" class="doctor-image w-full h-48 object-cover btl-rounded-lg" style="border-top-left-radius: 7px; border-top-right-radius: 7px;">
-                <span class="doctor-badge absolute top-4 right-4 px-2 py-1 text-white bg-[#5D5CDE] text-xs font-semibold rounded">TOP RATED</span>
-            </div>
-            <div class="p-6">
-                <div class="flex justify-between items-start mb-2">
-                    <h3 class="doctor-name text-lg font-bold text-gray-900 dark:text-white">
-                        {{ $doctor->name }}
-                        <i class="fas fa-check-circle verified-badge ml-1 text-primary" title="Verified Provider"></i>
-                    </h3>
-                    <button class="favorite-btn text-gray-400 hover:text-red-500">
-                        <i class="far fa-heart"></i>
-                    </button>
-                </div>
-                <span class="doctor-specialty inline-block px-3 py-1 bg-red-100 text-red-800 rounded-full text-xs font-medium mb-3">Cardiology</span>
-                <div class="flex items-center mb-3">
-                    <div class="stars-container flex text-yellow-400 mr-1">4</div>
-                    <span class="text-sm">
-                        <span class="rating-value">3</span>
-                        <span class="reviews-count text-gray-500">TOP RATED</span>
-                    </span>
-                </div>
-                <p class="doctor-desc text-gray-700 text-sm mb-4 line-clamp-2">
-                    {{ $doctor->specialization }}
-                </p>
-                <div class="flex justify-between items-center text-sm text-gray-600 mb-4">
-                    <span class="doctor-availability">
-                        <i class="far fa-clock mr-1"></i> Available today
-                    </span>
-                    <span class="doctor-experience">
-                        <i class="fas fa-user-md mr-1"></i> {{ $doctor->experience }} years of experience
-                    </span>
-                </div>
-                <div class="grid grid-cols-2 gap-2">
-                    <button class="call-doctor-btn w-full py-2 bg-[#5D5CDE] hover:bg-opacity-90 text-white font-medium rounded transition-colors">
-                        <i class="fas fa-video mr-1"></i> Video Call
-                    </button>
-                    <button class="chat-doctor-btn w-full py-2 border border-primary text-primary hover:bg-primary hover:bg-opacity-10 font-medium rounded transition-colors">
-                        <i class="fas fa-comment-medical mr-1"></i> Chat
-                    </button>
-                    <button class="doctor-view-btn w-full py-2 bg-gray-100 text-gray-700 hover:bg-gray-200 font-medium rounded transition-colors col-span-1">
-                        <i class="fas fa-user-md mr-1"></i> Profile
-                    </button>
-                    <button class="book-btn w-full py-2 bg-green-500 hover:bg-green-600 text-white font-medium rounded transition-colors col-span-1">
-                        <i class="fas fa-calendar-check mr-1"></i> Book
-                    </button>
-                </div>
-            </div>
-        </div>
+       <div class="doctor-card bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-transform duration-300"
+     data-id="{{ $doctor->id }}">
+  <div class="relative">
+    <img src="{{ asset('storage/' . $doctor->profile_picture) }}" 
+         alt="{{ $doctor->name }}" 
+         class="doctor-image w-full h-48 object-cover rounded-t-xl" />
+    <span class="doctor-badge absolute top-4 right-4 bg-blue-600 text-white text-xs font-semibold px-2 py-1 rounded">
+      TOP RATED
+    </span>
+  </div>
+  
+  <div class="p-6">
+    <div class="flex justify-between items-center mb-2">
+      <h3 class="text-lg font-bold text-gray-900">
+       Dr. {{ $doctor->name }}
+        <i class="fas fa-check-circle text-blue-500 ml-1" title="Verified"></i>
+      </h3>
+      <button class="favorite-btn text-gray-400 hover:text-red-500">
+        <i class="far fa-heart"></i>
+      </button>
+    </div>
+    
+    <span class="inline-block bg-red-100 text-red-800 text-xs rounded-full px-3 py-1 mb-3">
+      {{ $doctor->specializatio }} BRAIN SPECIALIST
+    </span>
+    
+    <div class="flex items-center mb-3 text-yellow-400">
+      <!-- Example star icons, replace with your rating logic -->
+      <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i>
+      <span class="ml-2 text-gray-600 text-sm">({{ $doctor->reviews }} reviews)</span>
+    </div>
+    
+    <p class="text-gray-700 text-sm mb-4 line-clamp-2">
+      {{ $doctor->bio ?? 'Experienced doctor providing quality care.' }}
+    </p>
+    
+    <div class="flex justify-between items-center text-sm text-gray-600 mb-4">
+      <span>
+        <i class="far fa-clock mr-1"></i> Available today
+      </span>
+      <span>
+        <i class="fas fa-user-md mr-1"></i> {{ $doctor->experience }} years experience
+      </span>
+    </div>
+    
+    <div class="grid grid-cols-2 gap-2">
+      <button class="call-doctor-btn w-full py-2 bg-blue-600 hover:bg-blue-700 text-white rounded transition">
+        <i class="fas fa-video mr-1"></i> Video Call
+      </button>
+      <button class="chat-doctor-btn w-full py-2 border border-blue-600 text-blue-600 hover:bg-blue-100 rounded transition">
+        <i class="fas fa-comment-medical mr-1"></i> Chat
+      </button>
+      <button class="doctor-view-btn w-full py-2 bg-gray-100 text-gray-700 hover:bg-gray-200 rounded transition">
+        <i class="fas fa-user-md mr-1"></i> Profile
+      </button>
+      <button class="book-btn w-full py-2 bg-green-500 hover:bg-green-600 text-white rounded transition">
+        <i class="fas fa-calendar-check mr-1"></i> Book
+      </button>
+    </div>
+  </div>
+</div>
+
     @endforeach
 </div>
 
@@ -2936,7 +2948,7 @@
             </div>
         </div>
     </footer>   
-
+<script src="script.js"></script>
 
     <script>
         // Chat functionality
