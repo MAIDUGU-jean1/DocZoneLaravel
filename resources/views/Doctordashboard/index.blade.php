@@ -61,6 +61,7 @@
                 </div>
             </div>
 
+            
             <!-- Recent Appointments -->
             <div class="bg-white dark:bg-gray-800 p-4 md:p-6 rounded shadow overflow-x-auto">
                 <h3 class="text-xl font-semibold mb-4">Recent Appointments</h3>

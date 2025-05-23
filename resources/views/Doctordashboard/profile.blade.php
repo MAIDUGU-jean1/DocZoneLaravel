@@ -4,13 +4,13 @@
     <div class="w-full max-w-4xl bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 sm:p-8">
       <div class="flex flex-col sm:flex-row items-center sm:items-start space-y-6 sm:space-y-0 sm:space-x-6">
         <!-- Profile Picture -->
-        <img src="{{ asset('Images/A woman in a white lab coat is standing in a room with a bottle of liquid _ Premium AI-generated image.jpeg') }}"
+        <img src="{{ asset('storage/'.Auth::user()->profile_picture) }}"
              alt="Dr. John Doe"
-             class="w-28 h-28 sm:w-32 sm:h-32 rounded-full object-cover shadow-lg" />
+             class="w-30 h-30 sm:w-32 sm:h-32 rounded-lg object-cover shadow-lg" />
 
         <!-- Doctor Info -->
         <div class="text-center sm:text-left">
-          <h1 class="text-2xl sm:text-3xl font-bold">Dr. John Doe</h1>
+          <h1 class="text-2xl sm:text-3xl font-bold">Dr. {{Auth::user()->name}}</h1>
           <p class="text-blue-600 dark:text-blue-400 text-lg sm:text-xl mt-1">Cardiologist</p>
           <p class="mt-2 text-gray-600 dark:text-gray-300">
             Experienced cardiologist with over 10 years helping patients maintain heart health and improve their quality of life.

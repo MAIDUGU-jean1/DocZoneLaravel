@@ -40,7 +40,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@500;600;700;800&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="output.css">
+  
     <style>
         /* Animation classes */
         .fade-in {
@@ -508,7 +508,7 @@
                                         class="p-4 hover:bg-gray-50 dark:hover:bg-gray-700 border-b border-gray-100 dark:border-gray-700">
                                         <div class="flex items-start">
                                             <div class="flex-shrink-0">
-                                                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Doctor"
+                                                <img src="{{asset('Images/Doctor with Stethoscope Smiling Isolated on White Background _ Premium AI-generated image.jpeg')}}" alt="Doctor"
                                                     class="w-10 h-10 rounded-full">
                                             </div>
                                             <div class="ml-3 flex-1">
@@ -1379,7 +1379,7 @@
     </div>
 
     <!-- Doctor Modal -->
-    <div id="doctorModal" class="modal fixed inset-0 z-50 flex items-center justify-center hidden">
+    <div id="appointmentsModal" class="modal fixed inset-0 z-50 flex items-center justify-center hidden">
         <div class="modal-content bg-white dark:bg-dark-card w-full max-w-4xl rounded-lg shadow-xl p-6 mx-4">
             <div class="flex justify-between items-center mb-4">
                 <h3 class="text-xl font-bold text-gray-900 dark:text-white" id="modalTitle">Doctor Profile</h3>
@@ -1738,11 +1738,11 @@
                 </div>
             </div>
 
-            <div class="mt-6 text-center">
+            <div id="" class="mt-6 text-center">
                 <button class="px-6 py-2 bg-primary text-white rounded-lg hover:bg-opacity-90 transition-colors">
                     <i class="fas fa-plus mr-1"></i> Schedule New Appointment
                 </button>
-            </div>
+    </div>
         </div>
     </div>
 
@@ -1780,10 +1780,10 @@
                             class="btn-scale px-8 py-4 bg-primary hover:bg-opacity-90 text-white font-bold rounded-lg transition-colors">
                             Get to a doctor
                         </a>
-                        <a href="#how-it-works"
+                        <button  id="openModal"
                             class="btn-scale px-8 py-4 border-2 border-primary text-primary hover:bg-primary hover:bg-opacity-10 font-bold rounded-lg transition-colors">
-                            How It Works
-                        </a>
+                           Join as a doctor
+                        </button>
                     </div>
                     <div class="mt-8 flex flex-wrap items-center gap-6">
                         <div class="flex">
@@ -1803,7 +1803,7 @@
                 </div>
                 <div class="relative slide-in-right">
                     <div class="relative bg-white dark:bg-dark-card p-4 rounded-2xl shadow-xl transform -rotate-2">
-                        <img src="images/young-woman-having-video-call-with-doctor-her-friend_23-2148944830.jpg"
+                        <img src="{{asset('Images/young-woman-having-video-call-with-doctor-her-friend_23-2148944830.jpg')}}"
                             alt="Doctor consultation" class="w-full h-auto rounded-lg shadow-sm">
                         <div
                             class="absolute -right-6 -bottom-6 bg-secondary text-white rounded-full w-24 h-24 flex flex-col items-center justify-center font-bold shadow-lg transform rotate-12">
@@ -1923,7 +1923,121 @@
             <!-- Doctor Cards Grid -->
             <div id="doctor-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 <!-- Doctor cards will be inserted here by JavaScript -->
+                
+                            <div class="flex flex-col border shadow-xl hover:shadow-2xl hover:scale-105 rounded-lg">
+                                <div class="relative flex flex-col">
+                                            <img src="{{asset('Images/A woman in a white lab coat is standing in a room with a bottle of liquid _ Premium AI-generated image.jpeg')}}" alt="" class="doctor-image w-full h-48 object-cover btl-rounded-lg" style="border-top-left-radius: 7px; border-top-right-radius: 7px;">
+                                            <span class="doctor-badge absolute top-4 right-4 px-2 py-1 text-white bg-[#5D5CDE] text-white text-xs font-semibold rounded">TOP RATED</span>
+                                        </div>
+                                        <div>
+
+                                                            <div class="p-6">
+                                            <div class="flex justify-between items-start mb-2">
+                                                <h3 class="doctor-name text-lg font-bold text-gray-900 dark:text-white">
+                                                    ATEBA
+                                                    <i class="fas fa-check-circle verified-badge ml-1 text-primary " title="Verified Provider"></i>
+                                                </h3>
+                                                <button class="favorite-btn text-gray-400 hover:text-red-500">
+                                                    <i class="far fa-heart"></i>
+                                                </button>
+                                            </div>
+                                            <span class="doctor-specialty inline-block px-3 py-1 bg-red-100 dark:bg-${doctor.specialtyColor}-900 text-red-800 dark:text-${doctor.specialtyColor}-200 rounded-full text-xs font-medium mb-3">Cardiology</span>
+                                            <div class="flex items-center mb-3">
+                                                <div class="stars-container flex text-yellow-400 mr-1">
+                                                    4
+                                                </div>
+                                                <span class="text-sm">
+                                                    <span class="rating-value">3</span>
+                                                    <span class="reviews-count text-gray-500 dark:text-gray-400">TOP RATED</span>
+                                                </span>
+                                            </div>
+                                            <p class="doctor-desc text-gray-700 dark:text-gray-300 text-sm mb-4 line-clamp-2">
+                                                Specialized in cardiovascular health with over 15 years of experience in
+                                            </p>
+                                            <div class="flex justify-between items-center text-sm text-gray-600 dark:text-gray-400 mb-4">
+                                                <span class="doctor-availability">
+                                                    <i class="far fa-clock mr-1"></i>  Available today
+                                                </span>
+                                                <span class="doctor-experience">
+                                                    <i class="fas fa-user-md mr-1"></i>4 years of experience
+                                                </span>
+                                            </div>
+                                            <div class="grid grid-cols-2 gap-2">
+                                                <button class="call-doctor-btn w-full py-2 bg-[#5D5CDE] hover:bg-opacity-90 text-white font-medium rounded transition-colors">
+                                                    <i class="fas fa-video mr-1"></i> Video Call
+                                                </button>
+                                                <button class="chat-doctor-btn w-full py-2 border border-primary text-primary hover:bg-primary hover:bg-opacity-10 font-medium rounded transition-colors">
+                                                    <i class="fas fa-comment-medical mr-1"></i> Chat
+                                                </button>
+                                                <button class="doctor-view-btn w-full py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 font-medium rounded transition-colors col-span-1">
+                                                    <i class="fas fa-user-md mr-1"></i> Profile
+                                                </button>
+                                                <button class="book-btn w-full py-2 bg-green-500 hover:bg-green-600 text-white font-medium rounded transition-colors col-span-1">
+                                                    <i class="fas fa-calendar-check mr-1"></i> Book
+                                                </button>
+                                            </div>
+                                        </div>
+                                        </div>
+                          </div>
+
+
+
+        
+                       </div>
+                     <div id="doctor-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+    @foreach ($doctors as $doctor)
+        <div class="flex flex-col border shadow-xl hover:shadow-2xl hover:scale-105 rounded-lg">
+            <div class="relative flex flex-col">
+                <img src="{{ asset('storage/' . $doctor->profile_picture) }}" alt="" class="doctor-image w-full h-48 object-cover btl-rounded-lg" style="border-top-left-radius: 7px; border-top-right-radius: 7px;">
+                <span class="doctor-badge absolute top-4 right-4 px-2 py-1 text-white bg-[#5D5CDE] text-xs font-semibold rounded">TOP RATED</span>
             </div>
+            <div class="p-6">
+                <div class="flex justify-between items-start mb-2">
+                    <h3 class="doctor-name text-lg font-bold text-gray-900 dark:text-white">
+                        {{ $doctor->name }}
+                        <i class="fas fa-check-circle verified-badge ml-1 text-primary" title="Verified Provider"></i>
+                    </h3>
+                    <button class="favorite-btn text-gray-400 hover:text-red-500">
+                        <i class="far fa-heart"></i>
+                    </button>
+                </div>
+                <span class="doctor-specialty inline-block px-3 py-1 bg-red-100 text-red-800 rounded-full text-xs font-medium mb-3">Cardiology</span>
+                <div class="flex items-center mb-3">
+                    <div class="stars-container flex text-yellow-400 mr-1">4</div>
+                    <span class="text-sm">
+                        <span class="rating-value">3</span>
+                        <span class="reviews-count text-gray-500">TOP RATED</span>
+                    </span>
+                </div>
+                <p class="doctor-desc text-gray-700 text-sm mb-4 line-clamp-2">
+                    {{ $doctor->specialization }}
+                </p>
+                <div class="flex justify-between items-center text-sm text-gray-600 mb-4">
+                    <span class="doctor-availability">
+                        <i class="far fa-clock mr-1"></i> Available today
+                    </span>
+                    <span class="doctor-experience">
+                        <i class="fas fa-user-md mr-1"></i> {{ $doctor->experience }} years of experience
+                    </span>
+                </div>
+                <div class="grid grid-cols-2 gap-2">
+                    <button class="call-doctor-btn w-full py-2 bg-[#5D5CDE] hover:bg-opacity-90 text-white font-medium rounded transition-colors">
+                        <i class="fas fa-video mr-1"></i> Video Call
+                    </button>
+                    <button class="chat-doctor-btn w-full py-2 border border-primary text-primary hover:bg-primary hover:bg-opacity-10 font-medium rounded transition-colors">
+                        <i class="fas fa-comment-medical mr-1"></i> Chat
+                    </button>
+                    <button class="doctor-view-btn w-full py-2 bg-gray-100 text-gray-700 hover:bg-gray-200 font-medium rounded transition-colors col-span-1">
+                        <i class="fas fa-user-md mr-1"></i> Profile
+                    </button>
+                    <button class="book-btn w-full py-2 bg-green-500 hover:bg-green-600 text-white font-medium rounded transition-colors col-span-1">
+                        <i class="fas fa-calendar-check mr-1"></i> Book
+                    </button>
+                </div>
+            </div>
+        </div>
+    @endforeach
+</div>
 
             <div class="text-center mt-8">
                 <a href="#"
@@ -1933,6 +2047,144 @@
             </div>
         </div>
     </section>
+
+    
+<!-- Modal Background & Container -->
+<div id="doctorappointmentModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
+  <div class="bg-white rounded-2xl shadow-xl max-h-screen overflow-y-auto w-full max-w-4xl p-4 relative">
+    <!-- Close Button -->
+    <button id="closeModal" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-2xl">&times;</button>
+
+    <!-- Your Section Goes Here -->
+    <section class="py-4 px-2 sm:px-4 lg:px-6">
+      <!-- Keep your form code here (you pasted it in your message) -->
+      
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl font-bold text-center text-blue-800 mb-10">Apply to Join as a Doctor</h2>
+
+      <!-- Success Alert -->
+      <div id="success-message" class="hidden mb-6 rounded-xl p-4 bg-green-100 text-green-800 text-center font-semibold">
+        ✅ Application submitted successfully. We'll review your credentials and contact you shortly.
+      </div>
+
+      <div class="flex items-center bg-yellow-100 border-l-4 border-yellow-500 text-yellow-800 p-4 rounded-xl mb-6" role="alert">
+            <svg class="w-6 h-6 mr-3 text-yellow-500 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2"
+                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.675 1.732-3L13.732 4c-.77-1.325-2.694-1.325-3.464 0L3.34 16c-.77 1.325.192 3 1.732 3z"></path>
+            </svg>
+            <p class="text-sm font-medium">
+                ⚠️ Please ensure all information provided is accurate and up-to-date. Submitting false credentials may result in disqualification and a permanent ban from the platform.
+            </p>
+      </div>
+
+
+      <form id="doctor-form" class="bg-white rounded-2xl shadow-xl p-8 space-y-2">
+
+        <!-- Email -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Your Email</label>
+          <input type="email" name="email" required
+                 class="w-full border border-gray-300 rounded-lg p-1 bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400">
+        </div>
+
+        <!-- Profile Photo Upload -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Upload Profile Photo <span class="text-red-500">*</span></label>
+          <input type="file" name="photo" accept="image/*" required id="photo-file"
+                 class="w-full border border-gray-300 rounded-lg p-1 bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400">
+        </div>
+
+        <!-- Full Name -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
+          <input type="text" name="full_name" required
+                 class="w-full border border-gray-300 rounded-lg p-1 bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400">
+        </div>
+
+        <!-- Specialty -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Specialty</label>
+          <input type="text" name="specialty" required
+                 class="w-full border border-gray-300 rounded-lg p-1 bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400">
+        </div>
+
+        <!-- Experience -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Years of Experience</label>
+          <input type="number" name="experience" required
+                 class="w-full border border-gray-300 rounded-lg p-1 bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400">
+        </div>
+
+        <!-- License -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">License Number</label>
+          <input type="text" name="license" required
+                 class="w-full border border-gray-300 rounded-lg p-1 bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400">
+        </div>
+
+        <!-- Bio -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Short Bio</label>
+          <textarea name="bio" rows="4" required
+                    class="w-full border border-gray-300 rounded-lg p-1 bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400"></textarea>
+        </div>
+        <!-- University Attended -->
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">University Attended <span class="text-red-500">*</span></label>
+            <input type="text" name="university" required placeholder="e.g., University of Nairobi"
+                class="w-full border border-gray-300 rounded-lg p-3 bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400">
+        </div>
+        
+        <!-- Medical Degree -->
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Medical Degree <span class="text-red-500">*</span></label>
+            <input type="text" name="degree" required placeholder="e.g., MBBS, MD, DO"
+                class="w-full border border-gray-300 rounded-lg p-1 bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400">
+        </div>
+        
+        <!-- Year of Graduation -->
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Year of Graduation <span class="text-red-500">*</span></label>
+            <input type="number" name="graduation_year" min="1950" max="2099" required placeholder="e.g., 2015"
+                class="w-full border border-gray-300 rounded-lg p-1 bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400">
+        </div>
+        
+        <!-- Country of Practice -->
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Country of Practice <span class="text-red-500">*</span></label>
+            <input type="text" name="country" required placeholder="e.g., Kenya"
+                class="w-full border border-gray-300 rounded-lg p-1 bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400">
+        </div>
+        
+        <!-- LinkedIn or Professional Profile -->
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">LinkedIn or Professional Profile (optional)</label>
+            <input type="url" name="profile_url" placeholder="https://linkedin.com/in/example"
+                class="w-full border border-gray-300 rounded-lg p-1 bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400">
+        </div>
+        
+        <!-- Upload Medical Certificate -->
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Upload Medical Certificate (optional)</label>
+            <input type="file" name="certificate" accept=".pdf,.jpg,.jpeg,.png"
+                class="w-full border border-gray-300 rounded-lg p-2 bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400">
+        </div>
+        
+        <!-- Submit Button -->
+        <div class="text-center">
+          <button type="submit"
+                  class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-1 px-8 rounded-lg transition duration-300">
+            Submit Application
+          </button>
+        </div>
+      </form>
+    </div>
+  
+      <!-- ... -->
+    </section>
+  </div>
+</div>
 
     <!-- Healthcare Services Section -->
     <section id="categories" class="py-16 bg-white dark:bg-dark-card">
@@ -2683,9 +2935,9 @@
                 </p>
             </div>
         </div>
-    </footer>
+    </footer>   
 
-    <script src="{{ asset('js/script.js') }}"></script>
+
     <script>
         // Chat functionality
         document.addEventListener('DOMContentLoaded', function() {
@@ -2812,6 +3064,762 @@
                 }
             });
         });
+
+
+
+        
+  document.getElementById('openModal').addEventListener('click', function () {
+    document.getElementById('doctorappointmentModal').classList.remove('hidden');
+   
+   
+  });
+
+  document.getElementById('closeModal').addEventListener('click', function () {
+    document.getElementById('doctorappointmentModal').classList.add('hidden');
+  });
+
+  // Optional: Close modal when clicking outside the form
+  document.getElementById('doctorappointmentModal').addEventListener('click', function (e) {
+    if (e.target === this) {
+      this.classList.add('hidden');
+    }
+  });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          let closeNotBtn = document.getElementById('closeNotBtn');
+        let notificationModal = document.getElementById('notificationDropdown')
+        function closenot(){
+            notificationModal.classList.add('hidden')
+        }
+        function opennot(){
+            notificationModal.classList.remove('hidden')
+        }
+         
+         
+        
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check user preference for dark mode
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                document.documentElement.classList.add('dark');
+            }
+            
+            // Listen for changes in color scheme preference
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+                if (event.matches) {
+                    document.documentElement.classList.add('dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                }
+            });
+            
+            // Theme toggle button
+            const themeToggle = document.getElementById('themeToggle');
+            themeToggle.addEventListener('click', function() {
+                document.documentElement.classList.toggle('dark');
+            });
+            
+            // Mobile menu functionality
+            const hamburgerBtn = document.getElementById('hamburgerBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const closeMenuBtn = document.getElementById('closeMenuBtn');
+            
+            hamburgerBtn.addEventListener('click', function() {
+                mobileMenu.classList.add('active');
+                hamburgerBtn.classList.add('menu-open');
+            });
+            
+            closeMenuBtn.addEventListener('click', function() {
+                mobileMenu.classList.remove('active');
+                hamburgerBtn.classList.remove('menu-open');
+            });
+            
+            // Search overlay functionality
+            const searchBtn = document.getElementById('searchBtn');
+            const searchOverlay = document.getElementById('searchOverlay');
+            const closeSearchBtn = document.getElementById('closeSearchBtn');
+            const searchContent = document.getElementById('searchContent');
+            
+            searchBtn.addEventListener('click', function() {
+                searchOverlay.classList.remove('hidden');
+                setTimeout(() => {
+                    searchContent.classList.remove('scale-90', 'opacity-0');
+                    searchContent.classList.add('scale-100', 'opacity-100');
+                }, 10);
+            });
+            
+            closeSearchBtn.addEventListener('click', function() {
+                searchContent.classList.remove('scale-100', 'opacity-100');
+                searchContent.classList.add('scale-90', 'opacity-0');
+                setTimeout(() => {
+                    searchOverlay.classList.add('hidden');
+                }, 300);
+            });
+            
+            // Chat panel functionality
+            const chatBtn = document.getElementById('chatBtn');
+            const chatPanel = document.getElementById('chatPanel');
+            const closeChatBtn = document.getElementById('closeChatBtn');
+            const chatItems = document.querySelectorAll('.chat-item');
+            const individualChat = document.getElementById('individualChat');
+            const backToChatList = document.getElementById('backToChatList');
+            const chatDoctorName = document.getElementById('chatDoctorName');
+            const chatDoctorImage = document.getElementById('chatDoctorImage');
+            const chatMessages = document.getElementById('chatMessages');
+            const messageInput = document.getElementById('messageInput');
+            const sendMessageBtn = document.getElementById('sendMessageBtn');
+            
+            // Sample chat data
+            const chatData = {
+                1: { // Dr. Marcus Johnson
+                    name: "Dr. Marcus Johnson",
+                    image: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                    status: "online",
+                    messages: [
+                        { sender: "doctor", content: "Hello Michael, how can I help you today?", time: "9:30 AM" },
+                        { sender: "user", content: "Hi Dr. Johnson, I've been experiencing some chest pain after exercising.", time: "9:32 AM" },
+                        { sender: "doctor", content: "I'm sorry to hear that. Can you describe the pain? Is it sharp, dull, or pressure-like?", time: "9:33 AM" },
+                        { sender: "user", content: "It's more like a pressure that lasts for about 5-10 minutes after I stop exercising.", time: "9:35 AM" },
+                        { sender: "doctor", content: "Thank you for that description. Does it radiate to your arm, jaw, or back?", time: "9:36 AM" },
+                        { sender: "user", content: "No, it stays in my chest area.", time: "9:37 AM" },
+                        { sender: "doctor", content: "I'll send your prescription to your local pharmacy. You should be able to pick it up within an hour.", time: "9:39 AM", unread: true },
+                        { sender: "doctor", content: "Also, please make sure to schedule a follow-up appointment for next week so we can check your progress.", time: "9:41 AM", unread: true }
+                    ]
+                },
+                2: { // Dr. Olivia Williams
+                    name: "Dr. Olivia Williams",
+                    image: "https://images.unsplash.com/photo-1594824476967-48c8b964273f?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80",
+                    status: "offline",
+                    messages: [
+                        { sender: "doctor", content: "Hi Michael, based on our last appointment, I'd like to schedule a follow-up to check how your child is responding to the new medication.", time: "Yesterday", unread: true }
+                    ]
+                },
+                4: { // Dr. Jasmine Carter
+                    name: "Dr. Jasmine Carter",
+                    image: "https://images.unsplash.com/photo-1607746882042-944635dfe10e?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80",
+                    status: "online",
+                    messages: [
+                        { sender: "doctor", content: "Hello Michael! I've reviewed your lab results from last week.", time: "Tuesday" },
+                        { sender: "doctor", content: "Your blood work looks good, but there's a slight elevation in your vitamin D levels that we should discuss during your next visit.", time: "Tuesday" },
+                        { sender: "user", content: "Thanks Dr. Carter! When would be a good time to schedule that appointment?", time: "Tuesday" },
+                        { sender: "doctor", content: "I have openings next Monday or Wednesday afternoon. Would either of those work for you?", time: "Tuesday" }
+                    ]
+                }
+            };
+            
+            // Open chat panel
+            chatBtn.addEventListener('click', function() {
+                chatPanel.classList.add('active');
+            });
+            
+            // Close chat panel
+            closeChatBtn.addEventListener('click', function() {
+                chatPanel.classList.remove('active');
+            });
+            
+            // Open individual chat
+            chatItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const doctorId = this.dataset.doctorId;
+                    const doctor = chatData[doctorId];
+                    
+                    if (doctor) {
+                        chatDoctorName.textContent = doctor.name;
+                        chatDoctorImage.src = doctor.image;
+                        
+                        // Clear existing messages
+                        chatMessages.innerHTML = '';
+                        
+                        // Add messages to chat
+                        doctor.messages.forEach(msg => {
+                            const messageEl = document.createElement('div');
+                            messageEl.className = `chat-message ${msg.sender === 'user' ? 'sent' : 'received'} p-3 rounded-lg ${msg.unread ? 'font-semibold' : ''}`;
+                            
+                            messageEl.innerHTML = `
+                                <p>${msg.content}</p>
+                                <p class="text-xs text-right mt-1 ${msg.sender === 'user' ? 'text-white text-opacity-70' : 'text-gray-500 dark:text-gray-400'}">${msg.time}</p>
+                            `;
+                            
+                            chatMessages.appendChild(messageEl);
+                        });
+                        
+                        // Add typing indicator if first doctor (for demo purposes)
+                        if (doctorId === '1') {
+                            const typingIndicator = document.createElement('div');
+                            typingIndicator.className = 'chat-message received p-3 rounded-lg';
+                            typingIndicator.innerHTML = `
+                                <div class="typing-indicator">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </div>
+                            `;
+                            chatMessages.appendChild(typingIndicator);
+                        }
+                        
+                        // Scroll to bottom of chat
+                        chatMessages.scrollTop = chatMessages.scrollHeight;
+                        
+                        // Show individual chat
+                        individualChat.classList.remove('hidden');
+                    }
+                });
+            });
+            
+            // Back to chat list
+            backToChatList.addEventListener('click', function() {
+                individualChat.classList.add('hidden');
+            });
+            
+            // Send message
+            sendMessageBtn.addEventListener('click', function() {
+                sendMessage();
+            });
+            
+            messageInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendMessage();
+                }
+            });
+            
+            function sendMessage() {
+                const messageText = messageInput.value.trim();
+                if (messageText) {
+                    // Create new message element
+                    const messageEl = document.createElement('div');
+                    messageEl.className = 'chat-message sent p-3 rounded-lg';
+                    
+                    const currentTime = new Date();
+                    const timeString = currentTime.getHours() + ':' + (currentTime.getMinutes() < 10 ? '0' : '') + currentTime.getMinutes();
+                    
+                    messageEl.innerHTML = `
+                        <p>${messageText}</p>
+                        <p class="text-xs text-right mt-1 text-white text-opacity-70">${timeString}</p>
+                    `;
+                    
+                    chatMessages.appendChild(messageEl);
+                    
+                    // Clear input
+                    messageInput.value = '';
+                    
+                    // Scroll to bottom of chat
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                    
+                    // Simulate doctor response after a delay (for demo)
+                    setTimeout(() => {
+                        const typingIndicator = document.createElement('div');
+                        typingIndicator.className = 'chat-message received p-3 rounded-lg';
+                        typingIndicator.innerHTML = `
+                            <div class="typing-indicator">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        `;
+                        chatMessages.appendChild(typingIndicator);
+                        chatMessages.scrollTop = chatMessages.scrollHeight;
+                        
+                        // Replace typing indicator with response after a delay
+                        setTimeout(() => {
+                            typingIndicator.innerHTML = `
+                                <p>Thanks for your message. I'll review this and get back to you shortly.</p>
+                                <p class="text-xs text-right mt-1 text-gray-500 dark:text-gray-400">${timeString}</p>
+                            `;
+                        }, 2000);
+                    }, 1000);
+                }
+            }
+            
+            // User profile dropdown
+            const accountBtn = document.getElementById('accountBtn');
+            const profileDropdown = document.getElementById('profileDropdown');
+            
+            accountBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                profileDropdown.classList.toggle('hidden');
+            });
+            
+            // Close dropdown when clicking elsewhere
+            document.addEventListener('click', function(e) {
+                if (!profileDropdown.contains(e.target) && e.target !== accountBtn) {
+                    profileDropdown.classList.add('hidden');
+                }
+            });
+            
+            // Open profile modal
+            const viewProfileBtn = document.getElementById('viewProfileBtn');
+            const profileModal = document.getElementById('profileModal');
+            
+            if (viewProfileBtn) {
+                viewProfileBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    profileDropdown.classList.add('hidden');
+                    profileModal.classList.remove('hidden');
+                });
+            }
+            
+            // Profile tabs
+            const profileTabs = document.querySelectorAll('.profile-tab');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            profileTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // Remove active class from all tabs
+                    profileTabs.forEach(t => t.classList.remove('active', 'text-primary', 'border-primary'));
+                    profileTabs.forEach(t => t.classList.add('text-gray-500', 'dark:text-gray-400', 'border-transparent'));
+                    
+                    // Add active class to clicked tab
+                    this.classList.add('active', 'text-primary', 'border-primary');
+                    this.classList.remove('text-gray-500', 'dark:text-gray-400', 'border-transparent');
+                    
+                    // Hide all tab contents
+                    tabContents.forEach(content => content.classList.add('hidden'));
+                    
+                    // Show selected tab content
+                    const tabId = this.dataset.tab + 'Info';
+                    document.getElementById(tabId).classList.remove('hidden');
+                });
+            });
+            
+            // Appointments modal
+            const viewAppointmentsBtn = document.getElementById('viewAppointmentsBtn');
+            const appointmentsModal = document.getElementById('appointmentsModal');
+            
+            if (viewAppointmentsBtn) {
+                viewAppointmentsBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    profileDropdown.classList.add('hidden');
+                    appointmentsModal.classList.remove('hidden');
+                });
+            }
+            
+            // Appointment tabs
+            const appointmentTabs = document.querySelectorAll('.appointment-tab');
+            const appointmentContents = document.querySelectorAll('.appointment-content');
+            
+            appointmentTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // Remove active class from all tabs
+                    appointmentTabs.forEach(t => t.classList.remove('active', 'text-primary', 'border-primary'));
+                    appointmentTabs.forEach(t => t.classList.add('text-gray-500', 'dark:text-gray-400', 'border-transparent'));
+                    
+                    // Add active class to clicked tab
+                    this.classList.add('active', 'text-primary', 'border-primary');
+                    this.classList.remove('text-gray-500', 'dark:text-gray-400', 'border-transparent');
+                    
+                    // Hide all tab contents
+                    appointmentContents.forEach(content => content.classList.add('hidden'));
+                    
+                    // Show selected tab content
+                    const tabId = this.dataset.tab + 'Appointments';
+                    document.getElementById(tabId).classList.remove('hidden');
+                });
+            });
+            
+            // Close modals
+            const closeModalBtns = document.querySelectorAll('.close-modal');
+            
+            closeModalBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const modal = this.closest('.modal');
+                    modal.classList.add('hidden');
+                });
+            });
+            
+            // Close modals when clicking outside
+            window.addEventListener('click', function(event) {
+                if (event.target.classList.contains('modal')) {
+                    event.target.classList.add('hidden');
+                }
+            });
+            
+            // Open messages from profile
+            const viewMessagesBtn = document.getElementById('viewMessagesBtn');
+            
+            if (viewMessagesBtn) {
+                viewMessagesBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    profileDropdown.classList.add('hidden');
+                    chatPanel.classList.add('active');
+                });
+            }
+            
+            // FAQ toggles
+            const faqToggles = document.querySelectorAll('.faq-toggle');
+            
+            faqToggles.forEach(toggle => {
+                toggle.addEventListener('click', function() {
+                    const content = this.nextElementSibling;
+                    const icon = this.querySelector('i');
+                    
+                    if (content.classList.contains('hidden')) {
+                        content.classList.remove('hidden');
+                        icon.style.transform = 'rotate(180deg)';
+                    } else {
+                        content.classList.add('hidden');
+                        icon.style.transform = 'rotate(0)';
+                    }
+                });
+            });
+            
+            // Testimonial slider
+            const testimonialTrack = document.getElementById('testimonialTrack');
+            const testimonialSlides = document.querySelectorAll('.testimonial-slide');
+            const testimonialDots = document.querySelectorAll('.testimonial-dot');
+            const prevBtn = document.querySelector('.testimonial-prev');
+            const nextBtn = document.querySelector('.testimonial-next');
+            
+            let currentIndex = 0;
+            
+            function updateSlider() {
+                const translateValue = -currentIndex * 100 + '%';
+                testimonialTrack.style.transform = 'translateX(' + translateValue + ')';
+                
+                // Update dots
+                testimonialDots.forEach((dot, index) => {
+                    if (index === currentIndex) {
+                        dot.classList.add('bg-primary');
+                        dot.classList.remove('bg-gray-300', 'dark:bg-gray-700');
+                    } else {
+                        dot.classList.remove('bg-primary');
+                        dot.classList.add('bg-gray-300', 'dark:bg-gray-700');
+                    }
+                });
+            }
+            
+            // Initialize dots
+            updateSlider();
+            
+            // Next/Prev buttons
+            nextBtn.addEventListener('click', function() {
+                currentIndex = (currentIndex + 1) % testimonialSlides.length;
+                updateSlider();
+            });
+            
+            prevBtn.addEventListener('click', function() {
+                currentIndex = (currentIndex - 1 + testimonialSlides.length) % testimonialSlides.length;
+                updateSlider();
+            });
+            
+            // Dots navigation
+            testimonialDots.forEach((dot, index) => {
+                dot.addEventListener('click', function() {
+                    currentIndex = index;
+                    updateSlider();
+                });
+            });
+            
+            // Auto-advance the slider
+            setInterval(() => {
+                currentIndex = (currentIndex + 1) % testimonialSlides.length;
+                updateSlider();
+            }, 15000);
+            
+            // Scroll animations
+            function checkScroll() {
+                document.querySelectorAll('.fade-in, .slide-in-bottom, .slide-in-left, .slide-in-right').forEach(element => {
+                    const elementPosition = element.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    
+                    if (elementPosition < windowHeight * 0.9) {
+                        element.style.animationPlayState = 'running';
+                    }
+                });
+            }
+            
+            // Initial check on page load
+            checkScroll();
+            
+            // Check on scroll
+            window.addEventListener('scroll', checkScroll);
+
+            // Sample doctor data with Black doctors and verification status
+
+        
+            // Function to generate star rating HTML
+            function generateStarRating(rating) {
+                let starsHTML = '';
+                
+                // Generate stars with data-rating attributes
+                for (let i = 1; i <= 5; i++) {
+                    if (i <= Math.floor(rating)) {
+                        // Full star
+                        starsHTML += `<i class="fas fa-star star-icon" data-rating="${i}"></i>`;
+                    } else if (i === Math.ceil(rating) && !Number.isInteger(rating)) {
+                        // Half star
+                        starsHTML += `<i class="fas fa-star-half-alt star-icon" data-rating="${i-0.5}"></i>`;
+                    } else {
+                        // Empty star
+                        starsHTML += `<i class="far fa-star star-icon" data-rating="${i}"></i>`;
+                    }
+                }
+                
+                return starsHTML;
+            }
+            
+            // Function to create a doctor card
+
+            
+            // DOM elements
+            const doctorGrid = document.getElementById('doctor-grid');
+            const searchInput = document.getElementById('doctor-search');
+            const searchButton = document.getElementById('search-button');
+            const specialtyFilters = document.querySelectorAll('.filter-btn');
+            const sortSelect = document.getElementById('doctor-sort');
+            
+            // Current filter and sort state
+            let currentSpecialty = 'all';
+            let currentSortMethod = 'rating';
+            let searchQuery = '';
+            
+            // Function to render all doctor cards
+            function renderDoctors() {
+                // Clear existing content
+                if (doctorGrid) {
+                    doctorGrid.innerHTML = '';
+                    
+                    // Filter doctors
+                    let filteredDoctors = doctorsData.filter(doctor => {
+                        // Apply specialty filter if not 'all'
+                        const specialtyMatch = currentSpecialty === 'all' || doctor.specialty === currentSpecialty;
+                        
+                        // Apply search filter if there's a query
+                        const searchMatch = !searchQuery || 
+                            doctor.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                            doctor.specialty.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                            doctor.description.toLowerCase().includes(searchQuery.toLowerCase());
+                            
+                        return specialtyMatch && searchMatch;
+                    });
+                    
+                    // Sort doctors
+                    switch (currentSortMethod) {
+                        case 'rating':
+                            filteredDoctors.sort((a, b) => b.rating - a.rating);
+                            break;
+                        case 'experience':
+                            filteredDoctors.sort((a, b) => {
+                                const aYears = parseInt(a.experience);
+                                const bYears = parseInt(b.experience);
+                                return bYears - aYears;
+                            });
+                            break;
+                        case 'availability':
+                            filteredDoctors.sort((a, b) => {
+                                if (a.availability.includes('today') && !b.availability.includes('today')) return -1;
+                                if (!a.availability.includes('today') && b.availability.includes('today')) return 1;
+                                if (a.availability.includes('tomorrow') && !b.availability.includes('tomorrow')) return -1;
+                                if (!a.availability.includes('tomorrow') && b.availability.includes('tomorrow')) return 1;
+                                return 0;
+                            });
+                            break;
+                        case 'name':
+                            filteredDoctors.sort((a, b) => a.name.localeCompare(b.name));
+                            break;
+                    }
+                    
+                    // Create and append doctor cards
+                    if (filteredDoctors.length > 0) {
+                        filteredDoctors.forEach(doctor => {
+                            doctorGrid.appendChild(createDoctorCard(doctor));
+                        });
+                    } else {
+                        // Show no results message
+                        const noResults = document.createElement('div');
+                        noResults.className = 'col-span-full text-center py-12';
+                        noResults.innerHTML = `
+                            <i class="fas fa-user-md text-gray-400 text-5xl mb-4"></i>
+                            <h3 class="text-xl font-bold text-gray-700 dark:text-gray-300">No doctors found</h3>
+                            <p class="text-gray-500 dark:text-gray-400 mt-2">Try adjusting your search or filters</p>
+                        `;
+                        doctorGrid.appendChild(noResults);
+                    }
+                }
+            }
+            
+            // Initial render
+            renderDoctors();
+            
+            // Update doctor stats
+            const doctorCountEl = document.getElementById('doctorCount');
+            const categoryCountEl = document.getElementById('categoryCount');
+            
+            if (doctorCountEl) {
+                doctorCountEl.textContent = doctorsData.length;
+            }
+            
+            if (categoryCountEl) {
+                const uniqueSpecialties = [...new Set(doctorsData.map(doctor => doctor.specialty))];
+                categoryCountEl.textContent = uniqueSpecialties.length;
+            }
+            
+            // Set up search
+            if (searchButton) {
+                searchButton.addEventListener('click', function() {
+                    searchQuery = searchInput.value.trim();
+                    renderDoctors();
+                });
+            }
+            
+            if (searchInput) {
+                searchInput.addEventListener('keyup', function(e) {
+                    if (e.key === 'Enter') {
+                        searchQuery = searchInput.value.trim();
+                        renderDoctors();
+                    }
+                });
+            }
+            
+            // Set up specialty filters
+            specialtyFilters.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Update active class
+                    specialtyFilters.forEach(btn => btn.classList.remove('active', 'bg-primary', 'text-white'));
+                    specialtyFilters.forEach(btn => {
+                        if (btn !== this) {
+                            btn.classList.add('bg-gray-100', 'dark:bg-gray-800', 'text-gray-700', 'dark:text-gray-300');
+                            btn.classList.remove('bg-primary', 'text-white');
+                        }
+                    });
+                    
+                    this.classList.add('active', 'bg-primary', 'text-white');
+                    this.classList.remove('bg-gray-100', 'dark:bg-gray-800', 'text-gray-700', 'dark:text-gray-300');
+                    
+                    // Update filter and re-render
+                    currentSpecialty = this.dataset.specialty;
+                    renderDoctors();
+                });
+            });
+            
+            // Set up sorting
+            if (sortSelect) {
+                sortSelect.addEventListener('change', function() {
+                    currentSortMethod = this.value;
+                    renderDoctors();
+                });
+            }
+            
+            // Doctor modal and interactions
+            const doctorModal = document.getElementById('doctorModal');
+            const modalImage = document.getElementById('modalImage');
+            const modalDoctorName = document.getElementById('modalDoctorName');
+            const modalDescription = document.getElementById('modalDescription');
+            
+            // Set up event delegation for doctor grid interactions
+            if (doctorGrid) {
+                doctorGrid.addEventListener('click', function(e) {
+                    // View doctor profile
+                    const viewBtn = e.target.closest('.doctor-view-btn');
+                    if (viewBtn) {
+                        const doctorCard = viewBtn.closest('.doctor-card');
+                        const doctorId = doctorCard.dataset.id;
+                        const doctor = doctorsData.find(d => d.id == doctorId);
+                        
+                        if (doctor) {
+                            modalImage.src = doctor.image;
+                            modalDoctorName.textContent = doctor.name;
+                            modalDescription.textContent = doctor.description;
+                            doctorModal.classList.remove('hidden');
+                        }
+                    }
+                    
+                    // Favorite button functionality
+                    const favoriteButton = e.target.closest('.favorite-btn');
+                    if (favoriteButton) {
+                        const icon = favoriteButton.querySelector('i');
+                        
+                        // Toggle favorite state
+                        if (icon.classList.contains('far')) {
+                            icon.classList.remove('far');
+                            icon.classList.add('fas', 'text-red-500');
+                        } else {
+                            icon.classList.remove('fas', 'text-red-500');
+                            icon.classList.add('far');
+                        }
+                    }
+                    
+                    // Chat button functionality
+                    const chatBtn = e.target.closest('.chat-doctor-btn');
+                    if (chatBtn) {
+                        const doctorCard = chatBtn.closest('.doctor-card');
+                        const doctorId = doctorCard.dataset.id;
+                        const doctor = doctorsData.find(d => d.id == doctorId);
+                        
+                        if (doctor) {
+                            // Open chat panel and start chat with this doctor
+                            chatPanel.classList.add('active');
+                            
+                            // Check if this doctor already has a chat
+                            if (chatData[doctorId]) {
+                                // Find the chat item for this doctor
+                                const chatItem = document.querySelector(`.chat-item[data-doctor-id="${doctorId}"]`);
+                                if (chatItem) {
+                                    chatItem.click();
+                                } else {
+                                    // If no existing chat item, create one
+                                    chatDoctorName.textContent = doctor.name;
+                                    chatDoctorImage.src = doctor.image;
+                                    chatMessages.innerHTML = '';
+                                    individualChat.classList.remove('hidden');
+                                }
+                            } else {
+                                // Create a new chat with this doctor
+                                chatDoctorName.textContent = doctor.name;
+                                chatDoctorImage.src = doctor.image;
+                                chatMessages.innerHTML = '';
+                                
+                                // Add initial message
+                                const messageEl = document.createElement('div');
+                                messageEl.className = 'chat-message received p-3 rounded-lg';
+                                messageEl.innerHTML = `
+                                    <p>Hello! How can I help you today?</p>
+                                    <p class="text-xs text-right mt-1 text-gray-500 dark:text-gray-400">Just now</p>
+                                `;
+                                chatMessages.appendChild(messageEl);
+                                
+                                individualChat.classList.remove('hidden');
+                            }
+                        }
+                    }
+                    
+                    // Call doctor button functionality
+                    const callBtn = e.target.closest('.call-doctor-btn');
+                    if (callBtn) {
+                        const doctorCard = callBtn.closest('.doctor-card');
+                        const doctorName = doctorCard.querySelector('.doctor-name').textContent.trim();
+                        
+                        alert(`Starting video call with ${doctorName}`);
+                    }
+                    
+                    // Book appointment button functionality
+                    const bookBtn = e.target.closest('.book-btn');
+                    if (bookBtn) {
+                        const doctorCard = bookBtn.closest('.doctor-card');
+                        const doctorId = doctorCard.dataset.id;
+                        const doctor = doctorsData.find(d => d.id == doctorId);
+                        
+                        if (doctor) {
+                            appointmentsModal.classList.remove('hidden');
+                        }
+                    }
+                });
+            }
+        });
+
     </script>
 </body>
 

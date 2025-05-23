@@ -17,12 +17,12 @@ Route::get('/user/index', [PatientController::class, 'UserIndex'])->name('ShowUs
 Route::post('/register', [AuthController::class, 'register'])->name('register')->middleware('web');
 Route::post('/login', [AuthController::class, 'login'])->name('login')->middleware('web');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-<<<<<<< HEAD
-=======
+
+
 
 
 Route::get('/dashboard/index', [DoctorsDashboardController::class, 'doctorindex'])->name('doctorindex');
 Route::get('/dashboard/profile', [DoctorsDashboardController::class, 'doctorprofile'])->name('doctorprofile');
 Route::get('/dashboard/appointment', [DoctorsDashboardController::class, 'doctorappointment'])->name('doctorappointment');
 Route::get('/dashboard/patient', [DoctorsDashboardController::class, 'doctorpatient'])->name('doctorpatient');
->>>>>>> 06565c73417f1c8b260d739bad4e095503ad62e4
+

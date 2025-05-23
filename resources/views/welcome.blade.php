@@ -1,77 +1,174 @@
-<!DOCTYPE html>
-<html lang="en" class="dark">
+<x-app>
+  <!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Doctor's Patients</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Doctor Application</title>
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
   <script>
-    tailwind.config = {
-      darkMode: 'class',
-    };
+    (function(){
+      emailjs.init("YOUR_PUBLIC_KEY"); // Replace with your EmailJS Public Key
+    })();
   </script>
+  <link rel="stylesheet" href="output.css" />
 </head>
-<body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-100">
+<body class="bg-gray-50">
 
-  <!-- Header -->
-  <header class="bg-white dark:bg-gray-800 shadow p-4 flex items-center justify-between">
-    <h1 class="text-2xl font-bold">Dr. Ahmed's Patients</h1>
-    <button id="toggleDark" class="bg-indigo-600 text-white px-3 py-1 rounded hover:bg-indigo-700 transition">
-      Toggle Dark Mode
-    </button>
-  </header>
 
-  <!-- Patients List -->
-  <main class="p-6 max-w-7xl mx-auto">
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+<button id="openModal" class="bg-blue-600 text-white px-4 py-2 rounded-full">
+  Schedule New Appointment
+</button>
+
+
+<!-- Modal Background & Container -->
+<div id="doctorModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
+  <div class="bg-white rounded-2xl shadow-xl max-h-screen overflow-y-auto w-full max-w-4xl p-4 relative">
+    <!-- Close Button -->
+    <button id="closeModal" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-2xl">&times;</button>
+
+    <!-- Your Section Goes Here -->
+    <section class="py-4 px-2 sm:px-4 lg:px-6">
+      <!-- Keep your form code here (you pasted it in your message) -->
       
-      <!-- Patient Card 1 -->
-      <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-5 flex flex-col items-center">
-        <img src="https://randomuser.me/api/portraits/men/22.jpg" class="w-24 h-24 rounded-full border-4 border-indigo-500" />
-        <h2 class="mt-4 text-xl font-semibold">Joseph N.</h2>
-        <p class="text-sm text-gray-500 dark:text-gray-300">Age: 35</p>
-        <p class="text-sm text-gray-500 dark:text-gray-300">Diagnosis: Hypertension</p>
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl font-bold text-center text-blue-800 mb-10">Apply to Join as a Doctor</h2>
+
+      <!-- Success Alert -->
+      <div id="success-message" class="hidden mb-6 rounded-xl p-4 bg-green-100 text-green-800 text-center font-semibold">
+        ✅ Application submitted successfully. We'll review your credentials and contact you shortly.
       </div>
 
-      <!-- Patient Card 2 -->
-      <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-5 flex flex-col items-center">
-        <img src="https://randomuser.me/api/portraits/women/45.jpg" class="w-24 h-24 rounded-full border-4 border-indigo-500" />
-        <h2 class="mt-4 text-xl font-semibold">Clara M.</h2>
-        <p class="text-sm text-gray-500 dark:text-gray-300">Age: 29</p>
-        <p class="text-sm text-gray-500 dark:text-gray-300">Diagnosis: Asthma</p>
-      </div>
+      <form id="doctor-form" class="bg-white rounded-2xl shadow-xl p-8 space-y-6">
 
-      <!-- Patient Card 3 -->
-      <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-5 flex flex-col items-center">
-        <img src="https://randomuser.me/api/portraits/men/36.jpg" class="w-24 h-24 rounded-full border-4 border-indigo-500" />
-        <h2 class="mt-4 text-xl font-semibold">James D.</h2>
-        <p class="text-sm text-gray-500 dark:text-gray-300">Age: 41</p>
-        <p class="text-sm text-gray-500 dark:text-gray-300">Diagnosis: Diabetes</p>
-      </div>
+        <!-- Email -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Your Email</label>
+          <input type="email" name="email" required
+                 class="w-full border border-gray-300 rounded-lg p-3 bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400">
+        </div>
 
-      <!-- Patient Card 4 -->
-      <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-5 flex flex-col items-center">
-        <img src="https://randomuser.me/api/portraits/women/60.jpg" class="w-24 h-24 rounded-full border-4 border-indigo-500" />
-        <h2 class="mt-4 text-xl font-semibold">Marina T.</h2>
-        <p class="text-sm text-gray-500 dark:text-gray-300">Age: 53</p>
-        <p class="text-sm text-gray-500 dark:text-gray-300">Diagnosis: Arthritis</p>
-      </div>
+        <!-- Profile Photo Upload -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Upload Profile Photo <span class="text-red-500">*</span></label>
+          <input type="file" name="photo" accept="image/*" required id="photo-file"
+                 class="w-full border border-gray-300 rounded-lg p-2 bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400">
+        </div>
 
-      <!-- Patient Card 5 -->
-      <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-5 flex flex-col items-center">
-        <img src="https://randomuser.me/api/portraits/men/77.jpg" class="w-24 h-24 rounded-full border-4 border-indigo-500" />
-        <h2 class="mt-4 text-xl font-semibold">Liam S.</h2>
-        <p class="text-sm text-gray-500 dark:text-gray-300">Age: 62</p>
-        <p class="text-sm text-gray-500 dark:text-gray-300">Diagnosis: Heart Disease</p>
-      </div>
+        <!-- Full Name -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
+          <input type="text" name="full_name" required
+                 class="w-full border border-gray-300 rounded-lg p-3 bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400">
+        </div>
 
+        <!-- Specialty -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Specialty</label>
+          <input type="text" name="specialty" required
+                 class="w-full border border-gray-300 rounded-lg p-3 bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400">
+        </div>
+
+        <!-- Experience -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Years of Experience</label>
+          <input type="number" name="experience" required
+                 class="w-full border border-gray-300 rounded-lg p-3 bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400">
+        </div>
+
+        <!-- License -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">License Number</label>
+          <input type="text" name="license" required
+                 class="w-full border border-gray-300 rounded-lg p-3 bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400">
+        </div>
+
+        <!-- Bio -->
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Short Bio</label>
+          <textarea name="bio" rows="4" required
+                    class="w-full border border-gray-300 rounded-lg p-3 bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400"></textarea>
+        </div>
+        <!-- University Attended -->
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">University Attended <span class="text-red-500">*</span></label>
+            <input type="text" name="university" required placeholder="e.g., University of Nairobi"
+                class="w-full border border-gray-300 rounded-lg p-3 bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400">
+        </div>
+        
+        <!-- Medical Degree -->
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Medical Degree <span class="text-red-500">*</span></label>
+            <input type="text" name="degree" required placeholder="e.g., MBBS, MD, DO"
+                class="w-full border border-gray-300 rounded-lg p-3 bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400">
+        </div>
+        
+        <!-- Year of Graduation -->
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Year of Graduation <span class="text-red-500">*</span></label>
+            <input type="number" name="graduation_year" min="1950" max="2099" required placeholder="e.g., 2015"
+                class="w-full border border-gray-300 rounded-lg p-3 bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400">
+        </div>
+        
+        <!-- Country of Practice -->
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Country of Practice <span class="text-red-500">*</span></label>
+            <input type="text" name="country" required placeholder="e.g., Kenya"
+                class="w-full border border-gray-300 rounded-lg p-3 bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400">
+        </div>
+        
+        <!-- LinkedIn or Professional Profile -->
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">LinkedIn or Professional Profile (optional)</label>
+            <input type="url" name="profile_url" placeholder="https://linkedin.com/in/example"
+                class="w-full border border-gray-300 rounded-lg p-3 bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400">
+        </div>
+        
+        <!-- Upload Medical Certificate -->
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Upload Medical Certificate (optional)</label>
+            <input type="file" name="certificate" accept=".pdf,.jpg,.jpeg,.png"
+                class="w-full border border-gray-300 rounded-lg p-2 bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400">
+        </div>
+        
+        <!-- Submit Button -->
+        <div class="text-center">
+          <button type="submit"
+                  class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-full transition duration-300">
+            Submit Application
+          </button>
+        </div>
+      </form>
     </div>
-  </main>
+  
+      <!-- ... -->
+    </section>
+  </div>
+</div>
 
+
+  
+
+  <script src="./script.js">
+   
+  </script>
   <script>
-    document.getElementById('toggleDark').addEventListener('click', () => {
-      document.documentElement.classList.toggle('dark');
-    });
+      document.getElementById('openModal').addEventListener('click', function () {
+    document.getElementById('doctorModal').classList.remove('hidden');
+  });
+
+  document.getElementById('closeModal').addEventListener('click', function () {
+    document.getElementById('doctorModal').classList.add('hidden');
+  });
+
+  // Optional: Close modal when clicking outside the form
+  document.getElementById('doctorModal').addEventListener('click', function (e) {
+    if (e.target === this) {
+      this.classList.add('hidden');
+    }
+  });
   </script>
 </body>
 </html>
+
+</x-app>
