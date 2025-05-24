@@ -12,6 +12,11 @@ class PatientController extends Controller
     {
         $doctors = User::where('verification', 1)->get();
 
+<<<<<<< HEAD
+=======
+       $doctors = User::all();
+      // dd($doctors);
+>>>>>>> d4dd87a79fb0ef2d5fceded474e6c0f1bc7d3986
         return view('User.Patient.index', compact('doctors'));
     }
     //
