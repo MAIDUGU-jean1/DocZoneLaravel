@@ -429,7 +429,7 @@
                 <div class="flex items-center">
                     <a href="#" class="flex items-center gap-2">
                         <span class="text-2xl font-bold text-primary">
-                            DocZone
+                          <img src="{{ asset('Images/Doczone.png') }}" alt="Doczone Logo" width="90px" height="90px">
                         </span>
                     </a>
                 </div>
