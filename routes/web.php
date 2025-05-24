@@ -16,20 +16,11 @@ Route::get('/user/index', [PatientController::class, 'UserIndex'])->name('ShowUs
 Route::post('/register', [AuthController::class, 'register'])->name('register')->middleware('web');
 Route::post('/login', [AuthController::class, 'login'])->name('login')->middleware('web');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-<<<<<<< HEAD
-=======
 
 
->>>>>>> d4dd87a79fb0ef2d5fceded474e6c0f1bc7d3986
-
-
-
-// Doctor dashboard routes
+// Doctor routes
 Route::get('/dashboard/index', [DoctorsDashboardController::class, 'doctorindex'])->name('doctorindex');
 Route::get('/dashboard/profile', [DoctorsDashboardController::class, 'doctorprofile'])->name('doctorprofile');
 Route::get('/dashboard/appointment', [DoctorsDashboardController::class, 'doctorappointment'])->name('doctorappointment');
 Route::get('/dashboard/patient', [DoctorsDashboardController::class, 'doctorpatient'])->name('doctorpatient');
-<<<<<<< HEAD
-=======
-
->>>>>>> d4dd87a79fb0ef2d5fceded474e6c0f1bc7d3986
+Route::post('/dashboard/logout', [DoctorsDashboardController::class, 'logout'])->name('doctorlogout');
