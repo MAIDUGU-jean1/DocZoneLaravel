@@ -10,13 +10,11 @@ class PatientController extends Controller
 {
     public function UserIndex()
     {
+        // $doctors = User::with('category')->where('verification', 1)->get();
         $doctors = User::where('verification', 1)->get();
 
-<<<<<<< HEAD
-=======
-       $doctors = User::all();
-      // dd($doctors);
->>>>>>> d4dd87a79fb0ef2d5fceded474e6c0f1bc7d3986
+        $doctors = User::all();
+        // dd($doctors);
         return view('User.Patient.index', compact('doctors'));
     }
     //
