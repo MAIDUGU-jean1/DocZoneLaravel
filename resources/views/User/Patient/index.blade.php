@@ -484,7 +484,7 @@
                         </button>
                         <div>
                             <!-- notification Dropdown (Hidden by default) -->
-                            <div id="notificationDropdown"
+                            <div id="notificationDropdown" 
                                 class="hidden fixed right-4 top-16 w-96 bg-white dark:bg-gray-800 rounded-lg shadow-xl z-50 border border-gray-200 dark:border-gray-700">
                                 <div class="p-4 border-b border-gray-200 dark:border-gray-700">
                                     <div class="flex justify-between items-center mb-4">
@@ -1379,7 +1379,7 @@
     </div>
 
     <!-- Doctor Modal -->
-    <div id="appointmentsModal" class="modal fixed inset-0 z-50 flex items-center justify-center hidden">
+    <div id="doctorProfileModal" class="modal fixed inset-0 z-50 flex items-center justify-center hidden">
         <div class="modal-content bg-white dark:bg-dark-card w-full max-w-4xl rounded-lg shadow-xl p-6 mx-4">
             <div class="flex justify-between items-center mb-4">
                 <h3 class="text-xl font-bold text-gray-900 dark:text-white" id="modalTitle">Doctor Profile</h3>
@@ -1476,7 +1476,7 @@
     </div>
 
     <!-- Appointments Modal -->
-    <div id="appointmentsModal" class="modal fixed inset-0 z-50 flex items-center justify-center hidden">
+    <div id="appointmentsModal" class="modal fixed inset-0 z-50 flex items-center justify-center hidden" style="z-index:1000;">
         <div class="modal-content bg-white dark:bg-dark-card w-full max-w-4xl rounded-lg shadow-xl p-6 mx-4">
             <div class="flex justify-between items-center mb-4">
                 <h3 class="text-xl font-bold text-gray-900 dark:text-white">My Appointments</h3>
@@ -1739,12 +1739,91 @@
             </div>
 
             <div id="" class="mt-6 text-center">
-                <button class="px-6 py-2 bg-primary text-white rounded-lg hover:bg-opacity-90 transition-colors">
+                <button class="px-6 py-2 bg-primary text-white rounded-lg hover:bg-opacity-90 transition-colors" onclick=Appoint();>
                     <i class="fas fa-plus mr-1"></i> Schedule New Appointment
                 </button>
     </div>
         </div>
     </div>
+
+
+    <section
+  id="appointModal"
+  class="fixed inset-0 bg-white z-[9999] hidden overflow-y-auto"
+>
+  <!-- Close Button -->
+  <button
+    onclick="document.getElementById('appointModal').classList.add('hidden');"
+    class="absolute top-4 right-6 text-3xl text-gray-600 hover:text-red-500 font-bold z-50"
+    aria-label="Close"
+  >
+    &times;
+  </button>
+
+  <div class="flex flex-col items-center justify-center min-h-screen p-6">
+    <div class="w-full max-w-2xl bg-white rounded-2xl shadow-2xl p-8">
+      <h2 class="text-3xl font-bold mb-6 text-center text-teal-600">
+        Book Appointment with Dr. John Smith
+      </h2>
+
+      <form action="/appointments" method="POST" class="space-y-5">
+        <input type="hidden" name="doctor_id" value="1" />
+        <input type="hidden" name="doctor_name" value="Dr. John Smith" />
+
+        <div>
+          <label class="block font-medium text-gray-700 mb-1">Doctor</label>
+          <div class="px-4 py-2 bg-gray-100 rounded-xl border border-gray-200 text-gray-700">
+            Dr. John Smith - Cardiologist
+          </div>
+        </div>
+
+        <div>
+          <label for="patientName" class="block font-medium text-gray-700 mb-1">Full Name</label>
+          <input type="text" id="patientName" name="patient_name" required
+            class="w-full px-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-400" />
+        </div>
+
+        <div>
+          <label for="email" class="block font-medium text-gray-700 mb-1">Email</label>
+          <input type="email" id="email" name="email" required
+            class="w-full px-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-400" />
+        </div>
+
+        <div>
+          <label for="phone" class="block font-medium text-gray-700 mb-1">Phone Number</label>
+          <input type="tel" id="phone" name="phone" required
+            class="w-full px-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-400" />
+        </div>
+
+        <div>
+          <label for="date" class="block font-medium text-gray-700 mb-1">Appointment Date</label>
+          <input type="date" id="date" name="date" required
+            class="w-full px-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-400" />
+        </div>
+
+        <div>
+          <label for="time" class="block font-medium text-gray-700 mb-1">Preferred Time</label>
+          <input type="time" id="time" name="time" required
+            class="w-full px-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-400" />
+        </div>
+
+        <div>
+          <label for="notes" class="block font-medium text-gray-700 mb-1">Reason or Notes</label>
+          <textarea id="notes" name="notes" rows="4"
+            class="w-full px-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-400"
+            placeholder="Briefly describe symptoms or concerns..."></textarea>
+        </div>
+
+        <div class="flex justify-end">
+          <button type="submit"
+            class="bg-teal-500 hover:bg-teal-600 text-white font-semibold py-2 px-6 rounded-xl transition duration-200">
+            Confirm Appointment
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
 
     <!-- Hero Section with Stats -->
     <section
@@ -1923,70 +2002,15 @@
             <!-- Doctor Cards Grid -->
             <div id="doctor-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 <!-- Doctor cards will be inserted here by JavaScript -->
-                
-                            <div class="flex flex-col border shadow-xl hover:shadow-2xl hover:scale-105 rounded-lg">
-                                <div class="relative flex flex-col">
-                                            <img src="{{asset('Images/A woman in a white lab coat is standing in a room with a bottle of liquid _ Premium AI-generated image.jpeg')}}" alt="" class="doctor-image w-full h-48 object-cover btl-rounded-lg" style="border-top-left-radius: 7px; border-top-right-radius: 7px;">
-                                            <span class="doctor-badge absolute top-4 right-4 px-2 py-1 text-white bg-[#5D5CDE] text-white text-xs font-semibold rounded">TOP RATED</span>
-                                        </div>
-                                        <div>
-
-                                                            <div class="p-6">
-                                            <div class="flex justify-between items-start mb-2">
-                                                <h3 class="doctor-name text-lg font-bold text-gray-900 dark:text-white">
-                                                    ATEBA
-                                                    <i class="fas fa-check-circle verified-badge ml-1 text-primary " title="Verified Provider"></i>
-                                                </h3>
-                                                <button class="favorite-btn text-gray-400 hover:text-red-500">
-                                                    <i class="far fa-heart"></i>
-                                                </button>
-                                            </div>
-                                            <span class="doctor-specialty inline-block px-3 py-1 bg-red-100 dark:bg-${doctor.specialtyColor}-900 text-red-800 dark:text-${doctor.specialtyColor}-200 rounded-full text-xs font-medium mb-3">Cardiology</span>
-                                            <div class="flex items-center mb-3">
-                                                <div class="stars-container flex text-yellow-400 mr-1">
-                                                    4
-                                                </div>
-                                                <span class="text-sm">
-                                                    <span class="rating-value">3</span>
-                                                    <span class="reviews-count text-gray-500 dark:text-gray-400">TOP RATED</span>
-                                                </span>
-                                            </div>
-                                            <p class="doctor-desc text-gray-700 dark:text-gray-300 text-sm mb-4 line-clamp-2">
-                                                Specialized in cardiovascular health with over 15 years of experience in
-                                            </p>
-                                            <div class="flex justify-between items-center text-sm text-gray-600 dark:text-gray-400 mb-4">
-                                                <span class="doctor-availability">
-                                                    <i class="far fa-clock mr-1"></i>  Available today
-                                                </span>
-                                                <span class="doctor-experience">
-                                                    <i class="fas fa-user-md mr-1"></i>4 years of experience
-                                                </span>
-                                            </div>
-                                            <div class="grid grid-cols-2 gap-2">
-                                                <button class="call-doctor-btn w-full py-2 bg-[#5D5CDE] hover:bg-opacity-90 text-white font-medium rounded transition-colors">
-                                                    <i class="fas fa-video mr-1"></i> Video Call
-                                                </button>
-                                                <button class="chat-doctor-btn w-full py-2 border border-primary text-primary hover:bg-primary hover:bg-opacity-10 font-medium rounded transition-colors">
-                                                    <i class="fas fa-comment-medical mr-1"></i> Chat
-                                                </button>
-                                                <button class="doctor-view-btn w-full py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 font-medium rounded transition-colors col-span-1">
-                                                    <i class="fas fa-user-md mr-1"></i> Profile
-                                                </button>
-                                                <button class="book-btn w-full py-2 bg-green-500 hover:bg-green-600 text-white font-medium rounded transition-colors col-span-1">
-                                                    <i class="fas fa-calendar-check mr-1"></i> Book
-                                                </button>
-                                            </div>
-                                        </div>
-                                        </div>
-                          </div>
+               
 
 
 
         
                        </div>
-                     <div id="doctor-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                     <div id="doctor-grid" class="grid  grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
     @foreach ($doctors as $doctor)
-       <div class="doctor-card bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-transform duration-300"
+       <div class="doctor-card bg-white dark:bg-black dark:bg-opacity-10  rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-transform duration-300"
      data-id="{{ $doctor->id }}">
   <div class="relative">
     <img src="{{ asset('storage/' . $doctor->profile_picture) }}" 
@@ -1999,7 +2023,7 @@
   
   <div class="p-6">
     <div class="flex justify-between items-center mb-2">
-      <h3 class="text-lg font-bold text-gray-900">
+      <h3 class="text-lg font-bold text-gray-900 dark:text-white">
        Dr. {{ $doctor->name }}
         <i class="fas fa-check-circle text-blue-500 ml-1" title="Verified"></i>
       </h3>
@@ -2015,19 +2039,19 @@
     <div class="flex items-center mb-3 text-yellow-400">
       <!-- Example star icons, replace with your rating logic -->
       <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i>
-      <span class="ml-2 text-gray-600 text-sm">({{ $doctor->reviews }} reviews)</span>
+      <span class="ml-2 text-gray-600 text-sm dark:text-white">({{ $doctor->reviews }} reviews)</span>
     </div>
     
-    <p class="text-gray-700 text-sm mb-4 line-clamp-2">
+    <p class="text-gray-700 text-sm mb-4 line-clamp-2 dark:text-white">
       {{ $doctor->bio ?? 'Experienced doctor providing quality care.' }}
     </p>
     
     <div class="flex justify-between items-center text-sm text-gray-600 mb-4">
-      <span>
-        <i class="far fa-clock mr-1"></i> Available today
+      <span class="dark:text-white">
+        <i class="far fa-clock mr-1 dark:text-white"></i> Available today
       </span>
-      <span>
-        <i class="fas fa-user-md mr-1"></i> {{ $doctor->experience }} years experience
+      <span class="dark:text-white">
+        <i class="fas fa-user-md mr-1 dark:text-white"></i> {{ $doctor->experience }} years experience
       </span>
     </div>
     
@@ -2035,13 +2059,13 @@
       <button class="call-doctor-btn w-full py-2 bg-blue-600 hover:bg-blue-700 text-white rounded transition">
         <i class="fas fa-video mr-1"></i> Video Call
       </button>
-      <button class="chat-doctor-btn w-full py-2 border border-blue-600 text-blue-600 hover:bg-blue-100 rounded transition">
+      <button class="chat-doctor-btn w-full py-2 border border-blue-600 text-blue-600 hover:bg-blue-100 rounded transition" onclick=chat();>
         <i class="fas fa-comment-medical mr-1"></i> Chat
       </button>
-      <button class="doctor-view-btn w-full py-2 bg-gray-100 text-gray-700 hover:bg-gray-200 rounded transition">
+      <button class="doctor-view-btn w-full py-2 bg-gray-100 text-gray-700 hover:bg-gray-200 rounded transition" onclick=display();>
         <i class="fas fa-user-md mr-1"></i> Profile
       </button>
-      <button class="book-btn w-full py-2 bg-green-500 hover:bg-green-600 text-white rounded transition">
+      <button class="book-btn w-full py-2 bg-green-500 hover:bg-green-600 text-white rounded transition" onclick=appointment()>
         <i class="fas fa-calendar-check mr-1"></i> Book
       </button>
     </div>
@@ -2212,7 +2236,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Service Card 1 -->
                 <div class="group relative rounded-xl overflow-hidden h-64 slide-in-bottom">
-                    <img src="images/Telehealth Services Cancun - Telemed Mexico.jpeg" alt="General Medicine"
+                    <img src="{{ asset('Images/Telehealth Services Cancun - Telemed Mexico.jpeg')}}" alt="General Medicine"
                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                     <div class="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent"></div>
                     <div class="absolute bottom-0 left-0 p-6">
@@ -2230,7 +2254,7 @@
 
                 <!-- Service Card 2 -->
                 <div class="group relative rounded-xl overflow-hidden h-64 slide-in-bottom delay-200">
-                    <img src="images/Telemedicina_ Transformando o Futuro dos Cuidados de Saúde, Saiba Como Esse Futuro Pode Transform___.jpeg"
+                    <img src="{{asset('Images/Telemedicina_ Transformando o Futuro dos Cuidados de Saúde, Saiba Como Esse Futuro Pode Transform___.jpeg')}}"
                         alt="Pediatrics"
                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                     <div class="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent"></div>
@@ -2249,7 +2273,7 @@
 
                 <!-- Service Card 3 -->
                 <div class="group relative rounded-xl overflow-hidden h-64 slide-in-bottom delay-400">
-                    <img src="images/Healthy Brain illustration and mental heath design _ Premium AI-generated image.jpeg"
+                    <img src="{{asset('Images/Healthy Brain illustration and mental heath design _ Premium AI-generated image.jpeg')}}"
                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                     <div class="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent"></div>
                     <div class="absolute bottom-0 left-0 p-6">
@@ -2267,7 +2291,7 @@
 
                 <!-- Service Card 4 -->
                 <div class="group relative rounded-xl overflow-hidden h-64 slide-in-bottom">
-                    <img src="images/CeraVe Launches Fund For Howard University's___.jpeg"
+                    <img src="{{asset('Images/CeraVe Launches Fund For Howard University\'s___.jpeg')}}"
                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                     <div class="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent"></div>
                     <div class="absolute bottom-0 left-0 p-6">
@@ -2285,7 +2309,7 @@
 
                 <!-- Service Card 5 -->
                 <div class="group relative rounded-xl overflow-hidden h-64 slide-in-bottom delay-200">
-                    <img src="images/Breakthrough analysis highlights Imperial's power in cardiovascular science _ Imperial Inform___.jpeg"
+                    <img src="{{asset('Images/Breakthrough analysis highlights Imperial’s power in cardiovascular science _ Imperial Inform___.jpeg')}}"
                         alt="Cardiology"
                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                     <div class="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent"></div>
@@ -2304,7 +2328,7 @@
 
                 <!-- Service Card 6 -->
                 <div class="group relative rounded-xl overflow-hidden h-64 slide-in-bottom delay-400">
-                    <img src="images/Focus on digital health leads to emergence of new roles in healthtech.jpeg"
+                    <img src="{{asset('Images/Focus on digital health leads to emergence of new roles in healthtech.jpeg')}}"
                         alt="Specialist Referrals"
                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                     <div class="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent"></div>
@@ -2413,7 +2437,7 @@
                         </a>
                     </div>
                     <div class="relative">
-                        <img src="images/Beneficence.jpeg" alt="Healthcare Membership"
+                        <img src="{{asset('Images/Beneficence.jpeg')}}" alt="Healthcare Membership"
                             class="w-full rounded-xl shadow-md">
                         <div class="absolute -bottom-5 -right-5 bg-white dark:bg-dark-card p-4 rounded-lg shadow-lg">
                             <div class="flex items-center">
@@ -2589,7 +2613,7 @@
                 <div
                     class="bg-white dark:bg-dark-card rounded-xl overflow-hidden shadow-md transition-all duration-300 hover:shadow-xl slide-in-bottom">
                     <div class="h-56 overflow-hidden">
-                        <img src="images/The+Correlation+Between+Exercise+and+Heart+Health.jpeg" alt="Heart Health"
+                        <img src="{{asset('Images/heart.jpeg')}}" alt="Heart Health"
                             class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
                     </div>
                     <div class="p-6">
@@ -2650,7 +2674,7 @@
                 <div
                     class="bg-white dark:bg-dark-card rounded-xl overflow-hidden shadow-md transition-all duration-300 hover:shadow-xl slide-in-bottom delay-400">
                     <div class="h-56 overflow-hidden">
-                        <img src="images/Ringing in your ears_ About 750 million people have this perplexing condition, study says.jpeg"
+                        <img src="{{asset('Images/Ringing in your ears_ About 750 million people have this perplexing condition, study says.jpeg')}}"
                             class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
                     </div>
                     <div class="p-6">
@@ -3115,7 +3139,7 @@
           let closeNotBtn = document.getElementById('closeNotBtn');
         let notificationModal = document.getElementById('notificationDropdown')
         function closenot(){
-            notificationModal.classList.add('hidden')
+            notificationModal.classList.toggle('hidden')
         }
         function opennot(){
             notificationModal.classList.remove('hidden')
@@ -3184,7 +3208,7 @@
             
             // Chat panel functionality
             const chatBtn = document.getElementById('chatBtn');
-            const chatPanel = document.getElementById('chatPanel');
+
             const closeChatBtn = document.getElementById('closeChatBtn');
             const chatItems = document.querySelectorAll('.chat-item');
             const individualChat = document.getElementById('individualChat');
@@ -3409,7 +3433,7 @@
             
             // Appointments modal
             const viewAppointmentsBtn = document.getElementById('viewAppointmentsBtn');
-            const appointmentsModal = document.getElementById('appointmentsModal');
+           
             
             if (viewAppointmentsBtn) {
                 viewAppointmentsBtn.addEventListener('click', function(e) {
@@ -3831,6 +3855,34 @@
                 });
             }
         });
+function display(){
+    
+ const doctorProfileModal = document.getElementById('doctorProfileModal');
+    doctorProfileModal.classList.remove('hidden');
+}
+
+function appointment(){
+    const appointmentsModal = document.getElementById('appointmentsModal');
+    appointmentsModal.classList.remove('hidden');
+}
+
+function chat(){
+    const chatPanel = document.getElementById('chatPanel');
+    chatPanel.classList.add('active');
+}
+
+function close(){
+    alert('')
+     const appointModal = document.getElementById('appointModal');
+     appointModal.classList.add('hidden');
+}
+
+function Appoint(){
+    const appointModal = document.getElementById('appointModal');
+    const appointmentsModal = document.getElementById('appointmentsModal');
+    appointmentsModal.classList.add('hidden');
+    appointModal.classList.remove('hidden');
+}
 
     </script>
 </body>

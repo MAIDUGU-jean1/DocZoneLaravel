@@ -3,171 +3,101 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Doctor Application</title>
-  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-  <script>
-    (function(){
-      emailjs.init("YOUR_PUBLIC_KEY"); // Replace with your EmailJS Public Key
-    })();
-  </script>
-  <link rel="stylesheet" href="output.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Appointment Booking</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
-<body class="bg-gray-50">
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
 
+  <div x-data="{ showForm: false }" class="relative z-10">
 
-<button id="openModal" class="bg-blue-600 text-white px-4 py-2 rounded-full">
-  Schedule New Appointment
-</button>
+    <!-- Trigger Button -->
+    <button 
+      @click="showForm = true"
+      class="bg-teal-600 hover:bg-teal-700 text-white px-6 py-3 rounded-xl font-semibold transition">
+      Book Appointment with Dr. John Smith
+    </button>
 
+    <!-- Full Screen Modal -->
+    <div 
+      x-show="showForm"
+      x-transition
+      class="fixed inset-0 bg-white z-50 flex flex-col items-center justify-center overflow-auto p-6"
+      style="display: none;"
+    >
+      <!-- Close Button -->
+      <button 
+        @click="showForm = false"
+        class="absolute top-4 right-4 text-gray-600 hover:text-red-500 text-3xl font-bold focus:outline-none"
+        aria-label="Close">
+        &times;
+      </button>
 
-<!-- Modal Background & Container -->
-<div id="doctorModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
-  <div class="bg-white rounded-2xl shadow-xl max-h-screen overflow-y-auto w-full max-w-4xl p-4 relative">
-    <!-- Close Button -->
-    <button id="closeModal" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 text-2xl">&times;</button>
+      <!-- Appointment Form -->
+      <div class="w-full max-w-2xl bg-white rounded-2xl shadow-lg p-8">
+        <h2 class="text-3xl font-bold mb-6 text-center text-teal-600">Book Appointment with Dr. John Smith</h2>
 
-    <!-- Your Section Goes Here -->
-    <section class="py-4 px-2 sm:px-4 lg:px-6">
-      <!-- Keep your form code here (you pasted it in your message) -->
-      
-    <div class="max-w-4xl mx-auto">
-      <h2 class="text-3xl font-bold text-center text-blue-800 mb-10">Apply to Join as a Doctor</h2>
+        <form action="/appointments" method="POST" class="space-y-5">
+          <input type="hidden" name="doctor_id" value="1" />
+          <input type="hidden" name="doctor_name" value="Dr. John Smith" />
 
-      <!-- Success Alert -->
-      <div id="success-message" class="hidden mb-6 rounded-xl p-4 bg-green-100 text-green-800 text-center font-semibold">
-        ✅ Application submitted successfully. We'll review your credentials and contact you shortly.
+          <div>
+            <label class="block font-medium text-gray-700 mb-1">Doctor</label>
+            <div class="px-4 py-2 bg-gray-100 rounded-xl border border-gray-200 text-gray-700">
+              Dr. John Smith - Cardiologist
+            </div>
+          </div>
+
+          <div>
+            <label for="patientName" class="block font-medium text-gray-700 mb-1">Full Name</label>
+            <input type="text" id="patientName" name="patient_name" required
+              class="w-full px-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-400" />
+          </div>
+
+          <div>
+            <label for="email" class="block font-medium text-gray-700 mb-1">Email</label>
+            <input type="email" id="email" name="email" required
+              class="w-full px-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-400" />
+          </div>
+
+          <div>
+            <label for="phone" class="block font-medium text-gray-700 mb-1">Phone Number</label>
+            <input type="tel" id="phone" name="phone" required
+              class="w-full px-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-400" />
+          </div>
+
+          <div>
+            <label for="date" class="block font-medium text-gray-700 mb-1">Appointment Date</label>
+            <input type="date" id="date" name="date" required
+              class="w-full px-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-400" />
+          </div>
+
+          <div>
+            <label for="time" class="block font-medium text-gray-700 mb-1">Preferred Time</label>
+            <input type="time" id="time" name="time" required
+              class="w-full px-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-400" />
+          </div>
+
+          <div>
+            <label for="notes" class="block font-medium text-gray-700 mb-1">Reason or Notes</label>
+            <textarea id="notes" name="notes" rows="4"
+              class="w-full px-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-400"
+              placeholder="Briefly describe symptoms or concerns..."></textarea>
+          </div>
+
+          <div class="flex justify-end">
+            <button type="submit"
+              class="bg-teal-500 hover:bg-teal-600 text-white font-semibold py-2 px-6 rounded-xl transition duration-200">
+              Confirm Appointment
+            </button>
+          </div>
+        </form>
       </div>
-
-      <form id="doctor-form" class="bg-white rounded-2xl shadow-xl p-8 space-y-6">
-
-        <!-- Email -->
-        <div>
-          <label class="block text-sm font-medium text-gray-700 mb-2">Your Email</label>
-          <input type="email" name="email" required
-                 class="w-full border border-gray-300 rounded-lg p-3 bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400">
-        </div>
-
-        <!-- Profile Photo Upload -->
-        <div>
-          <label class="block text-sm font-medium text-gray-700 mb-2">Upload Profile Photo <span class="text-red-500">*</span></label>
-          <input type="file" name="photo" accept="image/*" required id="photo-file"
-                 class="w-full border border-gray-300 rounded-lg p-2 bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400">
-        </div>
-
-        <!-- Full Name -->
-        <div>
-          <label class="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
-          <input type="text" name="full_name" required
-                 class="w-full border border-gray-300 rounded-lg p-3 bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400">
-        </div>
-
-        <!-- Specialty -->
-        <div>
-          <label class="block text-sm font-medium text-gray-700 mb-2">Specialty</label>
-          <input type="text" name="specialty" required
-                 class="w-full border border-gray-300 rounded-lg p-3 bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400">
-        </div>
-
-        <!-- Experience -->
-        <div>
-          <label class="block text-sm font-medium text-gray-700 mb-2">Years of Experience</label>
-          <input type="number" name="experience" required
-                 class="w-full border border-gray-300 rounded-lg p-3 bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400">
-        </div>
-
-        <!-- License -->
-        <div>
-          <label class="block text-sm font-medium text-gray-700 mb-2">License Number</label>
-          <input type="text" name="license" required
-                 class="w-full border border-gray-300 rounded-lg p-3 bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400">
-        </div>
-
-        <!-- Bio -->
-        <div>
-          <label class="block text-sm font-medium text-gray-700 mb-2">Short Bio</label>
-          <textarea name="bio" rows="4" required
-                    class="w-full border border-gray-300 rounded-lg p-3 bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400"></textarea>
-        </div>
-        <!-- University Attended -->
-        <div>
-            <label class="block text-sm font-medium text-gray-700 mb-2">University Attended <span class="text-red-500">*</span></label>
-            <input type="text" name="university" required placeholder="e.g., University of Nairobi"
-                class="w-full border border-gray-300 rounded-lg p-3 bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400">
-        </div>
-        
-        <!-- Medical Degree -->
-        <div>
-            <label class="block text-sm font-medium text-gray-700 mb-2">Medical Degree <span class="text-red-500">*</span></label>
-            <input type="text" name="degree" required placeholder="e.g., MBBS, MD, DO"
-                class="w-full border border-gray-300 rounded-lg p-3 bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400">
-        </div>
-        
-        <!-- Year of Graduation -->
-        <div>
-            <label class="block text-sm font-medium text-gray-700 mb-2">Year of Graduation <span class="text-red-500">*</span></label>
-            <input type="number" name="graduation_year" min="1950" max="2099" required placeholder="e.g., 2015"
-                class="w-full border border-gray-300 rounded-lg p-3 bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400">
-        </div>
-        
-        <!-- Country of Practice -->
-        <div>
-            <label class="block text-sm font-medium text-gray-700 mb-2">Country of Practice <span class="text-red-500">*</span></label>
-            <input type="text" name="country" required placeholder="e.g., Kenya"
-                class="w-full border border-gray-300 rounded-lg p-3 bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400">
-        </div>
-        
-        <!-- LinkedIn or Professional Profile -->
-        <div>
-            <label class="block text-sm font-medium text-gray-700 mb-2">LinkedIn or Professional Profile (optional)</label>
-            <input type="url" name="profile_url" placeholder="https://linkedin.com/in/example"
-                class="w-full border border-gray-300 rounded-lg p-3 bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400">
-        </div>
-        
-        <!-- Upload Medical Certificate -->
-        <div>
-            <label class="block text-sm font-medium text-gray-700 mb-2">Upload Medical Certificate (optional)</label>
-            <input type="file" name="certificate" accept=".pdf,.jpg,.jpeg,.png"
-                class="w-full border border-gray-300 rounded-lg p-2 bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400">
-        </div>
-        
-        <!-- Submit Button -->
-        <div class="text-center">
-          <button type="submit"
-                  class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-full transition duration-300">
-            Submit Application
-          </button>
-        </div>
-      </form>
     </div>
-  
-      <!-- ... -->
-    </section>
+
   </div>
-</div>
 
-
-  
-
-  <script src="./script.js">
-   
-  </script>
-  <script>
-      document.getElementById('openModal').addEventListener('click', function () {
-    document.getElementById('doctorModal').classList.remove('hidden');
-  });
-
-  document.getElementById('closeModal').addEventListener('click', function () {
-    document.getElementById('doctorModal').classList.add('hidden');
-  });
-
-  // Optional: Close modal when clicking outside the form
-  document.getElementById('doctorModal').addEventListener('click', function (e) {
-    if (e.target === this) {
-      this.classList.add('hidden');
-    }
-  });
-  </script>
 </body>
 </html>
 

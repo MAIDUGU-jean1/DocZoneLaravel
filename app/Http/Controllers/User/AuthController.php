@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\PatientController;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,66 +10,39 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    // This function handles user registration
+    // Handle user registration
     public function register(Request $request)
     {
-        if ($request->role === 'patient') {
-            $validated = $request->validate([
-                'name' => 'required|string|max:255',
-                'email' => 'required|email|unique:users,email',
-                'phone' => 'nullable|string|max:20',
-                'role' => 'nullable|in:patient,doctor',
-                'password' => 'required|string|confirmed|min:6',
-                'profile_picture' => 'required|mimes:png,jpeg,jpg|max:10048',
-            ]);
+        $isPatient = $request->role === 'patient';
 
-            $imagePath = $request->file('profile_picture')->store('profiles', 'public');
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'phone' => 'nullable|string|max:20',
+            'password' => 'required|string|confirmed|min:6',
+            'role' => $isPatient ? 'nullable|in:patient,doctor' : 'required|in:doctor',
+            'specialization' => $isPatient ? 'nullable' : 'required|string|max:255',
+            'profile_picture' => 'required|mimes:png,jpeg,jpg|max:2048',
+        ]);
 
-           $user = User::create([
-                'name' => $validated['name'],
-                'email' => $validated['email'],
-                'phone' => $validated['phone'] ?? null,
-                'specialistion' => null,
-                'password' => Hash::make($validated['password']),
-                'role' => $request->role,
-                'profile_picture' => $imagePath,
-            ]);
-                Auth::login($user);
-        } else {
-            $validated = $request->validate([
-                'name' => 'required|string|max:255',
-                'email' => 'required|email|unique:users,email',
-                'phone' => 'nullable|string|max:20',
-                'specialization' => 'required|string|max:255',
-                'password' => 'required|string|confirmed|min:6',
-                'role' => 'required|in:doctor',
-                'profile_picture' => 'required|mimes:png,jpeg,jpg|max:2048',
-            ]);
+        $imagePath = $request->file('profile_picture')->store('profiles', 'public');
 
-            $imagePath = $request->file('profile_picture')->store('profiles', 'public');
+        $user = User::create([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'phone' => $validated['phone'] ?? null,
+            'specialization' => $validated['specialization'] ?? null,
+            'password' => Hash::make($validated['password']),
+            'role' => $validated['role'] ?? 'patient',
+            'profile_picture' => $imagePath,
+        ]);
 
-
-         
-
-            // 'terms' => 'accepted', 
-            User::create([
-                'name' => $validated['name'],
-                'email' => $validated['email'],
-                'phone' => $validated['phone'] ?? null,
-                'specialistion' => $validated['specialization'],
-                'password' => Hash::make($validated['password']),
-                'role' => $validated['role'],
-                'profile_picture' => $imagePath,
-            ]);
-        }
-        $user = Auth::user();
         Auth::login($user);
-       
 
         return redirect()->route('ShowUserLanding')->with('success', 'Registration successful!');
     }
 
-    // This function handles user login
+    // Handle user login
     public function login(Request $request)
     {
         $validated = $request->validate([
@@ -79,23 +51,23 @@ class AuthController extends Controller
         ]);
 
         if (Auth::attempt($validated)) {
-              if (Auth::user()->role =="Doctor"){
-           return redirect()->route('doctorindex');
-        }
-           
-            return redirect()->route('doctorindex')->with('success', 'You have logged in successfully!');
+            $user = Auth::user();
+
+            return $user->role === 'doctor'
+                ? redirect()->route('doctorindex')
+                : redirect()->route('ShowUserLanding');
         }
 
         return redirect()->back()->with('error', 'Invalid credentials.');
     }
-    
-    public function logout(Request $request){
-    
+
+    // Handle user logout
+    public function logout(Request $request)
+    {
         Auth::logout();
-        $request->session()->regenerate();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
 
-     
-
-        return redirect()->route('showLanding'); 
+        return redirect()->route('showLanding');
     }
 }
