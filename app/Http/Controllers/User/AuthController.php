@@ -22,6 +22,7 @@ class AuthController extends Controller
             'password' => 'required|string|confirmed|min:6',
             'role' => $isPatient ? 'nullable|in:patient,doctor' : 'required|in:doctor',
             'specialization' => $isPatient ? 'nullable' : 'required|string|max:255',
+            'experience' => $isPatient ? 'nullable' : 'required',
             'profile_picture' => 'required|mimes:png,jpeg,jpg|max:2048',
         ]);
 
@@ -32,6 +33,7 @@ class AuthController extends Controller
             'email' => $validated['email'],
             'phone' => $validated['phone'] ?? null,
             'specialization' => $validated['specialization'] ?? null,
+            'experience' => $validated['experience'] ?? null,
             'password' => Hash::make($validated['password']),
             'role' => $validated['role'] ?? 'patient',
             'profile_picture' => $imagePath,
@@ -53,9 +55,14 @@ class AuthController extends Controller
         if (Auth::attempt($validated)) {
             $user = Auth::user();
 
-            return $user->role === 'doctor'
-                ? redirect()->route('doctorindex')
-                : redirect()->route('ShowUserLanding');
+            if ($user->role === 'doctor') {
+                if ($user->verification == 0) {
+                    return redirect()->back()->with('error', 'Your account is not verified yet.');
+                }
+                return redirect()->route('doctorindex');
+            }
+
+            return redirect()->route('ShowUserLanding')->with('success', 'You have logged in successfully!');
         }
 
         return redirect()->back()->with('error', 'Invalid credentials.');

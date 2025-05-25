@@ -62,11 +62,11 @@
             </div>
         </nav>
     </header>
-@if (session('success'))
-    <span class="alert alert-success">
-        {{ session('success') }}
-    </span>
-@endif
+    @if (session('success'))
+        <span class="alert alert-success">
+            {{ session('success') }}
+        </span>
+    @endif
 
 
     <!-- Register Modal -->
@@ -77,92 +77,125 @@
             <button onclick="toggleModal('registerModal')"
                 class="absolute top-4 right-6 text-black text-2xl font-bold">&times;</button>
             <h2 class="text-2xl mb-6 font-bold text-center text-[#5D5CDE]">Register</h2>
-    <form action="{{ route('register') }}" method="POST" enctype="multipart/form-data" class="space-y-5" >
-        @csrf
-            <div>
-                <label for="name" class="block text-sm font-medium text-gray-700">Full Name</label>
-                <input type="text" id="name" name="name"  class="mt-1 w-full px-4 py-1 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500" :value="{{old('name')}}" />
-              @error('name')
-                  <span class="text-red-600">{{$message}}</span>
-              @enderror
-            </div>
-            
-            <div>
-                <label for="email" class="block text-sm font-medium text-gray-700">Email Address</label>
-                <input type="email" id="email" name="email"  class="mt-1 w-full px-4 py-1 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500" />
-              @error('email')
-                  <span class="text-red-600">{{$message}}</span>
-              @enderror
-            </div>
+            <form action="{{ route('register') }}" method="POST" enctype="multipart/form-data" class="space-y-5">
+                @csrf
+                <div>
+                    <label for="name" class="block text-sm font-medium text-gray-700">Full Name</label>
+                    <input type="text" id="name" name="name"
+                        class="mt-1 w-full px-4 py-1 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
+                        :value="{{ old('name') }}" />
+                    @error('name')
+                        <span class="text-red-600">{{ $message }}</span>
+                    @enderror
+                </div>
 
-            <div>
-                <label for="phone" class="block text-sm font-medium text-gray-700">Phone Number</label>
-                <input type="tel" id="phone" name="phone" class="mt-1 w-full px-4 py-1 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500" />
-              @error('phone')
-                  <span class="text-red-600">{{$message}}</span>
-              @enderror
-            </div>
-            
-            <div>
-                <label for="role" class="block text-sm font-medium text-gray-700">Registering As</label>
-                <select id="role" name="role"  class="mt-1 w-full px-4 py-1 border border-gray-300 text-black rounded-md focus:ring-indigo-500 focus:border-indigo-500">
-                <option value="">-- Select Role --</option>
-                <option value="patient">Patient</option>
-                <option value="doctor">Doctor</option>
-                </select>
-              @error('role')
-                  <span class="text-red-600">{{$message}}</span>
-              @enderror
-            </div>
-            
-            <div id="specializationField" class="hidden">
-                <label for="specialization" class="block text-sm font-medium text-gray-700">Specialization</label>
-                <input type="text" id="specialization" name="specialization" class="mt-1 text-black w-full px-4 py-1 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500" />
-              @error('specialization')
-                  <span class="text-red-600">{{$message}}</span>
-              @enderror
-            </div>
-            
-            <div>
-                <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
-                <input type="password" id="password" name="password"  class="mt-1 w-full px-4 py-1 border text-black border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500" />
-              @error('password')
-                  <span class="text-red-600">{{$message}}</span>
-              @enderror
-            </div>
-            
-            <div>
-                <label for="confirm_password" class="block text-sm font-medium text-gray-700">Confirm Password</label>
-                <input type="password" id="confirm_password" name="password_confirmation"  class="mt-1 w-full px-4 py-1 border text-black border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500" />
-            </div>
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700">Email Address</label>
+                    <input type="email" id="email" name="email"
+                        class="mt-1 w-full px-4 py-1 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500" />
+                    @error('email')
+                        <span class="text-red-600">{{ $message }}</span>
+                    @enderror
+                </div>
 
-             <div>
-                <label for="profile_picture" class="block text-sm font-medium text-gray-700">Profile Picture</label>
-                <input type="file" id="profile_picture" name="profile_picture"  class="mt-1 w-full px-4 py-1 border text-black border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500" />
-              @error('profile_picture')
-                  <span class="text-red-600">{{$message}}</span>
-              @enderror
-            </div>
-            
-            <div class="flex items-center">
-                <input id="terms" name="terms" type="checkbox"  class="h-4 w-4 text-indigo-600 border-gray-300 rounded" />
-                <label for="terms" class="ml-2 block text-sm text-gray-600">
-                I agree to the <a href="#" class="text-indigo-600 hover:underline">Terms & Conditions</a>
-                </label>
-              @error('terms')
-                  <span class="text-red-600">{{$message}}</span>
-              @enderror
-            </div>
-            
-            <button type="submit" class="w-full bg-indigo-600 text-white py-1 rounded-md hover:bg-indigo-700 transition duration-200">
-                Register
-            </button>
-    </form>
+                <div>
+                    <label for="phone" class="block text-sm font-medium text-gray-700">Phone Number</label>
+                    <input type="tel" id="phone" name="phone"
+                        class="mt-1 w-full px-4 py-1 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500" />
+                    @error('phone')
+                        <span class="text-red-600">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                <div>
+                    <label for="role" class="block text-sm font-medium text-gray-700">Registering As</label>
+                    <select id="role" name="role"
+                        class="mt-1 w-full px-4 py-1 border border-gray-300 text-black rounded-md focus:ring-indigo-500 focus:border-indigo-500">
+                        <option value="">-- Select Role --</option>
+                        <option value="patient">Patient</option>
+                        <option value="doctor">Doctor</option>
+                    </select>
+                    @error('role')
+                        <span class="text-red-600">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                <div id="specializationField" class="hidden">
+                    <label for="specialization" class="block text-sm font-medium text-gray-700">Specialization</label>
+                    <input type="text" id="specialization" name="specialization"
+                        class="mt-1 text-black w-full px-4 py-1 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500" />
+                    @error('specialization')
+                        <span class="text-red-600">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                <div id="experienceField" class="hidden">
+                    <label for="experience" class="block text-sm font-medium text-gray-700">Years of experience</label>
+                    <input type="number" id="experience" name="experience"
+                        class="mt-1 text-black w-full px-4 py-1 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500" />
+                    @error('experience')
+                        <span class="text-red-600">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+                    <input type="password" id="password" name="password"
+                        class="mt-1 w-full px-4 py-1 border text-black border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500" />
+                    @error('password')
+                        <span class="text-red-600">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                <div>
+                    <label for="confirm_password" class="block text-sm font-medium text-gray-700">Confirm
+                        Password</label>
+                    <input type="password" id="confirm_password" name="password_confirmation"
+                        class="mt-1 w-full px-4 py-1 border text-black border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500" />
+                </div>
+
+                <div>
+                    <label for="profile_picture" class="block text-sm font-medium text-gray-700">Profile
+                        Picture</label>
+                    <input type="file" id="profile_picture" name="profile_picture"
+                        class="mt-1 w-full px-4 py-1 border text-black border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500" />
+                    @error('profile_picture')
+                        <span class="text-red-600">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                <div class="flex items-center">
+                    <input id="terms" name="terms" type="checkbox"
+                        class="h-4 w-4 text-indigo-600 border-gray-300 rounded" />
+                    <label for="terms" class="ml-2 block text-sm text-gray-600">
+                        I agree to the <a href="#" class="text-indigo-600 hover:underline">Terms &
+                            Conditions</a>
+                    </label>
+                    @error('terms')
+                        <span class="text-red-600">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                <button type="submit"
+                    class="w-full bg-indigo-600 text-white py-1 rounded-md hover:bg-indigo-700 transition duration-200">
+                    Register
+                </button>
+            </form>
         </div>
     </div>
 
 
     <!-- Login Modal -->
+    @if ($errors->any())
+        @foreach ($errors as $error)
+            <div class="alert alert-danger">{{ $error }}</div>
+        @endforeach
+    @endif
+    @if (session('error'))
+        <span class="alert alert-red-600">
+            {{ session('error') }}
+        </span>
+    @endif
     <div id="loginModal" style="display: none;"
         class="fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center">
         <div
@@ -171,29 +204,33 @@
                 class="absolute top-4 right-6 text-black text-3xl font-bold">&times;</button>
             <h2 class="text-3xl mb-6 font-bold text-center text-[#5D5CDE]">Login</h2>
             <form action="{{ route('login') }}" method="POST" class="space-y-6">
-           
-             @csrf
-            <div>
-                <label for="email" class="block text-sm font-medium text-gray-700">Email Address</label>
-                <input type="email" id="email" name="email" class="mt-1 w-full text-black px-4 py-1 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500" />
-              @error('email')
-                  <span class="text-red-600">{{$message}}</span>
-              @enderror
-            </div>
 
-            <div>
-                <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
-                <input type="password" id="name" name="password"  class="mt-1 text-black w-full px-4 py-1 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500" />
-              @error('password')
-                  <span class="text-red-600">{{$message}}</span>
-              @enderror
-            </div>
-            <button type="submit" class="w-full bg-indigo-600 text-white py-1 rounded-md hover:bg-indigo-700 transition duration-200">
-                Login
-            </button>
-            <div>
-                <p class="text-center text-black">Already have an Account? <a href="#" class=" text-[#5D5CDE]">Register</a></p>
-            </div>
+                @csrf
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700">Email Address</label>
+                    <input type="email" id="email" name="email"
+                        class="mt-1 w-full text-black px-4 py-1 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500" />
+                    @error('email')
+                        <span class="text-red-600">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+                    <input type="password" id="name" name="password"
+                        class="mt-1 text-black w-full px-4 py-1 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500" />
+                    @error('password')
+                        <span class="text-red-600">{{ $message }}</span>
+                    @enderror
+                </div>
+                <button type="submit"
+                    class="w-full bg-indigo-600 text-white py-1 rounded-md hover:bg-indigo-700 transition duration-200">
+                    Login
+                </button>
+                <div>
+                    <p class="text-center text-black">Already have an Account? <a href="#"
+                            class=" text-[#5D5CDE]">Register</a></p>
+                </div>
             </form>
         </div>
     </div>
@@ -747,10 +784,20 @@
         })
 
 
-        document.getElementById('role').addEventListener('change', function () {
-    const specializationField = document.getElementById('specializationField');
-    specializationField.classList.toggle('hidden', this.value !== 'doctor');
-  });
+
+        const roleSelect = document.getElementById('role');
+        const specializationField = document.getElementById('specializationField');
+        const experienceField = document.getElementById('experienceField');
+
+        roleSelect.addEventListener('change', function() {
+            if (this.value === 'doctor') {
+                specializationField.classList.remove('hidden');
+                experienceField.classList.remove('hidden');
+            } else {
+                specializationField.classList.add('hidden');
+                experienceField.classList.add('hidden');
+            }
+        });
     </script>
 
 </body>

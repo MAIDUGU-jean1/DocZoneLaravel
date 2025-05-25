@@ -18,10 +18,18 @@ class User extends Authenticatable
      * @var list<string>
      */
 
-     protected $fillable = [
-        'name', 'email', 'phone', 'role', 'specialization', 'password', 'profile_picture',
+    protected $fillable = [
+        'name',
+        'email',
+        'phone',
+        'role',
+        'specialization',
+        'experience',
+        'password',
+        'profile_picture',
+        'verification'
     ];
-    
+
     // public function role()
     // {
     //     return $this->belongsTo(Role::class);

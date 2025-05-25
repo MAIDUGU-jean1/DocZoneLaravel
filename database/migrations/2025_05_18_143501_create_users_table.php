@@ -16,9 +16,11 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('specialization')->nullable();
+            $table->string('experience')->nullable();
             $table->string('email')->unique();
             $table->string('phone')->nullable();
             $table->string('role');
+            $table->string('verification')->default(0);
             $table->string('profile_picture');
             $table->string('password');
             $table->timestamps();
