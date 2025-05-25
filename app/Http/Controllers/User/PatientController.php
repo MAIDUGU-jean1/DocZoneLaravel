@@ -8,14 +8,16 @@ use Illuminate\Http\Request;
 
 class PatientController extends Controller
 {
-    public function UserIndex()
-    {
-        // $doctors = User::with('category')->where('verification', 1)->get();
-        $doctors = User::where('verification', 1)->get();
+  public function UserIndex(Request $request)
+{
+    $doctors = User::where('role', 'doctor')
+                   ->where('verification', 1)
+                   ->when($request->specialization, function ($query, $specialization) {
+                       $query->where('specialization', $specialization);
+                   })
+                   ->paginate(8); // Adjust number per page
 
-        $doctors = User::all();
-        // dd($doctors);
-        return view('User.Patient.index', compact('doctors'));
-    }
-    //
+    return view('User.Patient.index', compact('doctors'));
+}
+
 }

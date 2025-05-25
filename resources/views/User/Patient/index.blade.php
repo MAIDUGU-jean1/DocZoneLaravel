@@ -2000,89 +2000,6 @@
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                @foreach ($doctors as $doctor)
-                    <div
-                        class="bg-white dark:bg-gray-800 shadow-md rounded-lg overflow-hidden transition-transform transform hover:scale-105 duration-300">
-                        <div class="relative">
-                            <img src="{{ asset('storage/' . $doctor->profile_picture) ?? 'default.jpg' }}"
-                                alt="{{ $doctor->name }}" class="w-full h-48 object-cover">
-                            <span
-                                class="absolute top-4 right-4 px-2 py-1  text-white text-xs bg-blue-500 font-semibold rounded">BRAIN
-                                SPECIALIST</span>
-                        </div>
-                        <div class="p-6">
-                            <div class="flex justify-between items-start mb-2">
-                                <h3 class="text-lg font-bold text-gray-900 dark:text-white">
-                                    {{ $doctor->name }}
-                                    @if ($doctor->verified)
-                                        <i class="fas fa-check-circle text-primary ml-1"
-                                            title="Verified Provider"></i>
-                                    @endif
-                                </h3>
-                                <button class="text-gray-400 hover:text-red-500 transition-colors">
-                                    <i class="far fa-heart"></i>
-                                </button>
-                            </div>
-
-                            <span
-                                class="inline-block px-3 py-1 bg-purple-600dark:bg-purple-900 text-white dark:text-{{ $doctor->specialtyColor }}-200 rounded-full text-xs font-medium mb-3">
-                                gfgfgf
-                            </span>
-
-                            <div class="flex items-center mb-3">
-                                <div class="flex text-yellow-400 mr-1">
-                                    @for ($i = 1; $i <= 5; $i++)
-                                        @if ($i <= floor($doctor->rating))
-                                            <i class="fas fa-star"></i>
-                                        @elseif ($i - $doctor->rating < 1)
-                                            <i class="fas fa-star-half-alt"></i>
-                                        @else
-                                            <i class="far fa-star"></i>
-                                        @endif
-                                    @endfor
-                                </div>
-                                <span class="text-sm">
-                                    <span>{{ number_format($doctor->rating, 1) }}</span>
-                                    <span class="text-gray-500 dark:text-gray-400">({{ $doctor->reviews }})</span>
-                                </span>
-                            </div>
-
-                            <p class="text-gray-700 dark:text-gray-300 text-sm mb-4 line-clamp-2">
-                                {{ $doctor->specialization }}
-                            </p>
-
-                            <div
-                                class="flex justify-between items-center text-sm text-gray-600 dark:text-gray-400 mb-4">
-                                <span><i class="far fa-clock mr-1"></i> available today</span>
-                                <span><i class="fas fa-user-md mr-1"></i> {{ $doctor->experience }}years
-                                    experience</span>
-                            </div>
-
-                            <div class="grid grid-cols-2 gap-2">
-                                <button
-                                    class="w-full py-2 bg-primary hover:bg-opacity-90 text-white font-medium rounded transition-colors">
-                                    <i class="fas fa-video mr-1"></i> Video Call
-                                </button>
-                                <button
-                                    class="w-full py-2 border border-primary text-primary hover:bg-primary hover:bg-opacity-10 font-medium rounded transition-colors">
-                                    <i class="fas fa-comment-medical mr-1"></i> Chat
-                                </button>
-                                <!-- Trigger Button -->
-                                <label for="doctor-modal-toggle"
-                                    class="cursor-pointer inline-block bg-primary text-white px-4 py-2 rounded-lg font-medium hover:bg-opacity-90 transition">
-                                    Profile
-                                </label>
-                                <button
-                                    class="w-full py-2 bg-green-500 hover:bg-green-600 text-white font-medium rounded transition-colors"
-                                    data-toggle="Modal" data-target="#appointmentsModal">
-                                    <i class="fas fa-calendar-check mr-1"></i> Book
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
 
 
             <!-- Doctor Cards Grid -->
@@ -2184,7 +2101,7 @@
     </div>
     
     <p class="text-gray-700 text-sm mb-4 line-clamp-2 dark:text-white">
-      {{ $doctor->bio ?? 'Experienced doctor providing quality care.' }}
+      {{ $doctor->specializatio }}
     </p>
     
     <div class="flex justify-between items-center text-sm text-gray-600 mb-4">
@@ -2215,8 +2132,11 @@
 
     @endforeach
 </div>
+<div class="mt-6">
+    {{ $doctors->links() }}
+</div>
 
->>>>>>> d4dd87a79fb0ef2d5fceded474e6c0f1bc7d3986
+
             <div class="text-center mt-8">
                 <a href="#"
                     class="inline-block px-8 py-3 bg-primary hover:bg-opacity-90 text-white font-bold rounded-lg transition-colors">
