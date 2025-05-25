@@ -80,16 +80,17 @@ class AuthController extends Controller
         ]);
 
         if (Auth::attempt($validated)) {
-            $user = Auth::user(); // Get the currently authenticated user
+            $user = Auth::user();
 
             if ($user->role === 'doctor') {
                 if ($user->verification == 0) {
                     return redirect()->back()->with('error', 'Your account is not verified yet.');
                 }
                 return redirect()->route('doctorindex');
-            }
+            } elseif ($user->role === 'patient') {
 
-            return redirect()->route('ShowUserLanding')->with('success', 'You have logged in successfully!');
+                return redirect()->route('ShowUserLanding')->with('success', 'You have logged in successfully!');
+            }
         }
 
         return redirect()->back()->with('error', 'Invalid credentials.');

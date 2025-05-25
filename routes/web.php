@@ -12,15 +12,21 @@ Route::get('/', function () {
 
 // User routes
 Route::get('/index', [LandingPageController::class, 'Index'])->name('showLanding');
-Route::get('/user/index', [PatientController::class, 'UserIndex'])->name('ShowUserLanding');
+
+Route::middleware(['auth', 'patient'])->group(function () {
+    Route::get('/user/index', [PatientController::class, 'UserIndex'])->name('ShowUserLanding');
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+});
 Route::post('/register', [AuthController::class, 'register'])->name('register')->middleware('web');
 Route::post('/login', [AuthController::class, 'login'])->name('login')->middleware('web');
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
 
 
 // Doctor routes
-Route::get('/dashboard/index', [DoctorsDashboardController::class, 'doctorindex'])->name('doctorindex');
-Route::get('/dashboard/profile', [DoctorsDashboardController::class, 'doctorprofile'])->name('doctorprofile');
-Route::get('/dashboard/appointment', [DoctorsDashboardController::class, 'doctorappointment'])->name('doctorappointment');
-Route::get('/dashboard/patient', [DoctorsDashboardController::class, 'doctorpatient'])->name('doctorpatient');
-Route::post('/dashboard/logout', [DoctorsDashboardController::class, 'logout'])->name('doctorlogout');
+Route::middleware(['auth', 'doctor'])->group(function () {
+    Route::get('/doctor/index', [DoctorsDashboardController::class, 'doctorindex'])->name('doctorindex');
+    Route::get('/doctor/profile', [DoctorsDashboardController::class, 'doctorprofile'])->name('doctorprofile');
+    Route::get('/doctor/appointment', [DoctorsDashboardController::class, 'doctorappointment'])->name('doctorappointment');
+    Route::get('/doctor/patient', [DoctorsDashboardController::class, 'doctorpatient'])->name('doctorpatient');
+    Route::post('/doctor/logout', [DoctorsDashboardController::class, 'logout'])->name('doctorlogout');
+});
