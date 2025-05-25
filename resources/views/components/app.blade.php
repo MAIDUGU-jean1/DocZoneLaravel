@@ -79,17 +79,18 @@
                 </form>
             </nav>
         </aside>
-
+@if (Auth::check() && Auth::user()->role === 'doctor')
         <!-- Main Content -->
         <div class="flex-1 flex flex-col">
             <!-- Header -->
             <header class="bg-white dark:bg-gray-800 shadow px-6 py-4 flex items-center justify-between">
                 <div>
-                    <h1 class="text-xl font-semibold">Welcome, Dr. {{ Auth::user()?->name }}</h1>
+                    <h1 class="text-xl font-semibold">Welcome, Dr. {{ Auth::user()->name }}
+</h1>
                 </div>
                 <div class="flex items-center gap-4">
                     <!-- Profile Picture -->
-                    <img src="{{ asset('storage/' . Auth::user()?->profile_picture) }}" alt="Profile Picture"
+                    <img src="{{ asset('storage/' .  Auth:: user()->profile_picture) }}" alt="Profile Picture"
                         class="w-12 h-12 rounded-full border-2 border-blue-400 dark:border-blue-300 shadow-md object-cover">
 
 
@@ -104,3 +105,4 @@
             <div>
                 {{ $slot }}
             </div>
+@endif

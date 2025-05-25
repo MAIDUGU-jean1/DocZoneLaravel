@@ -18,6 +18,7 @@ Route::post('/login', [AuthController::class, 'login'])->name('login')->middlewa
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
+
 // Doctor routes
 Route::get('/dashboard/index', [DoctorsDashboardController::class, 'doctorindex'])->name('doctorindex');
 Route::get('/dashboard/profile', [DoctorsDashboardController::class, 'doctorprofile'])->name('doctorprofile');

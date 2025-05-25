@@ -2123,9 +2123,18 @@
       <button class="doctor-view-btn w-full py-2 bg-gray-100 text-gray-700 hover:bg-gray-200 rounded transition" onclick=display();>
         <i class="fas fa-user-md mr-1"></i> Profile
       </button>
-      <button class="book-btn w-full py-2 bg-green-500 hover:bg-green-600 text-white rounded transition" onclick=appointment()>
-        <i class="fas fa-calendar-check mr-1"></i> Book
-      </button>
+       
+            <button class="book-btn w-full py-2 bg-green-500 hover:bg-green-600 text-white rounded transition" onclick=appointment()
+                data-id="{{ $doctor->id }}"
+                data-name="{{ $doctor->name }}"
+                data-specialization="{{ $doctor->specialization }}"
+                data-experience="{{ $doctor->experience }}"
+                data-profile="{{ asset('storage/' . $doctor->profile_picture) }}"
+               >
+                
+                 <i class="fas fa-calendar-check mr-1"></i> Book
+            </button>
+         
     </div>
   </div>
 </div>
@@ -2174,7 +2183,7 @@
                     d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.675 1.732-3L13.732 4c-.77-1.325-2.694-1.325-3.464 0L3.34 16c-.77 1.325.192 3 1.732 3z"></path>
             </svg>
             <p class="text-sm font-medium">
-                ⚠️ Please ensure all information provided is accurate and up-to-date. Submitting false credentials may result in disqualification and a permanent ban from the platform.
+                Please ensure all information provided is accurate and up-to-date. Submitting false credentials may result in disqualification and a permanent ban from the platform.
             </p>
       </div>
 
@@ -4032,6 +4041,7 @@ function display(){
 }
 
 function appointment(){
+    
     const appointmentsModal = document.getElementById('appointmentsModal');
     appointmentsModal.classList.remove('hidden');
 }
