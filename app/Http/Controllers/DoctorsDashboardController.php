@@ -12,6 +12,11 @@ class DoctorsDashboardController extends Controller
         return view('Doctordashboard.index');
     }
 
+    public function doctorblogs()
+    {
+        return view('Doctordashboard.blogs');
+    }
+
     public function doctorprofile()
     {
         return view('Doctordashboard.profile');

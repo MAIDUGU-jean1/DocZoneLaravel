@@ -64,6 +64,8 @@
                     class="block px-4 py-2 rounded hover:bg-blue-100 dark:hover:bg-gray-700 transition">Patients</a>
                 <a href="#"
                     class="block px-4 py-2 rounded hover:bg-blue-100 dark:hover:bg-gray-700 transition">Messages</a>
+                <a href="{{ route('doctorblogs') }}"
+                    class="block px-4 py-2 rounded hover:bg-blue-100 dark:hover:bg-gray-700 transition">Blogs</a>
                 <a href="{{ route('doctorprofile') }}"
                     class="block px-4 py-2 rounded hover:bg-blue-100 dark:hover:bg-gray-700 transition">Profile</a>
                 <form action="{{ route('logout') }}" method="POST">
@@ -79,30 +81,30 @@
                 </form>
             </nav>
         </aside>
-@if (Auth::check() && Auth::user()->role === 'doctor')
-        <!-- Main Content -->
-        <div class="flex-1 flex flex-col">
-            <!-- Header -->
-            <header class="bg-white dark:bg-gray-800 shadow px-6 py-4 flex items-center justify-between">
+        @if (Auth::check() && Auth::user()->role === 'doctor')
+            <!-- Main Content -->
+            <div class="flex-1 flex flex-col">
+                <!-- Header -->
+                <header class="bg-white dark:bg-gray-800 shadow px-6 py-4 flex items-center justify-between">
+                    <div>
+                        <h1 class="text-xl font-semibold">Welcome, Dr. {{ Auth::user()->name }}
+                        </h1>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <!-- Profile Picture -->
+                        <img src="{{ asset('storage/' . Auth::user()->profile_picture) }}" alt="Profile Picture"
+                            class="w-12 h-12 rounded-full border-2 border-blue-400 dark:border-blue-300 shadow-md object-cover">
+
+
+
+                        <!-- Logout -->
+                        <form action="{{ route('logout') }}" method="POST">
+                            @csrf
+
+                        </form>
+                    </div>
+                </header>
                 <div>
-                    <h1 class="text-xl font-semibold">Welcome, Dr. {{ Auth::user()->name }}
-</h1>
+                    {{ $slot }}
                 </div>
-                <div class="flex items-center gap-4">
-                    <!-- Profile Picture -->
-                    <img src="{{ asset('storage/' .  Auth:: user()->profile_picture) }}" alt="Profile Picture"
-                        class="w-12 h-12 rounded-full border-2 border-blue-400 dark:border-blue-300 shadow-md object-cover">
-
-
-
-                    <!-- Logout -->
-                    <form action="{{ route('logout') }}" method="POST">
-                        @csrf
-
-                    </form>
-                </div>
-            </header>
-            <div>
-                {{ $slot }}
-            </div>
-@endif
+        @endif
