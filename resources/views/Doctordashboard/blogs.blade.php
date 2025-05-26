@@ -52,7 +52,8 @@
                     &times;
                 </button>
                 <h2 class="text-2xl font-semibold text-gray-800 dark:text-white mb-4 mx-8">Add New Blog</h2>
-                <form action="#" method="POST" class="space-y-4">
+                <form action="{{ route('blogs') }}" method="POST" class="space-y-4">
+                    @csrf
                     <div>
                         <label class="block text-gray-700 dark:text-gray-200 mb-1" for="title">Title</label>
                         <input type="text" id="title" name="title"
@@ -72,7 +73,7 @@
                             required>
                     </div>
                     <button type="submit"
-                        class="bg-blue  -600 text-white px-4 py-2 rounded hover:bg-green-700 transition duration-300">
+                        class="bg-blue-600  text-white px-4 py-2 rounded hover:bg-green-700 transition duration-300">
                         Post Blog
                     </button>
                 </form>
@@ -81,33 +82,51 @@
             <!-- Blog Cards Grid -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mx-3 animate-fade-in">
                 <!-- Blog Card -->
-                <div
-                    class="bg-white dark:bg-gray-800 p-5 rounded-xl shadow hover:shadow-lg transform hover:scale-[1.02] transition duration-300">
+             <div class="bg-white dark:bg-gray-800 p-5 rounded-xl shadow hover:shadow-lg transform hover:scale-[1.02] transition duration-300">
+                    <img src="{{ asset('Images/Beneficence.jpeg')}}" alt="Understanding Diabetes" class="w-full h-48 object-cover rounded-lg mb-4">
+                    
                     <h2 class="text-xl font-semibold text-gray-800 dark:text-white mb-2">Understanding Diabetes</h2>
+                    
                     <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
                         Learn about the causes, symptoms, and treatment of diabetes in this detailed guide.
                     </p>
-                    <a href="#" class="text-blue-600 font-medium hover:underline">Read More</a>
-                </div>
+                    
+                    <div class="flex justify-between">
+                        <a href="#" class="text-blue-600 font-medium hover:underline">Read More</a>
+                        <p class="text-gray-400 font-medium">4:47pm</p>
+                    </div>
+            </div>
+
 
                 <!-- Example Repeat Blog Card -->
-                <div
-                    class="bg-white dark:bg-gray-800 p-5 rounded-xl shadow hover:shadow-lg transform hover:scale-[1.02] transition duration-300">
-                    <h2 class="text-xl font-semibold text-gray-800 dark:text-white mb-2">Heart Health Tips</h2>
+               <div class="bg-white dark:bg-gray-800 p-5 rounded-xl shadow hover:shadow-lg transform hover:scale-[1.02] transition duration-300">
+                    <img src="{{ asset('Images/Beneficence.jpeg')}}" alt="Understanding Diabetes" class="w-full h-48 object-cover rounded-lg mb-4">
+                    
+                    <h2 class="text-xl font-semibold text-gray-800 dark:text-white mb-2">Understanding Diabetes</h2>
+                    
                     <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
-                        Discover effective tips to maintain a healthy heart and prevent cardiovascular diseases.
+                        Learn about the causes, symptoms, and treatment of diabetes in this detailed guide.
                     </p>
-                    <a href="#" class="text-blue-600 font-medium hover:underline">Read More</a>
-                </div>
-
-                <div
-                    class="bg-white dark:bg-gray-800 p-5 rounded-xl shadow hover:shadow-lg transform hover:scale-[1.02] transition duration-300">
-                    <h2 class="text-xl font-semibold text-gray-800 dark:text-white mb-2">Heart Health Tips</h2>
+                    
+                    <div class="flex justify-between">
+                        <a href="#" class="text-blue-600 font-medium hover:underline">Read More</a>
+                        <p class="text-gray-400 font-medium">4:47pm</p>
+                    </div>
+            </div>
+    <div class="bg-white dark:bg-gray-800 p-5 rounded-xl shadow hover:shadow-lg transform hover:scale-[1.02] transition duration-300">
+                    <img src="{{ asset('Images/Beneficence.jpeg')}}" alt="Understanding Diabetes" class="w-full h-48 object-cover rounded-lg mb-4">
+                    
+                    <h2 class="text-xl font-semibold text-gray-800 dark:text-white mb-2">Understanding Diabetes</h2>
+                    
                     <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
-                        Discover effective tips to maintain a healthy heart and prevent cardiovascular diseases.
+                        Learn about the causes, symptoms, and treatment of diabetes in this detailed guide.
                     </p>
-                    <a href="#" class="text-blue-600 font-medium hover:underline">Read More</a>
-                </div>
+                    
+                    <div class="flex justify-between">
+                        <a href="#" class="text-blue-600 font-medium hover:underline">Read More</a>
+                        <p class="text-gray-400 font-medium">4:47pm</p>
+                    </div>
+            </div>
             </div>
         </div>
     </body>

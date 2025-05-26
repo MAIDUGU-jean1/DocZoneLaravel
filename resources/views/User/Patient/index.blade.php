@@ -2093,6 +2093,7 @@
             </div>
             <div id="doctor-grid" class="grid  grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 @foreach ($doctors as $doctor)
+
                     <div class="doctor-card bg-white dark:bg-black dark:bg-opacity-10  rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-transform duration-300"
                         data-id="{{ $doctor->id }}">
                         <div class="relative">
@@ -2605,25 +2606,22 @@
                     &times;
                 </button>
                 <h2 class="text-2xl font-bold mb-4">Post a Testimony</h2>
-                <form action="#" method="POST" class="space-y-4">
+                <form action="{{route('testimony')}}" method="POST" class="space-y-4">
+                    @csrf
                     <div>
-                        <label for="name" class="block mb-1">Your Name</label>
-                        <input type="text" id="name" name="name" required
+                        <label for="rating" class="block mb-1">Rating (1–5)</label>
+                        <input type="number" id="rating" name="rating" min="1" max="5" required
                             class="w-full p-2 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-                            placeholder="Enter your name">
+                            placeholder="Enter a rating from 1 to 5" oninput="generateStars()">
+                        <div id="starPreview" class="text-yellow-400 mt-2 text-xl"></div>
                     </div>
                     <div>
-                        <label for="message" class="block mb-1">Your Testimony</label>
-                        <textarea id="message" name="message" rows="4" required
+                        <label for="testimony" class="block mb-1">Your Testimony</label>
+                        <textarea id="message" name="testimony" rows="4" required
                             class="w-full p-2 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                             placeholder="Write your testimony here..."></textarea>
                     </div>
-                    <div>
-                        <label for="picture" class="block mb-1">Your Picture</label>
-                        <input type="file" id="picture" name="picture" required
-                            class="w-full p-2 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-                            placeholder="Upload your picture">
-                    </div>
+                
                     <button type="submit"
                         class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition">
                         Submit Testimony
@@ -2634,108 +2632,42 @@
             <div class="testimonial-slider relative max-w-4xl mx-auto overflow-hidden">
                 <div class="testimonial-track flex transition-transform duration-500" id="testimonialTrack">
                     <!-- Testimonial 1 -->
-                    <div class="testimonial-slide min-w-full">
-                        <div class="bg-gray-50 dark:bg-gray-800 rounded-xl shadow-md p-6">
-                            <div class="text-yellow-400 mb-3">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                            <p class="text-gray-700 dark:text-gray-300 mb-6">
-                                "I was feeling terrible with flu symptoms but couldn't leave home. The online
-                                consultation with Dr. Johnson was so convenient! He diagnosed me quickly, sent my
-                                prescription to my local pharmacy, and I was feeling better in no time."
-                            </p>
-                            <div class="flex items-center">
-                                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Patient"
-                                    class="w-12 h-12 rounded-full mr-4">
-                                <div>
-                                    <h4 class="font-bold text-gray-900 dark:text-white">Michael Rodriguez</h4>
-                                    <p class="text-gray-600 dark:text-gray-400 text-sm">Patient since 2022</p>
+                     @forelse ($testimonies as $testimony)
+                    
+                        <div class="testimonial-slide min-w-full">
+                            <div class="bg-gray-50 dark:bg-gray-800 rounded-xl shadow-md p-6">
+                               <div class="text-yellow-400 mb-3">
+                                    @for ($i = 0; $i < $testimony->rating; $i++)
+                                        <i class="fas fa-star"></i>
+                                    @endfor
                                 </div>
-                            </div>
-                        </div>
-                    </div>
 
-                    <!-- Testimonial 2 -->
-                    <div class="testimonial-slide min-w-full">
-                        <div class="bg-gray-50 dark:bg-gray-800 rounded-xl shadow-md p-6">
-                            <div class="text-yellow-400 mb-3">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                            <p class="text-gray-700 dark:text-gray-300 mb-6">
-                                "As a busy mom of three, finding time to see a doctor was always a challenge. DocZone
-                                has been a lifesaver! Dr. Williams has been monitoring my ongoing skin condition with
-                                regular virtual check-ups, saving me countless hours in waiting rooms."
-                            </p>
-                            <div class="flex items-center">
-                                <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Patient"
-                                    class="w-12 h-12 rounded-full mr-4">
-                                <div>
-                                    <h4 class="font-bold text-gray-900 dark:text-white">Sarah Johnson</h4>
-                                    <p class="text-gray-600 dark:text-gray-400 text-sm">Patient since 2021</p>
+                                <p class="text-gray-700 dark:text-gray-300 mb-6">
+                                    "{{$testimony->testimony}}"
+                                </p>
+                                <div class="flex items-center">
+                                    <img src="{{ asset('storage/' . $testimony->profile_picture) }}" alt="Patient"
+                                         class="w-12 h-12 rounded-full mr-4">
+                                    <div>
+                                        <h4 class="font-bold text-gray-900 dark:text-white">{{$testimony->name}}</h4>
+                                        <p class="text-gray-600 dark:text-gray-400 text-sm">Patient since {{$testimony->created_at}}</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                     @empty
+                      <p class="text-center">No testimony</p>
+                    @endforelse
 
-                    <!-- Testimonial 3 -->
-                    <div class="testimonial-slide min-w-full">
-                        <div class="bg-gray-50 dark:bg-gray-800 rounded-xl shadow-md p-6">
-                            <div class="text-yellow-400 mb-3">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                            </div>
-                            <p class="text-gray-700 dark:text-gray-300 mb-6">
-                                "I live in a rural area with limited access to specialists. Through DocZone, I was able
-                                to consult with a top neurologist who helped manage my migraines. The video consultation
-                                was clear, and the doctor was extremely thorough."
-                            </p>
-                            <div class="flex items-center">
-                                <img src="https://randomuser.me/api/portraits/men/68.jpg" alt="Patient"
-                                    class="w-12 h-12 rounded-full mr-4">
-                                <div>
-                                    <h4 class="font-bold text-gray-900 dark:text-white">David Thompson</h4>
-                                    <p class="text-gray-600 dark:text-gray-400 text-sm">Patient since 2023</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                   
+                        
+                  
+                        
+                   
+                 
+                   
 
-                    <!-- Testimonial 4 -->
-                    <div class="testimonial-slide min-w-full">
-                        <div class="bg-gray-50 dark:bg-gray-800 rounded-xl shadow-md p-6">
-                            <div class="text-yellow-400 mb-3">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                            <p class="text-gray-700 dark:text-gray-300 mb-6">
-                                "The mental health services on DocZone have been transformative for me. My therapist and
-                                I connect weekly without the stress of commuting to appointments. The platform is secure
-                                and easy to use, making therapy much more accessible."
-                            </p>
-                            <div class="flex items-center">
-                                <img src="https://randomuser.me/api/portraits/women/52.jpg" alt="Patient"
-                                    class="w-12 h-12 rounded-full mr-4">
-                                <div>
-                                    <h4 class="font-bold text-gray-900 dark:text-white">Tanisha Williams</h4>
-                                    <p class="text-gray-600 dark:text-gray-400 text-sm">Patient since 2022</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                
                 </div>
 
                 <!-- Slider Navigation -->
@@ -4230,6 +4162,22 @@
             form.classList.toggle('hidden');
             form.classList.toggle('animate-slideIn');
         }
+
+            function generateStars() {
+        const ratingInput = document.getElementById('rating');
+        const starPreview = document.getElementById('starPreview');
+        const rating = parseInt(ratingInput.value);
+
+        if (rating >= 1 && rating <= 5) {
+            let stars = '';
+            for (let i = 0; i < rating; i++) {
+                stars += '<i class="fas fa-star"></i>';
+            }
+            starPreview.innerHTML = stars;
+        } else {
+            starPreview.innerHTML = '';
+        }
+    }
     </script>
 </body>
 

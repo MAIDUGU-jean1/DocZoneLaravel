@@ -11,6 +11,8 @@ Route::get('/', function () {
 });
 
 // User routes
+Route::post('/blogs', [LandingPageController::class, 'blogs'])->name('blogs');
+Route::post('/testimony', [LandingPageController::class, 'testimony'])->name('testimony');
 Route::get('/index', [LandingPageController::class, 'Index'])->name('showLanding');
 Route::get('/user/index', [PatientController::class, 'UserIndex'])->name('ShowUserLanding');
 Route::post('/register', [AuthController::class, 'register'])->name('register')->middleware('web');
