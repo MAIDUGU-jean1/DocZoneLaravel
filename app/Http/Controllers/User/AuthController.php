@@ -16,7 +16,7 @@ class AuthController extends Controller
         $isPatient = $request->role === 'patient';
 
         $validated = $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:14|',
             'email' => 'required|email|unique:users,email',
             'phone' => 'nullable|string|max:20',
             'password' => 'required|string|confirmed|min:6',

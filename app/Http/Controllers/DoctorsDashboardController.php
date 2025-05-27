@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Blog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,8 +13,9 @@ class DoctorsDashboardController extends Controller
     }
 
     public function doctorblogs()
-    {
-        return view('Doctordashboard.blogs');
+    {   $name = Auth::user()->name;
+        $doctorBlog = Blog::where('name', $name)->get();
+        return view('Doctordashboard.blogs',compact('doctorBlog'));
     }
 
     public function doctorprofile()

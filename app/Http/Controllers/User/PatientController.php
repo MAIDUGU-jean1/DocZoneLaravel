@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Blog;
 use App\Models\Testimony;
 use Illuminate\Http\Request;
 
@@ -11,6 +12,7 @@ class PatientController extends Controller
 {
   public function UserIndex(Request $request)
 {
+    $blogs = Blog::all();
     $testimonies = Testimony::all();
     $doctors = User::where('role', 'doctor')
                    ->where('verification', 1)
@@ -19,7 +21,7 @@ class PatientController extends Controller
                    })
                    ->paginate(8); // Adjust number per page
 
-    return view('User.Patient.index', compact('doctors','testimonies'));
+    return view('User.Patient.index', compact('doctors','testimonies','blogs'));
 }
 
 }

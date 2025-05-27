@@ -914,7 +914,7 @@
                 </div>
 
                 <!-- Chat Messages -->
-                <div id="chatMessages" class="p-4 flex-grow overflow-y-auto space-y-3">
+                <div id="chatMessages" class="p-4 flex-grow space-y-3">
                     <!-- Messages will be injected here -->
                 </div>
 
@@ -2107,7 +2107,7 @@
 
                         <div class="p-6">
                             <div class="flex justify-between items-center mb-2">
-                                <h3 class="text-lg font-bold text-gray-900 dark:text-white">
+                                <h3 class="text-lg font-bold text-gray-900 dark:text-white ">
                                     Dr. {{ $doctor->name }}
                                     <i class="fas fa-check-circle text-blue-500 ml-1" title="Verified"></i>
                                 </h3>
@@ -2705,95 +2705,39 @@
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Blog Post 1 -->
+                 @forelse ($blogs as $blog)
+               
                 <div
                     class="bg-white dark:bg-dark-card rounded-xl overflow-hidden shadow-md transition-all duration-300 hover:shadow-xl slide-in-bottom">
                     <div class="h-56 overflow-hidden">
-                        <img src="{{ asset('Images/heart.jpeg') }}" alt="Heart Health"
+                        <img src="{{ asset('storage/' . $blog->profile_picture) }}" alt="Heart Health"
                             class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
                     </div>
                     <div class="p-6">
                         <div class="flex items-center mb-4">
-                            <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80"
+                            <img src="{{ asset('storage/' . $blog->profile_picture) }}"
                                 alt="Dr. Marcus Johnson"
                                 class="w-10 h-10 rounded-full mr-3 border-2 border-primary">
                             <div>
-                                <p class="font-semibold text-gray-900 dark:text-white">Dr. Marcus Johnson</p>
-                                <p class="text-sm text-gray-500 dark:text-gray-400">Cardiology</p>
+                                <p class="font-semibold text-gray-900 dark:text-white">{{ $blog->name }}</p>
+                                <p class="text-sm text-gray-500 dark:text-gray-400">{{ $blog->speciality }}</p>
                             </div>
                         </div>
-                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">5 Simple Ways to Improve
-                            Heart Health Today</h3>
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">{{ $blog->title }}</h3>
                         <p class="text-gray-700 dark:text-gray-300 mb-4">
-                            Discover five actionable steps you can take right now to strengthen your heart and prevent
-                            cardiovascular disease, regardless of your age.
+                           {{ $blog->content }}
                         </p>
                         <div class="flex justify-between items-center">
-                            <span class="text-sm text-gray-500 dark:text-gray-400">April 15, 2023</span>
+                            <span class="text-sm text-gray-500 dark:text-gray-400">{{ $blog->created_at}}</span>
                             <a href="#" class="text-primary font-semibold hover:underline">Read More</a>
                         </div>
                     </div>
                 </div>
 
-                <!-- Blog Post 2 -->
-                <div
-                    class="bg-white dark:bg-dark-card rounded-xl overflow-hidden shadow-md transition-all duration-300 hover:shadow-xl slide-in-bottom delay-200">
-                    <div class="h-56 overflow-hidden">
-                        <img src="{{ asset('Images/Home - Los Alamitos Pediatrics _ CHOC Primary Care.jpeg') }}"
-                            alt="Child Fever"
-                            class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center mb-4">
-                            <img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80"
-                                alt="Dr. Olivia Williams"
-                                class="w-10 h-10 rounded-full mr-3 border-2 border-primary">
-                            <div>
-                                <p class="font-semibold text-gray-900 dark:text-white">Dr. Olivia Williams</p>
-                                <p class="text-sm text-gray-500 dark:text-gray-400">Pediatrics</p>
-                            </div>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">When to Worry About Your
-                            Child's Fever</h3>
-                        <p class="text-gray-700 dark:text-gray-300 mb-4">
-                            Learn the important signs that differentiate a normal fever from one requiring medical
-                            attention, and get practical advice for keeping kids comfortable.
-                        </p>
-                        <div class="flex justify-between items-center">
-                            <span class="text-sm text-gray-500 dark:text-gray-400">May 2, 2023</span>
-                            <a href="#" class="text-primary font-semibold hover:underline">Read More</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Blog Post 3 -->
-                <div
-                    class="bg-white dark:bg-dark-card rounded-xl overflow-hidden shadow-md transition-all duration-300 hover:shadow-xl slide-in-bottom delay-400">
-                    <div class="h-56 overflow-hidden">
-                        <img src="{{ asset('Images/Ringing in your ears_ About 750 million people have this perplexing condition, study says.jpeg') }}"
-                            class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
-                    </div>
-                    <div class="p-6">
-                        <div class="flex items-center mb-4">
-                            <img src="https://images.unsplash.com/photo-1607746882042-944635dfe10e?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80"
-                                alt="Dr. Jasmine Carter"
-                                class="w-10 h-10 rounded-full mr-3 border-2 border-primary">
-                            <div>
-                                <p class="font-semibold text-gray-900 dark:text-white">Dr. Jasmine Carter</p>
-                                <p class="text-sm text-gray-500 dark:text-gray-400">Psychiatry</p>
-                            </div>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Breaking the Stigma: Mental
-                            Health in the Black Community</h3>
-                        <p class="text-gray-700 dark:text-gray-300 mb-4">
-                            Addressing cultural barriers to mental healthcare and highlighting the importance of seeking
-                            support for psychological well-being.
-                        </p>
-                        <div class="flex justify-between items-center">
-                            <span class="text-sm text-gray-500 dark:text-gray-400">May 10, 2023</span>
-                            <a href="#" class="text-primary font-semibold hover:underline">Read More</a>
-                        </div>
-                    </div>
-                </div>
+                @empty
+                  <p>No blogs posted for now</p>
+                @endforelse
+               
             </div>
 
             <div class="text-center mt-12">

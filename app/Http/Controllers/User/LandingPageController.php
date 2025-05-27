@@ -33,7 +33,7 @@ public function blogs(Request $request)
 {
  
    if ($request->hasFile('image')) {
-    $imagePath = $request->file('image')->store('images');
+    $imagePath = $request->file('image')->store('profiles');
 } else {
     return back()->with('error', 'No file was uploaded.');
 }
@@ -47,7 +47,7 @@ public function blogs(Request $request)
         'profile_picture' => Auth::user()->profile_picture,
         'image' => $imagePath
     ]);
-dd('ok');
+
     return redirect()->back()->with('success', 'Blog posted successfully!');
 }
 
