@@ -2710,7 +2710,7 @@
                 <div
                     class="bg-white dark:bg-dark-card rounded-xl overflow-hidden shadow-md transition-all duration-300 hover:shadow-xl slide-in-bottom">
                     <div class="h-56 overflow-hidden">
-                        <img src="{{ asset('storage/' . $blog->profile_picture) }}" alt="Heart Health"
+                        <img src="{{ asset('storage/' . $blog->image) }}" alt="Heart Health"
                             class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
                     </div>
                     <div class="p-6">

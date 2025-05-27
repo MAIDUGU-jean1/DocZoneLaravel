@@ -31,13 +31,12 @@ class LandingPageController extends Controller
 
 public function blogs(Request $request)
 {
- 
-   if ($request->hasFile('image')) {
-    $imagePath = $request->file('image')->store('profiles');
-} else {
-    return back()->with('error', 'No file was uploaded.');
-}
-
+    if ($request->hasFile('image')) {
+        // Store image in 'storage/app/public/profiles'
+        $imagePath = $request->file('image')->store('profiles', 'public');
+    } else {
+        return back()->with('error', 'No file was uploaded.');
+    }
 
     $blog = Blog::create([
         'name' => Auth::user()->name,
@@ -45,10 +44,11 @@ public function blogs(Request $request)
         'title' => $request->title,
         'content' => $request->content,
         'profile_picture' => Auth::user()->profile_picture,
-        'image' => $imagePath
+        'image' => $imagePath,  // This path is relative to 'storage/app/public'
     ]);
 
     return redirect()->back()->with('success', 'Blog posted successfully!');
 }
+
 
 }
