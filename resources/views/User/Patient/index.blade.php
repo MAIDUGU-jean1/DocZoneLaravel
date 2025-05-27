@@ -505,7 +505,7 @@
                         <div>
                             <!-- notification Dropdown (Hidden by default) -->
                             <div id="notificationModal"
-                                class="hidden fixed right-4 top-16 w-96 bg-white dark:bg-gray-800 rounded-lg shadow-xl z-50 border border-gray-200 dark:border-gray-700">
+                                class="hidden notification-card fixed right-4 top-16 w-96 bg-white dark:bg-gray-800 rounded-lg shadow-xl z-50 border border-gray-200 dark:border-gray-700">
                                 <div class="p-4 border-b border-gray-200 dark:border-gray-700">
                                     <div class="flex justify-between items-center mb-4">
                                         <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Notifications
@@ -546,7 +546,7 @@
                                                 </p>
                                                 <div class="mt-2 flex gap-2">
                                                     <a href="#blogs"
-                                                        class="text-xs text-primary hover:text-primary-dark" id="closeB">View Details</a>
+                                                        class="text-xs text-primary hover:text-primary-dark closeB" id="closeB">View Details</a>
                                                     <form method="POST" action="">
                                                         @csrf
                                                         <button type="submit"
@@ -4108,10 +4108,15 @@
         const modal = document.getElementById("notificationModal");
 
         // Toggle modal on button click
-        closeB.addEventListener("click", function (e) {
-            e.stopPropagation(); // Prevent triggering document click
-            modal.classList.toggle("hidden");
+        document.querySelectorAll(".closeB").forEach(button => {
+        button.addEventListener("click", function () {
+            const card = this.closest(".notification-card");
+            if (card) {
+                card.classList.add('hidden'); 
+            }
+            });
         });
+
 
            button.addEventListener("click", function (e) {
             e.stopPropagation(); // Prevent triggering document click
