@@ -52,7 +52,7 @@
                     &times;
                 </button>
                 <h2 class="text-2xl font-semibold text-gray-800 dark:text-white mb-4 mx-8">Add New Blog</h2>
-                <form action="{{ route('blogs') }}" method="POST" class="space-y-4">
+                <form action="{{ route('blogs') }}" method="POST" class="space-y-4" enctype="multipart/form-data">
                     @csrf
                     <div>
                         <label class="block text-gray-700 dark:text-gray-200 mb-1" for="title">Title</label>

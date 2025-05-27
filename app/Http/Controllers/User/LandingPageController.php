@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 use App\Models\Testimony;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Blog;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -28,7 +29,26 @@ class LandingPageController extends Controller
       
     }
 
-    public function blogs(Request $request){
-        
-    }
+public function blogs(Request $request)
+{
+ 
+   if ($request->hasFile('image')) {
+    $imagePath = $request->file('image')->store('images');
+} else {
+    return back()->with('error', 'No file was uploaded.');
+}
+
+
+    $blog = Blog::create([
+        'name' => Auth::user()->name,
+        'speciality' => Auth::user()->specialization,
+        'title' => $request->title,
+        'content' => $request->content,
+        'profile_picture' => Auth::user()->profile_picture,
+        'image' => $imagePath
+    ]);
+dd('ok');
+    return redirect()->back()->with('success', 'Blog posted successfully!');
+}
+
 }
