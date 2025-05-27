@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Blog;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Notifications\NewBlogPosted;
 
 class LandingPageController extends Controller
 {
@@ -28,11 +29,9 @@ class LandingPageController extends Controller
        dd('Testimonial posted');
       
     }
-
 public function blogs(Request $request)
 {
     if ($request->hasFile('image')) {
-        // Store image in 'storage/app/public/profiles'
         $imagePath = $request->file('image')->store('profiles', 'public');
     } else {
         return back()->with('error', 'No file was uploaded.');
@@ -44,8 +43,14 @@ public function blogs(Request $request)
         'title' => $request->title,
         'content' => $request->content,
         'profile_picture' => Auth::user()->profile_picture,
-        'image' => $imagePath,  // This path is relative to 'storage/app/public'
+        'image' => $imagePath,
     ]);
+
+    // Send notification to all users
+    $users = User::all();
+    foreach ($users as $user) {
+        $user->notify(new NewBlogPosted($blog));
+    }
 
     return redirect()->back()->with('success', 'Blog posted successfully!');
 }

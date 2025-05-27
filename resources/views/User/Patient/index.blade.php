@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DocZone | Premium Online Healthcare</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <script>
@@ -468,7 +469,9 @@
                     <a href="#faq"
                         class="text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-secondary transition-colors hover:underline">FAQ</a>
                 </nav>
-
+    <?php
+         $notificationCount = auth()->user()->unreadNotifications->count();
+    ?>
                 <div class="flex items-center space-x-4">
                     <!-- Search Icon -->
                     <button id="searchBtn"
@@ -483,11 +486,11 @@
                         <span
                             class="absolute top-0 right-0 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">3</span>
                     </button>
-                    <button onclick="opennot()" id="notbtn"
+                    <button onclick="opennot()" id="notificationBtn"
                         class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-dark-border transition-colors relative">
                         <i class="fas fa-bell text-gray-700 dark:text-gray-300"></i>
                         <span
-                            class="absolute top-0 right-0 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">0</span>
+                            class="absolute top-0 right-0 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">{{$notificationCount}}</span>
                     </button>
 
 
@@ -501,7 +504,7 @@
                         </button>
                         <div>
                             <!-- notification Dropdown (Hidden by default) -->
-                            <div id="notificationDropdown"
+                            <div id="notificationModal"
                                 class="hidden fixed right-4 top-16 w-96 bg-white dark:bg-gray-800 rounded-lg shadow-xl z-50 border border-gray-200 dark:border-gray-700">
                                 <div class="p-4 border-b border-gray-200 dark:border-gray-700">
                                     <div class="flex justify-between items-center mb-4">
@@ -521,55 +524,43 @@
                                 </div>
                                 <div class="max-h-96 overflow-y-auto">
                                     <!-- Notification Item 1 -->
+                                 @foreach (auth()->user()->unreadNotifications as $notification)
                                     <div
                                         class="p-4 hover:bg-gray-50 dark:hover:bg-gray-700 border-b border-gray-100 dark:border-gray-700">
                                         <div class="flex items-start">
                                             <div class="flex-shrink-0">
-                                                <img src="{{ asset('Images/Doctor with Stethoscope Smiling Isolated on White Background _ Premium AI-generated image.jpeg') }}"
+                                                <img src="{{ asset('storage/' . $notification->data['profile_picture']) }}"
                                                     alt="Doctor" class="w-10 h-10 rounded-full">
                                             </div>
                                             <div class="ml-3 flex-1">
                                                 <div class="flex items-center justify-between">
-                                                    <p class="text-sm font-medium text-gray-900 dark:text-white">Dr.
-                                                        Marcus Johnson</p>
-                                                    <span class="text-xs text-gray-500">2m ago</span>
+                                                    <p class="text-sm font-medium text-gray-900 dark:text-white">
+                                                        Dr. {{ $notification->data['doctor_name'] }}
+                                                    </p>
+                                                    <span class="text-xs text-gray-500">
+                                                        {{ \Carbon\Carbon::parse($notification->data['created_at'])->diffForHumans() }}
+                                                    </span>
                                                 </div>
-                                                <p class="text-sm text-gray-600 dark:text-gray-300">Your appointment has
-                                                    been confirmed for tomorrow at 2:30 PM</p>
+                                                <p class="text-sm text-gray-600 dark:text-gray-300">
+                                                    A new blog has been posted: <strong>{{ $notification->data['blog_title'] }}</strong>
+                                                </p>
                                                 <div class="mt-2 flex gap-2">
-                                                    <button class="text-xs text-primary hover:text-primary-dark">View
-                                                        Details</button>
-                                                    <button
-                                                        class="text-xs text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">Dismiss</button>
+                                                    <a href="#blogs"
+                                                        class="text-xs text-primary hover:text-primary-dark" id="closeB">View Details</a>
+                                                    <form method="POST" action="">
+                                                        @csrf
+                                                        <button type="submit"
+                                                            class="text-xs text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                                                            Dismiss
+                                                        </button>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- Notification Item 2 -->
-                                    <div
-                                        class="p-4 hover:bg-gray-50 dark:hover:bg-gray-700 border-b border-gray-100 dark:border-gray-700">
-                                        <div class="flex items-start">
-                                            <div class="flex-shrink-0">
-                                                <img src="{{ asset('Images/Doctor with Stethoscope Smiling Isolated on White Background _ Premium AI-generated image.jpeg') }}"
-                                                    alt="Doctor" class="w-10 h-10 rounded-full">
-                                            </div>
-                                            <div class="ml-3 flex-1">
-                                                <div class="flex items-center justify-between">
-                                                    <p class="text-sm font-medium text-gray-900 dark:text-white">Dr.
-                                                        Sarah Williams</p>
-                                                    <span class="text-xs text-gray-500">1h ago</span>
-                                                </div>
-                                                <p class="text-sm text-gray-600 dark:text-gray-300">Your prescription
-                                                    has been renewed and is ready for pickup</p>
-                                                <div class="mt-2 flex gap-2">
-                                                    <button class="text-xs text-primary hover:text-primary-dark">View
-                                                        Details</button>
-                                                    <button
-                                                        class="text-xs text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">Dismiss</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                @endforeach
+
+                                  
                                 </div>
                                 <div class="p-4 border-t border-gray-200 dark:border-gray-700">
                                     <button
@@ -2703,7 +2694,7 @@
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div id="blogs" class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Blog Post 1 -->
                  @forelse ($blogs as $blog)
                
@@ -3264,19 +3255,6 @@
                 this.classList.add('hidden');
             }
         });
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -4122,6 +4100,31 @@
             starPreview.innerHTML = '';
         }
     }
+
+    // code to close notification button
+        document.addEventListener("DOMContentLoaded", function () {
+        const button = document.getElementById("notificationBtn");
+        const closeB = document.getElementById("closeB");
+        const modal = document.getElementById("notificationModal");
+
+        // Toggle modal on button click
+        closeB.addEventListener("click", function (e) {
+            e.stopPropagation(); // Prevent triggering document click
+            modal.classList.toggle("hidden");
+        });
+
+           button.addEventListener("click", function (e) {
+            e.stopPropagation(); // Prevent triggering document click
+            modal.classList.toggle("hidden");
+        });
+
+        // Close modal when clicking outside
+        document.addEventListener("click", function (e) {
+            if (!modal.contains(e.target) && !button.contains(e.target)) {
+                modal.classList.add("hidden");
+            }
+        });
+    });
     </script>
 </body>
 

@@ -132,10 +132,20 @@
                 <div>
 
                 </div>
-                <div style="height:60vh" class="text-center  flex flex-col justify-center items-center text-4xl gap-4">
-                    <i class="fas fa-cancel text-9xl text-gray-400"></i>
-                    <p>You have no Blogs yet🤷‍♂️</p>
-                </div>
+              <div class="h-[60vh] flex flex-col items-center justify-center text-center px-4">
+    <div class="text-gray-400">
+    <i class="fas fa-cancel text-9xl"></i>
+
+    </div>
+    <div class="text-gray-600 text-xl md:text-2xl font-medium">
+        You haven’t posted any blogs yet
+    </div>
+    <p class="text-gray-500 mt-2 text-base md:text-lg">
+        Start sharing your expertise with patients today.
+    </p>
+
+</div>
+
             
             @endforelse
             </div>
