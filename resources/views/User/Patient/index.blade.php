@@ -559,6 +559,8 @@
                                         </div>
                                     </div>
                                 @endforeach
+                         
+
 
                                   
                                 </div>
@@ -655,7 +657,31 @@
         </div>
     </header>
     <!--Delete account allert ALLERT -->
-
+   @if (session('success'))
+            <div 
+                x-data="{ show: true }" 
+                x-init="setTimeout(() => show = false, 2000)" 
+                x-show="show"
+                x-transition:enter="transition transform ease-out duration-500"
+                x-transition:enter-start="opacity-0 translate-y-2 scale-95"
+                x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+                x-transition:leave="transition transform ease-in duration-500"
+                x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+                x-transition:leave-end="opacity-0 translate-y-2 scale-95"
+                class="max-w-md mx-auto bg-green-50 border-l-4 border-green-500 text-green-700 px-6 py-4 rounded-lg shadow-lg flex items-start space-x-4 mt-6"
+                role="alert"
+            >
+                <svg class="w-6 h-6 text-green-500 mt-1 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2"
+                    viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M9 12l2 2 4-4m5 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <div class="flex-1  text-sm leading-6">
+                    <p class="font-semibold">Success</p>
+                    <p>{{ session('success') }}</p>
+                </div>
+            </div>
+        @endif
 
     <div id="searchOverlay"
         class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-start justify-center pt-28 px-4 hidden">

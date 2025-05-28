@@ -13,6 +13,8 @@ Route::get('/', function () {
 
 // User routes
 // web.php
+Route::patch('/appointments/{id}/confirm', [LandingPageController::class, 'confirmAppointment'])
+    ->name('appointments.confirm');
 Route::post('/confirmBook', [LandingPageController::class, 'confirmBook'])->name('confirmBook');
 Route::get('/bookDoctor/{id}', [LandingPageController::class, 'showBooking'])->name('book');
 Route::get('/', [LandingPageController::class, 'showBookingForm'])->name('showBookingForm');

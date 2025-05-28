@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Http\Controllers\User;
+use App\Notifications\AppointmentApproved;
 use App\Models\Testimony;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Appointment;
 use App\Models\Blog;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -67,18 +69,38 @@ public function confirmBook(Request $request)
 {
  
 
-    $patientId = auth()->id(); // make sure user is authenticated
+    $patient = Auth::user(); // make sure user is authenticated
  
 
     $appointment = new \App\Models\Appointment();
     $appointment->doctor_id = $request->doctor_id;
-    $appointment->patient_id = $patientId;
+    $appointment->patient_name = $patient->name;
+    $appointment->patient_image = $patient->profile_picture; 
+    $appointment->type = $request->appointment_type; 
     $appointment->appointment_date = $request->appointment_date;
     $appointment->appointment_time = $request->appointment_time;
     $appointment->save();
-   dd($request);
+
     return redirect()->route('ShowUserLanding')->with('success', 'Appointment booked successfully.');
 }
+public function confirmAppointment($id)
+{
+    $appointment = Appointment::findOrFail($id);
 
+    if ($appointment->status === 'pending') {
+        $appointment->status = 'confirmed';
+        $appointment->save();
+
+        // Fetch the doctor and patient
+        $doctor = Appointment::find($appointment->doctor_id);
+        $patient = User::find($appointment->patient_name);
+
+        if ($doctor && $patient) {
+            $patient->notify(new AppointmentApproved($doctor, $appointment));
+        }
+    }
+
+    return back()->with('success', 'Appointment confirmed and patient notified.');
+}
 
 }

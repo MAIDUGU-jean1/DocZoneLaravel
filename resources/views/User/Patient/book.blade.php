@@ -38,13 +38,27 @@
 
                     <div>
                         <label class="block text-sm font-medium text-gray-700">Date</label>
-                        <input type="date" name="appointment_date" 
+                        <input type="date" name="appointment_date" required
                             class="mt-1 block w-full rounded-md shadow-sm outline-none border-blue-500 border-2 focus:ring-blue-500 focus:border-blue-500">
                     </div>
 
+                    <div class="mb-4">
+                        <label for="appointment_type" class="block text-sm font-medium text-gray-700 mb-1">
+                            Appointment Type
+                        </label>
+                        <select name="appointment_type" id="appointment_type"
+                                class="w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500">
+                            <option value="calls">Calls</option>
+                            <option value="messages">Messages</option>
+                            <option value="in-person">In-person</option>
+                            <option value="video-call">Video Call</option>
+                        </select>
+                    </div>
+
+
                     <div>
                         <label class="block text-sm font-medium text-gray-700">Time</label>
-                        <input type="time" name="appointment_time" 
+                        <input type="time" name="appointment_time" required
                             class="mt-1 block w-full rounded-md outline-none border-blue-500 border-2 shadow-sm focus:ring-blue-500 focus:border-blue-500">
                     </div>
 

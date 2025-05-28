@@ -48,12 +48,12 @@
             <!-- Stats -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 <div class="bg-white dark:bg-gray-800 p-4 rounded shadow hover:shadow-lg transition">
-                    <h2 class="text-lg font-semibold">Today's Appointments</h2>
-                    <p class="text-3xl font-bold text-blue-600 dark:text-blue-400 mt-2">5</p>
+                    <h2 class="text-lg font-semibold"> Appointments</h2>
+                    <p class="text-3xl font-bold text-blue-600 dark:text-blue-400 mt-2">{{$appointmentsCount}}</p>
                 </div>
                 <div class="bg-white dark:bg-gray-800 p-4 rounded shadow hover:shadow-lg transition">
-                    <h2 class="text-lg font-semibold">New Patients</h2>
-                    <p class="text-3xl font-bold text-green-600 dark:text-green-400 mt-2">3</p>
+                    <h2 class="text-lg font-semibold">Total Patients</h2>
+                    <p class="text-3xl font-bold text-green-600 dark:text-green-400 mt-2">{{ $patientCount }}</p>
                 </div>
                 <div class="bg-white dark:bg-gray-800 p-4 rounded shadow hover:shadow-lg transition">
                     <h2 class="text-lg font-semibold">Unread Messages</h2>
@@ -75,18 +75,18 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="border-t border-gray-300 dark:border-gray-600">
-                            <td class="px-4 py-2">John Doe</td>
-                            <td class="px-4 py-2">May 20, 2025</td>
-                            <td class="px-4 py-2">10:00 AM</td>
-                            <td class="px-4 py-2 text-green-600 dark:text-green-400 font-medium">Confirmed</td>
-                        </tr>
-                        <tr class="border-t border-gray-300 dark:border-gray-600">
-                            <td class="px-4 py-2">Jane Smith</td>
-                            <td class="px-4 py-2">May 20, 2025</td>
-                            <td class="px-4 py-2">11:30 AM</td>
-                            <td class="px-4 py-2 text-yellow-600 dark:text-yellow-400 font-medium">Pending</td>
-                        </tr>
+                        @forelse ($appointments as $appointments)
+                              <tr class="border-t border-gray-300 dark:border-gray-600">
+                                    <td class="px-4 py-2">{{$appointments->patient_name}}</td>
+                                    <td class="px-4 py-2">{{$appointments->appointment_date}}</td>
+                                    <td class="px-4 py-2">{{$appointments->appointment_time}}</td>
+                                    <td class="px-4 py-2 text-green-600 dark:text-green-400 font-medium">{{$appointments->status}}</td>
+                            </tr>
+                        @empty
+                            
+                        @endforelse
+                      
+                      
                     </tbody>
                 </table>
             </div>

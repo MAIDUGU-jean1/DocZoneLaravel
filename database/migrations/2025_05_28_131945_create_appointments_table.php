@@ -14,8 +14,10 @@ return new class extends Migration
              Schema::create('appointments', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('doctor_id');
-            $table->unsignedBigInteger('patient_id'); // usually a user
+            $table->string('patient_name'); // usually a user
             $table->date('appointment_date');
+            $table->string('patient_image')->nullable();
+            $table->string('type')->nullable();
             $table->time('appointment_time');
             $table->string('status')->default('pending'); // e.g. pending, confirmed, cancelled
             $table->timestamps();
