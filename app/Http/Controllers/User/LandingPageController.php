@@ -55,5 +55,30 @@ public function blogs(Request $request)
     return redirect()->back()->with('success', 'Blog posted successfully!');
 }
 
+  public function showBooking($id)
+{
+    $patient = Auth::user()->name;
+    $patient_id = Auth::user()->id;
+    $doctor = User::findOrFail($id); // Get doctor or 404
+  
+    return view('User.Patient.book',compact('doctor','patient'));
+}
+public function confirmBook(Request $request)
+{
+ 
+
+    $patientId = auth()->id(); // make sure user is authenticated
+ 
+
+    $appointment = new \App\Models\Appointment();
+    $appointment->doctor_id = $request->doctor_id;
+    $appointment->patient_id = $patientId;
+    $appointment->appointment_date = $request->appointment_date;
+    $appointment->appointment_time = $request->appointment_time;
+    $appointment->save();
+   dd($request);
+    return redirect()->route('ShowUserLanding')->with('success', 'Appointment booked successfully.');
+}
+
 
 }

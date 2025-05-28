@@ -1749,10 +1749,14 @@
             </div>
 
             <div id="" class="mt-6 text-center">
-                <button class="px-6 py-2 bg-primary text-white rounded-lg hover:bg-opacity-90 transition-colors"
-                    onclick=Appoint();>
+          <a href="{{route('showBookingForm')}}">
+
+                <button class="px-6 py-2 bg-primary text-white rounded-lg hover:bg-opacity-90 transition-colors">
                     <i class="fas fa-plus mr-1"></i> Schedule New Appointment
                 </button>
+            </a>
+
+
             </div>
         </div>
     </div>
@@ -2069,10 +2073,12 @@
                                     class="doctor-view-btn w-full py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 font-medium rounded transition-colors col-span-1">
                                     <i class="fas fa-user-md mr-1"></i> Profile
                                 </button>
-                                <button
-                                    class="book-btn w-full py-2 bg-green-500 hover:bg-green-600 text-white font-medium rounded transition-colors col-span-1">
-                                    <i class="fas fa-calendar-check mr-1"></i> Book
-                                </button>
+                                <a href="">
+                                    <button
+                                        class="book-btn w-full py-2 px-2 bg-green-500 hover:bg-green-600 text-white font-medium rounded transition-colors col-span-1">
+                                        <i class="fas fa-calendar-check mr-1"></i> Book
+                                   </button>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -2149,16 +2155,12 @@
                                     <i class="fas fa-user-md mr-1"></i> Profile
                                 </button>
 
-                                <button
-                                    class="book-btn w-full py-2 bg-green-500 hover:bg-green-600 text-white rounded transition"
-                                    onclick=appointment() data-id="{{ $doctor->id }}"
-                                    data-name="{{ $doctor->name }}"
-                                    data-specialization="{{ $doctor->specialization }}"
-                                    data-experience="{{ $doctor->experience }}"
-                                    data-profile="{{ asset('storage/' . $doctor->profile_picture) }}">
-
-                                    <i class="fas fa-calendar-check mr-1"></i> Book
-                                </button>
+                                <a href="{{route('book', $doctor->id)}}">
+                                    <button
+                                        class="book-btn w-full py-2 px-2 bg-green-500 hover:bg-green-600 text-white font-medium rounded transition-colors col-span-1">
+                                        <i class="fas fa-calendar-check mr-1"></i> Book
+                                   </button>
+                                </a>
 
                             </div>
                         </div>

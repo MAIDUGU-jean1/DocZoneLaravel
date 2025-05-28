@@ -12,7 +12,8 @@ class PatientController extends Controller
 {
   public function UserIndex(Request $request)
 {
-    $blogs = Blog::all();
+    
+    $blogs = Blog::all(); 
     $testimonies = Testimony::all();
     $doctors = User::where('role', 'doctor')
                    ->where('verification', 1)

@@ -3,6 +3,7 @@
 use App\Http\Controllers\DoctorsDashboardController;
 use App\Http\Controllers\User\AuthController;
 use App\Http\Controllers\User\LandingPageController;
+use App\Http\Controllers\User\BookingController;
 use App\Http\Controllers\User\PatientController;
 use Illuminate\Support\Facades\Route;
 
@@ -11,6 +12,10 @@ Route::get('/', function () {
 });
 
 // User routes
+// web.php
+Route::post('/confirmBook', [LandingPageController::class, 'confirmBook'])->name('confirmBook');
+Route::get('/bookDoctor/{id}', [LandingPageController::class, 'showBooking'])->name('book');
+Route::get('/', [LandingPageController::class, 'showBookingForm'])->name('showBookingForm');
 Route::post('/blogs', [LandingPageController::class, 'blogs'])->name('blogs');
 Route::post('/testimony', [LandingPageController::class, 'testimony'])->name('testimony');
 Route::get('/index', [LandingPageController::class, 'Index'])->name('showLanding');
