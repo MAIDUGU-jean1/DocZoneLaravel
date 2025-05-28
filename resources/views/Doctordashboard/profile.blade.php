@@ -11,7 +11,7 @@
         <!-- Doctor Info -->
         <div class="text-center sm:text-left">
           <h1 class="text-2xl sm:text-3xl font-bold">Dr. {{Auth::user()->name}}</h1>
-          <p class="text-blue-600 dark:text-blue-400 text-lg sm:text-xl mt-1">Cardiologist</p>
+          <p class="text-blue-600 dark:text-blue-400 text-lg sm:text-xl mt-1">{{Auth::user()->specialization}}</p>
           <p class="mt-2 text-gray-600 dark:text-gray-300">
             Experienced cardiologist with over 10 years helping patients maintain heart health and improve their quality of life.
           </p>
