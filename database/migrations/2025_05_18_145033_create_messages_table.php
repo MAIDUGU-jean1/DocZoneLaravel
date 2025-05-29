@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('messages', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('consultation_id')->constrained()->onDelete('cascade');
-            $table->foreignId('sender_id')->constrained('users')->onDelete('cascade');
-            $table->text('message');
-            $table->timestamps();
-        });
+         Schema::create('messages', function (Blueprint $table) {
+        $table->id();
+        $table->enum('role', ['user', 'assistant']);
+        $table->text('content')->nullable();
+        $table->string('image_path')->nullable();
+        $table->timestamps();
+    });
     }
 
     /**

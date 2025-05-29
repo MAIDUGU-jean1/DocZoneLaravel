@@ -1,14 +1,17 @@
 <?php
-
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\DoctorsDashboardController;
 use App\Http\Controllers\User\AuthController;
 use App\Http\Controllers\User\LandingPageController;
+use App\Models\Message;
 use App\Http\Controllers\User\BookingController;
 use App\Http\Controllers\User\PatientController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+
+    $messages = Message::orderBy('created_at')->get();
+    return view('welcome', compact('messages'));
 });
 
 // User routes
@@ -17,7 +20,7 @@ Route::patch('/appointments/{id}/confirm', [LandingPageController::class, 'confi
     ->name('appointments.confirm');
 Route::post('/confirmBook', [LandingPageController::class, 'confirmBook'])->name('confirmBook');
 Route::get('/bookDoctor/{id}', [LandingPageController::class, 'showBooking'])->name('book');
-Route::get('/', [LandingPageController::class, 'showBookingForm'])->name('showBookingForm');
+//Route::get('/', [LandingPageController::class, 'showBookingForm'])->name('showBookingForm');
 Route::post('/blogs', [LandingPageController::class, 'blogs'])->name('blogs');
 Route::post('/testimony', [LandingPageController::class, 'testimony'])->name('testimony');
 Route::get('/index', [LandingPageController::class, 'Index'])->name('showLanding');
@@ -35,3 +38,31 @@ Route::get('/dashboard/profile', [DoctorsDashboardController::class, 'doctorprof
 Route::get('/dashboard/appointment', [DoctorsDashboardController::class, 'doctorappointment'])->name('doctorappointment');
 Route::get('/dashboard/patient', [DoctorsDashboardController::class, 'doctorpatient'])->name('doctorpatient');
 Route::post('/dashboard/logout', [DoctorsDashboardController::class, 'logout'])->name('doctorlogout');
+
+
+//open ai routes
+
+Route::get('/chat', [ChatController::class, 'index']);
+Route::post('/chat', [ChatController::class, 'chat']);
+
+Route::get('/openai-test', function () {
+    $response = Http::withHeaders([
+        'Authorization' => 'Bearer ' . config('services.openai.key'),
+        'Content-Type' => 'application/json',
+    ])->post('https://api.openai.com/v1/chat/completions', [
+        'model' => 'gpt-3.5-turbo',
+        'messages' => [
+            ['role' => 'user', 'content' => 'Say hello!'],
+        ],
+    ]);
+
+    if ($response->failed()) {
+        return response()->json([
+            'error' => 'API call failed',
+            'status' => $response->status(),
+            'body' => $response->body(),
+        ]);
+    }
+
+    return response()->json($response->json());
+});
