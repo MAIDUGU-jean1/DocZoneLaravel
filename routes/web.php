@@ -45,24 +45,3 @@ Route::post('/dashboard/logout', [DoctorsDashboardController::class, 'logout'])-
 Route::get('/chat', [ChatController::class, 'index']);
 Route::post('/chat', [ChatController::class, 'chat']);
 
-Route::get('/openai-test', function () {
-    $response = Http::withHeaders([
-        'Authorization' => 'Bearer ' . config('services.openai.key'),
-        'Content-Type' => 'application/json',
-    ])->post('https://api.openai.com/v1/chat/completions', [
-        'model' => 'gpt-3.5-turbo',
-        'messages' => [
-            ['role' => 'user', 'content' => 'Say hello!'],
-        ],
-    ]);
-
-    if ($response->failed()) {
-        return response()->json([
-            'error' => 'API call failed',
-            'status' => $response->status(),
-            'body' => $response->body(),
-        ]);
-    }
-
-    return response()->json($response->json());
-});

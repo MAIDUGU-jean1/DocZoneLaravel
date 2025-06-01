@@ -12,6 +12,7 @@ class Message extends Model
         'receiver_id',
         'read',
         'type',
+        'body'
     ];
   public function conversation(): BelongsTo
     {

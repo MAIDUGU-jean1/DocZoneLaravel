@@ -9,6 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -369,9 +370,11 @@
             }
         }
     </style>
+@livewireStyles
 </head>
 
 <body class="font-sans bg-light-bg dark:bg-dark-bg text-gray-800 dark:text-gray-200 transition-colors duration-300">
+     @livewireScripts
     <!-- Header and Navigation -->
     <header class="sticky top-0 z-40 bg-white dark:bg-dark-card shadow-md transition-colors duration-300">
         <div class="container mx-auto px-4 py-3">
