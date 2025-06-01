@@ -15,7 +15,7 @@ class LandingPageController extends Controller
 {
     public function Index()
     {
-
+        
         return view('Landing.index');
     }
     //Login behind the testimony post

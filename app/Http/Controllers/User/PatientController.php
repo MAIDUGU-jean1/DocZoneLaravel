@@ -12,7 +12,7 @@ class PatientController extends Controller
 {
   public function UserIndex(Request $request)
 {
-    
+    $allDoctors = User::where('role', 'doctor')->where('verification', 1)->get();
     $blogs = Blog::all(); 
     $testimonies = Testimony::all();
     $doctors = User::where('role', 'doctor')
@@ -22,7 +22,7 @@ class PatientController extends Controller
                    })
                    ->paginate(8); // Adjust number per page
 
-    return view('User.Patient.index', compact('doctors','testimonies','blogs'));
+    return view('User.Patient.index', compact('doctors','testimonies','blogs','allDoctors'));
 }
 
 }

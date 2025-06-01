@@ -276,35 +276,6 @@
             color: #eee;
         }
 
-        /* Typing indicator */
-        .typing-indicator {
-            display: flex;
-            align-items: center;
-        }
-
-        .typing-indicator span {
-            height: 8px;
-            width: 8px;
-            float: left;
-            margin: 0 1px;
-            background-color: #9E9EA1;
-            display: block;
-            border-radius: 50%;
-            opacity: 0.4;
-        }
-
-        .typing-indicator span:nth-of-type(1) {
-            animation: 1s blink infinite 0.3333s;
-        }
-
-        .typing-indicator span:nth-of-type(2) {
-            animation: 1s blink infinite 0.6666s;
-        }
-
-        .typing-indicator span:nth-of-type(3) {
-            animation: 1s blink infinite 0.9999s;
-        }
-
         @keyframes blink {
             50% {
                 opacity: 1;
@@ -383,45 +354,8 @@
             margin-left: 4px;
         }
 
-        .typing-indicator {
-            display: flex;
-            align-items: center;
-            padding: 8px 12px;
-            background-color: #f0f0f0;
-            border-radius: 7.5px;
-            margin-bottom: 8px;
-            width: fit-content;
-        }
-
-        .typing-indicator span {
-            height: 8px;
-            width: 8px;
-            background-color: #919191;
-            border-radius: 50%;
-            display: inline-block;
-            margin: 0 1px;
-            animation: typing 1s infinite;
-        }
-
-        .typing-indicator span:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-
-        .typing-indicator span:nth-child(3) {
-            animation-delay: 0.4s;
-        }
-
-        @keyframes typing {
-
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(-5px);
-            }
-        }
+  
+      
 
         @keyframes fadeIn {
             from {
@@ -809,151 +743,129 @@
             </div>
         </div>
     </div>
-    <!-- Chat Panel - WhatsApp Styled -->
-    <div id="chatPanel"
-        class="fixed top-0 right-0 w-full h-full bg-white dark:bg-dark-card z-50 flex flex-col md:flex-row transition-all duration-300 ease-in-out">
+  <!-- Chat Panel - WhatsApp Styled -->
+<div id="chatPanel"
+    class="fixed top-0 right-0 w-full h-full bg-white dark:bg-dark-card z-50 flex flex-col md:flex-row transition-all duration-300 ease-in-out">
 
-        <!-- Chat List Section -->
-        <div
-            class="w-full md:w-1/3 lg:w-1/4 bg-white dark:bg-gray-900 border-r border-gray-300 dark:border-gray-700 flex flex-col transition-all duration-300">
-            <!-- Header -->
-            <div class="p-4 bg-primary text-white flex justify-between items-center shadow">
-                <h2 class="text-lg font-semibold">Messages</h2>
-                <button id="closeChatBtn" class="hover:text-gray-200 transition duration-200">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
+    <!-- Chat List Section -->
+    <div class="w-full md:w-1/3 lg:w-1/4 bg-white dark:bg-gray-900 border-r border-gray-300 dark:border-gray-700 flex flex-col transition-all duration-300">
+        <!-- Header -->
+        <div class="p-4 bg-primary text-white flex justify-between items-center shadow">
+            <h2 class="text-lg font-semibold">Messages</h2>
+            <button id="closeChatBtn" class="hover:text-gray-200 transition duration-200">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
 
-            <!-- Search Bar -->
-            <div class="p-3 border-b border-gray-300 dark:border-gray-700">
-                <div class="relative">
-                    <input type="text" placeholder="Search doctors..."
-                        class="w-full px-4 py-2 pl-10 bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
-                    <i class="fas fa-search absolute left-3 top-3 text-gray-500"></i>
-                </div>
-            </div>
-
-            <!-- Tabs -->
-            <div class="flex text-sm border-b border-gray-300 dark:border-gray-700">
-                <button class="chat-tab w-1/2 py-2 font-medium border-b-2 border-primary text-primary">Recent</button>
-                <button class="chat-tab w-1/2 py-2 font-medium text-gray-600 dark:text-gray-400">All Doctors</button>
-            </div>
-
-            <!-- Chat List -->
-            <div class="overflow-y-auto flex-grow">
-                <div class="chat-list divide-y divide-gray-200 dark:divide-gray-800">
-                    <!-- Recent Chat Item -->
-                    <div class="chat-item flex items-center p-3 hover:bg-gray-100 dark:hover:bg-gray-800 cursor-pointer transition duration-200"
-                        data-doctor-id="1">
-                        <div class="relative">
-                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Doctor"
-                                class="w-12 h-12 rounded-full object-cover">
-                            <span
-                                class="absolute bottom-0 right-0 bg-green-500 h-3 w-3 rounded-full border-2 border-white dark:border-gray-800"></span>
-                        </div>
-                        <div class="ml-3 w-full">
-                            <div class="flex justify-between">
-                                <h4 class="font-medium text-gray-900 dark:text-white">Dr. Marcus Johnson</h4>
-                                <span class="text-xs text-gray-500">9:41 AM</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <p class="text-sm text-gray-600 dark:text-gray-300 truncate w-40">I'll send your
-                                    prescription...</p>
-                                <span
-                                    class="bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">2</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- All Doctors List -->
-                    <div class="all-doctors-list hidden">
-                        <!-- Doctor Item -->
-                        <div class="doctor-item flex items-center p-3 hover:bg-gray-100 dark:hover:bg-gray-800 cursor-pointer transition duration-200"
-                            data-doctor-id="2">
-                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Doctor"
-                                class="w-12 h-12 rounded-full object-cover">
-                            <div class="ml-3">
-                                <h4 class="font-medium text-gray-900 dark:text-white">Dr. Sarah Williams</h4>
-                                <p class="text-sm text-gray-600 dark:text-gray-300">Dermatology</p>
-                            </div>
-                        </div>
-                        <!-- Add more doctor items here -->
-                    </div>
-                </div>
+        <!-- Search Bar -->
+        <div class="p-3 border-b border-gray-300 dark:border-gray-700">
+            <div class="relative">
+                <input type="text" placeholder="Search doctors..."
+                    class="w-full px-4 py-2 pl-10 bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+                <i class="fas fa-search absolute left-3 top-3 text-gray-500"></i>
             </div>
         </div>
 
-        <!-- Individual Chat Section -->
-        <div id="individualChat"
-            class="flex-grow flex flex-col bg-gray-100 dark:bg-gray-900 transition-all duration-300 ease-in-out md:block hidden md:flex md:w-2/3 lg:w-3/4">
-            <!-- Empty State -->
-            <div id="emptyChatState" class="flex-grow flex flex-col items-center justify-center p-6 text-center">
-                <div class="w-24 h-24 bg-gray-200 dark:bg-gray-800 rounded-full flex items-center justify-center mb-4">
-                    <i class="fas fa-comments text-4xl text-gray-400"></i>
-                </div>
-                <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">No Chat Selected</h3>
-                <p class="text-gray-600 dark:text-gray-400 mb-6">Select a doctor from the list to start a conversation
-                </p>
-                <button class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-opacity-90 transition-colors">
-                    Browse Doctors
-                </button>
-            </div>
+        <!-- Tabs -->
+        <div class="flex text-sm border-b border-gray-300 dark:border-gray-700">
+            <button id="recentTab" class="chat-tab w-1/2 py-2 font-medium border-b-2 border-primary text-primary">Recent</button>
+            <button id="allDoctorsTab" class="chat-tab w-1/2 py-2 font-medium text-gray-600 dark:text-gray-400">All Doctors</button>
+        </div>
 
-            <!-- Active Chat (Hidden by default) -->
-            <div id="activeChat" class="hidden flex-grow flex flex-col">
-                <!-- Header -->
-                <div class="p-4 bg-primary text-white flex items-center shadow">
-                    <button id="backToChatList" class="mr-3 block md:hidden">
-                        <i class="fas fa-arrow-left"></i>
-                    </button>
-                    <div class="flex items-center flex-grow">
-                        <img src="..." alt="Doctor" id="chatDoctorImage"
-                            class="w-10 h-10 rounded-full object-cover">
-                        <div class="ml-3">
-                            <h3 id="chatDoctorName" class="font-semibold">Dr. Marcus Johnson</h3>
-                            <div class="flex items-center text-xs">
-                                <span class="bg-green-500 h-2 w-2 rounded-full mr-1"></span>
-                                <span>Online now</span>
-                            </div>
+        <!-- Chat Lists -->
+        <div class="overflow-y-auto flex-grow">
+            <div id="recentChats" class="chat-list divide-y divide-gray-200 dark:divide-gray-800">
+                <div class="chat-item flex items-center p-3 hover:bg-gray-100 dark:hover:bg-gray-800 cursor-pointer transition duration-200">
+                    <div class="relative">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Doctor"
+                            class="w-12 h-12 rounded-full object-cover">
+                        <span
+                            class="absolute bottom-0 right-0 bg-green-500 h-3 w-3 rounded-full border-2 border-white dark:border-gray-800"></span>
+                    </div>
+                    <div class="ml-3 w-full">
+                        <div class="flex justify-between">
+                            <h4 class="font-medium text-gray-900 dark:text-white">Dr. Marcus Johnson</h4>
+                            <span class="text-xs text-gray-500">9:41 AM</span>
                         </div>
                     </div>
-                    <div class="flex items-center space-x-4">
-                        <button class="hover:text-gray-200 transition-colors">
-                            <i class="fas fa-video"></i>
-                        </button>
-                        <button class="hover:text-gray-200 transition-colors">
-                            <i class="fas fa-phone"></i>
-                        </button>
-                        <button class="hover:text-gray-200 transition-colors">
-                            <i class="fas fa-ellipsis-v"></i>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Chat Messages -->
-                <div id="chatMessages" class="p-4 flex-grow space-y-3">
-                    <!-- Messages will be injected here -->
-                </div>
-
-                <!-- Chat Input -->
-                <div class="p-3 bg-white dark:bg-dark-card border-t border-gray-200 dark:border-gray-700">
-                    <div class="flex items-center space-x-2">
-                        <button class="p-2 text-gray-500 hover:text-primary transition duration-200">
-                            <i class="fas fa-paperclip"></i>
-                        </button>
-                        <input type="text" id="messageInput" placeholder="Type a message..."
-                            class="flex-grow px-4 py-2 rounded-full border border-gray-300 dark:border-gray-600 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary">
-                        <button id="sendMessageBtn"
-                            class="p-2 bg-primary text-white rounded-full hover:bg-opacity-90 transition duration-200">
-                            <i class="fas fa-paper-plane"></i>
-                        </button>
-                    </div>
                 </div>
             </div>
+
+ <div id="allDoctorsList" class="chat-list divide-y divide-gray-200 dark:divide-gray-800 hidden">
+    @foreach ($allDoctors as $allDoctor)
+        <div class="chat-item flex items-center p-3 hover:bg-gray-100 dark:hover:bg-gray-800 cursor-pointer transition duration-200">
+            <div class="relative">
+                <img src="{{ asset('storage/' . $allDoctor->profile_picture) }}" alt="Doctor"
+                     class="w-12 h-12 rounded-full object-cover">
+                @auth
+                    <span class="absolute bottom-0 right-0 bg-green-500 h-3 w-3 rounded-full border-2 border-white dark:border-gray-800"></span>
+                @endauth
+            </div>
+            <div class="ml-3 w-full">
+                <div class="flex justify-between">
+                    <h4 class="font-medium text-gray-900 dark:text-white">{{ $allDoctor->name }}</h4>
+                    <span class="text-xs text-gray-500">8:15 AM</span>
+                </div>
+                <span>{{$allDoctor->specialization}}</span>
+            </div>
+        </div>
+    @endforeach
+</div>
+
         </div>
     </div>
 
+    <!-- Individual Chat Section -->
+    <div id="individualChat" class="flex-grow flex flex-col bg-gray-100 dark:bg-gray-900 md:flex hidden md:w-2/3 lg:w-3/4">
+        <!-- Header -->
+        <div class="p-4 bg-primary text-white flex items-center shadow">
+            <button id="backToChatList" class="mr-3 block md:hidden">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+            <div class="flex items-center flex-grow">
+                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Doctor" id="chatDoctorImage"
+                    class="w-10 h-10 rounded-full object-cover doctor-image">
+                <div class="ml-3">
+                    <h3 id="chatDoctorName" class="font-semibold doctor-name">Dr. Marcus Johnson</h3>
+                    <div class="flex items-center text-xs">
+                        <span class="bg-green-500 h-2 w-2 rounded-full mr-1"></span>
+                        <span>Online now</span>
+                    </div>
+                </div>
+            </div>
+        </div>
 
+        <!-- Chat Messages -->
+        <div id="chatMessages" class="p-4 flex-grow space-y-3 overflow-y-auto">
+            <!-- Message from doctor -->
+            <div class="chat-message received p-3 bg-white dark:bg-gray-800 rounded-lg">
+                <p>Hello! How can I help you today?</p>
+                <p class="text-xs text-right mt-1 text-gray-500">9:42 AM</p>
+            </div>
+
+            <!-- Message from patient -->
+            <div class="chat-message sent p-3 bg-primary text-white rounded-lg">
+                <p>I have a headache and fever.</p>
+                <p class="text-xs text-right mt-1 text-white text-opacity-70">9:43 AM</p>
+            </div>
+        </div>
+
+        <!-- Chat Input -->
+        <div class="p-3 bg-white dark:bg-dark-card border-t border-gray-200 dark:border-gray-700">
+            <div class="flex items-center space-x-2">
+                <button class="p-2 text-gray-500 hover:text-primary transition duration-200">
+                    <i class="fas fa-paperclip"></i>
+                </button>
+                <input type="text" id="messageInput" placeholder="Type a message..."
+                    class="flex-grow px-4 py-2 rounded-full border border-gray-300 dark:border-gray-600 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary">
+                <button id="sendMessageBtn"
+                    class="p-2 bg-primary text-white rounded-full hover:bg-opacity-90 transition duration-200">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 
     <!-- User Profile Modal -->
     <div id="profileModal" class="modal fixed h-full inset-0 z-50 flex items-center justify-center hidden">
@@ -1775,7 +1687,7 @@
             </div>
 
             <div id="" class="mt-6 text-center">
-          <a href="{{route('showBookingForm')}}">
+          <a href="">
 
                 <button class="px-6 py-2 bg-primary text-white rounded-lg hover:bg-opacity-90 transition-colors">
                     <i class="fas fa-plus mr-1"></i> Schedule New Appointment
@@ -3140,7 +3052,7 @@
     <script>
         // Chat functionality
         document.addEventListener('DOMContentLoaded', function() {
-            const chatList = document.querySelector('.chat-list');
+            
             const individualChat = document.getElementById('individualChat');
             const emptyChatState = document.getElementById('emptyChatState');
             const activeChat = document.getElementById('activeChat');
@@ -3150,22 +3062,8 @@
             const chatTabs = document.querySelectorAll('.chat-tab');
             const recentChats = document.querySelector('.chat-list');
             const allDoctorsList = document.querySelector('.all-doctors-list');
+            const chatList = document.querySelector('.chat-list');
 
-            // Tab switching
-            chatTabs.forEach(tab => {
-                tab.addEventListener('click', () => {
-                    chatTabs.forEach(t => t.classList.remove('border-primary', 'text-primary'));
-                    tab.classList.add('border-primary', 'text-primary');
-
-                    if (tab.textContent === 'Recent') {
-                        recentChats.classList.remove('hidden');
-                        allDoctorsList.classList.add('hidden');
-                    } else {
-                        recentChats.classList.add('hidden');
-                        allDoctorsList.classList.remove('hidden');
-                    }
-                });
-            });
 
             // Chat selection
             document.querySelectorAll('.chat-item, .doctor-item').forEach(item => {
@@ -3190,30 +3088,10 @@
 
                     // Clear previous messages
                     chatMessages.innerHTML = '';
-
-                    // Add welcome message
-                    addMessage('Hello! How can I help you today?', 'received');
                 });
             });
 
-            // Send message
-            function sendMessage() {
-                const message = messageInput.value.trim();
-                if (message) {
-                    addMessage(message, 'sent');
-                    messageInput.value = '';
-
-                    // Simulate typing indicator
-                    showTypingIndicator();
-
-                    // Simulate response after 1-2 seconds
-                    setTimeout(() => {
-                        removeTypingIndicator();
-                        addMessage('Thank you for your message. I will get back to you shortly.',
-                            'received');
-                    }, Math.random() * 1000 + 1000);
-                }
-            }
+    
 
             // Add message to chat
             function addMessage(text, type) {
@@ -3238,23 +3116,7 @@
                 chatMessages.scrollTop = chatMessages.scrollHeight;
             }
 
-            // Show typing indicator
-            function showTypingIndicator() {
-                const indicator = document.createElement('div');
-                indicator.className = 'typing-indicator';
-                indicator.innerHTML = '<span></span><span></span><span></span>';
-                chatMessages.appendChild(indicator);
-                chatMessages.scrollTop = chatMessages.scrollHeight;
-            }
-
-            // Remove typing indicator
-            function removeTypingIndicator() {
-                const indicator = chatMessages.querySelector('.typing-indicator');
-                if (indicator) {
-                    indicator.remove();
-                }
-            }
-
+     
             // Event listeners
             sendMessageBtn.addEventListener('click', sendMessage);
             messageInput.addEventListener('keypress', (e) => {
@@ -3358,232 +3220,7 @@
                 }, 300);
             });
 
-            // Chat panel functionality
-            const chatBtn = document.getElementById('chatBtn');
-
-            const closeChatBtn = document.getElementById('closeChatBtn');
-            const chatItems = document.querySelectorAll('.chat-item');
-            const individualChat = document.getElementById('individualChat');
-            const backToChatList = document.getElementById('backToChatList');
-            const chatDoctorName = document.getElementById('chatDoctorName');
-            const chatDoctorImage = document.getElementById('chatDoctorImage');
-            const chatMessages = document.getElementById('chatMessages');
-            const messageInput = document.getElementById('messageInput');
-            const sendMessageBtn = document.getElementById('sendMessageBtn');
-
-            // Sample chat data
-            const chatData = {
-                1: { // Dr. Marcus Johnson
-                    name: "Dr. Marcus Johnson",
-                    image: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-                    status: "online",
-                    messages: [{
-                            sender: "doctor",
-                            content: "Hello Michael, how can I help you today?",
-                            time: "9:30 AM"
-                        },
-                        {
-                            sender: "user",
-                            content: "Hi Dr. Johnson, I've been experiencing some chest pain after exercising.",
-                            time: "9:32 AM"
-                        },
-                        {
-                            sender: "doctor",
-                            content: "I'm sorry to hear that. Can you describe the pain? Is it sharp, dull, or pressure-like?",
-                            time: "9:33 AM"
-                        },
-                        {
-                            sender: "user",
-                            content: "It's more like a pressure that lasts for about 5-10 minutes after I stop exercising.",
-                            time: "9:35 AM"
-                        },
-                        {
-                            sender: "doctor",
-                            content: "Thank you for that description. Does it radiate to your arm, jaw, or back?",
-                            time: "9:36 AM"
-                        },
-                        {
-                            sender: "user",
-                            content: "No, it stays in my chest area.",
-                            time: "9:37 AM"
-                        },
-                        {
-                            sender: "doctor",
-                            content: "I'll send your prescription to your local pharmacy. You should be able to pick it up within an hour.",
-                            time: "9:39 AM",
-                            unread: true
-                        },
-                        {
-                            sender: "doctor",
-                            content: "Also, please make sure to schedule a follow-up appointment for next week so we can check your progress.",
-                            time: "9:41 AM",
-                            unread: true
-                        }
-                    ]
-                },
-                2: { // Dr. Olivia Williams
-                    name: "Dr. Olivia Williams",
-                    image: "https://images.unsplash.com/photo-1594824476967-48c8b964273f?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80",
-                    status: "offline",
-                    messages: [{
-                        sender: "doctor",
-                        content: "Hi Michael, based on our last appointment, I'd like to schedule a follow-up to check how your child is responding to the new medication.",
-                        time: "Yesterday",
-                        unread: true
-                    }]
-                },
-                4: { // Dr. Jasmine Carter
-                    name: "Dr. Jasmine Carter",
-                    image: "https://images.unsplash.com/photo-1607746882042-944635dfe10e?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80",
-                    status: "online",
-                    messages: [{
-                            sender: "doctor",
-                            content: "Hello Michael! I've reviewed your lab results from last week.",
-                            time: "Tuesday"
-                        },
-                        {
-                            sender: "doctor",
-                            content: "Your blood work looks good, but there's a slight elevation in your vitamin D levels that we should discuss during your next visit.",
-                            time: "Tuesday"
-                        },
-                        {
-                            sender: "user",
-                            content: "Thanks Dr. Carter! When would be a good time to schedule that appointment?",
-                            time: "Tuesday"
-                        },
-                        {
-                            sender: "doctor",
-                            content: "I have openings next Monday or Wednesday afternoon. Would either of those work for you?",
-                            time: "Tuesday"
-                        }
-                    ]
-                }
-            };
-
-            // Open chat panel
-            chatBtn.addEventListener('click', function() {
-                chatPanel.classList.add('active');
-            });
-
-            // Close chat panel
-            closeChatBtn.addEventListener('click', function() {
-                chatPanel.classList.remove('active');
-            });
-
-            // Open individual chat
-            chatItems.forEach(item => {
-                item.addEventListener('click', function() {
-                    const doctorId = this.dataset.doctorId;
-                    const doctor = chatData[doctorId];
-
-                    if (doctor) {
-                        chatDoctorName.textContent = doctor.name;
-                        chatDoctorImage.src = doctor.image;
-
-                        // Clear existing messages
-                        chatMessages.innerHTML = '';
-
-                        // Add messages to chat
-                        doctor.messages.forEach(msg => {
-                            const messageEl = document.createElement('div');
-                            messageEl.className =
-                                `chat-message ${msg.sender === 'user' ? 'sent' : 'received'} p-3 rounded-lg ${msg.unread ? 'font-semibold' : ''}`;
-
-                            messageEl.innerHTML = `
-                                <p>${msg.content}</p>
-                                <p class="text-xs text-right mt-1 ${msg.sender === 'user' ? 'text-white text-opacity-70' : 'text-gray-500 dark:text-gray-400'}">${msg.time}</p>
-                            `;
-
-                            chatMessages.appendChild(messageEl);
-                        });
-
-                        // Add typing indicator if first doctor (for demo purposes)
-                        if (doctorId === '1') {
-                            const typingIndicator = document.createElement('div');
-                            typingIndicator.className = 'chat-message received p-3 rounded-lg';
-                            typingIndicator.innerHTML = `
-                                <div class="typing-indicator">
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                </div>
-                            `;
-                            chatMessages.appendChild(typingIndicator);
-                        }
-
-                        // Scroll to bottom of chat
-                        chatMessages.scrollTop = chatMessages.scrollHeight;
-
-                        // Show individual chat
-                        individualChat.classList.remove('hidden');
-                    }
-                });
-            });
-
-            // Back to chat list
-            backToChatList.addEventListener('click', function() {
-                individualChat.classList.add('hidden');
-            });
-
-            // Send message
-            sendMessageBtn.addEventListener('click', function() {
-                sendMessage();
-            });
-
-            messageInput.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    sendMessage();
-                }
-            });
-
-            function sendMessage() {
-                const messageText = messageInput.value.trim();
-                if (messageText) {
-                    // Create new message element
-                    const messageEl = document.createElement('div');
-                    messageEl.className = 'chat-message sent p-3 rounded-lg';
-
-                    const currentTime = new Date();
-                    const timeString = currentTime.getHours() + ':' + (currentTime.getMinutes() < 10 ? '0' : '') +
-                        currentTime.getMinutes();
-
-                    messageEl.innerHTML = `
-                        <p>${messageText}</p>
-                        <p class="text-xs text-right mt-1 text-white text-opacity-70">${timeString}</p>
-                    `;
-
-                    chatMessages.appendChild(messageEl);
-
-                    // Clear input
-                    messageInput.value = '';
-
-                    // Scroll to bottom of chat
-                    chatMessages.scrollTop = chatMessages.scrollHeight;
-
-                    // Simulate doctor response after a delay (for demo)
-                    setTimeout(() => {
-                        const typingIndicator = document.createElement('div');
-                        typingIndicator.className = 'chat-message received p-3 rounded-lg';
-                        typingIndicator.innerHTML = `
-                            <div class="typing-indicator">
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                            </div>
-                        `;
-                        chatMessages.appendChild(typingIndicator);
-                        chatMessages.scrollTop = chatMessages.scrollHeight;
-
-                        // Replace typing indicator with response after a delay
-                        setTimeout(() => {
-                            typingIndicator.innerHTML = `
-                                <p>Thanks for your message. I'll review this and get back to you shortly.</p>
-                                <p class="text-xs text-right mt-1 text-gray-500 dark:text-gray-400">${timeString}</p>
-                            `;
-                        }, 2000);
-                    }, 1000);
-                }
-            }
+           
 
             // User profile dropdown
             const accountBtn = document.getElementById('accountBtn');
@@ -3993,86 +3630,7 @@
                         }
                     }
 
-                    // Favorite button functionality
-                    const favoriteButton = e.target.closest('.favorite-btn');
-                    if (favoriteButton) {
-                        const icon = favoriteButton.querySelector('i');
-
-                        // Toggle favorite state
-                        if (icon.classList.contains('far')) {
-                            icon.classList.remove('far');
-                            icon.classList.add('fas', 'text-red-500');
-                        } else {
-                            icon.classList.remove('fas', 'text-red-500');
-                            icon.classList.add('far');
-                        }
-                    }
-
-                    // Chat button functionality
-                    const chatBtn = e.target.closest('.chat-doctor-btn');
-                    if (chatBtn) {
-                        const doctorCard = chatBtn.closest('.doctor-card');
-                        const doctorId = doctorCard.dataset.id;
-                        const doctor = doctorsData.find(d => d.id == doctorId);
-
-                        if (doctor) {
-                            // Open chat panel and start chat with this doctor
-                            chatPanel.classList.add('active');
-
-                            // Check if this doctor already has a chat
-                            if (chatData[doctorId]) {
-                                // Find the chat item for this doctor
-                                const chatItem = document.querySelector(
-                                    `.chat-item[data-doctor-id="${doctorId}"]`);
-                                if (chatItem) {
-                                    chatItem.click();
-                                } else {
-                                    // If no existing chat item, create one
-                                    chatDoctorName.textContent = doctor.name;
-                                    chatDoctorImage.src = doctor.image;
-                                    chatMessages.innerHTML = '';
-                                    individualChat.classList.remove('hidden');
-                                }
-                            } else {
-                                // Create a new chat with this doctor
-                                chatDoctorName.textContent = doctor.name;
-                                chatDoctorImage.src = doctor.image;
-                                chatMessages.innerHTML = '';
-
-                                // Add initial message
-                                const messageEl = document.createElement('div');
-                                messageEl.className = 'chat-message received p-3 rounded-lg';
-                                messageEl.innerHTML = `
-                                    <p>Hello! How can I help you today?</p>
-                                    <p class="text-xs text-right mt-1 text-gray-500 dark:text-gray-400">Just now</p>
-                                `;
-                                chatMessages.appendChild(messageEl);
-
-                                individualChat.classList.remove('hidden');
-                            }
-                        }
-                    }
-
-                    // Call doctor button functionality
-                    const callBtn = e.target.closest('.call-doctor-btn');
-                    if (callBtn) {
-                        const doctorCard = callBtn.closest('.doctor-card');
-                        const doctorName = doctorCard.querySelector('.doctor-name').textContent.trim();
-
-                        alert(`Starting video call with ${doctorName}`);
-                    }
-
-                    // Book appointment button functionality
-                    const bookBtn = e.target.closest('.book-btn');
-                    if (bookBtn) {
-                        const doctorCard = bookBtn.closest('.doctor-card');
-                        const doctorId = doctorCard.dataset.id;
-                        const doctor = doctorsData.find(d => d.id == doctorId);
-
-                        if (doctor) {
-                            appointmentsModal.classList.remove('hidden');
-                        }
-                    }
+                    
                 });
             }
         });
@@ -4158,6 +3716,62 @@
             }
         });
     });
+
+    const recentTab = document.getElementById('recentTab');
+const allDoctorsTab = document.getElementById('allDoctorsTab');
+const recentChats = document.getElementById('recentChats');
+const allDoctorsList = document.getElementById('allDoctorsList');
+
+recentTab.addEventListener('click', () => {
+    recentTab.classList.add('border-primary', 'text-primary');
+    allDoctorsTab.classList.remove('border-primary', 'text-primary');
+    recentChats.classList.remove('hidden');
+    allDoctorsList.classList.add('hidden');
+});
+
+allDoctorsTab.addEventListener('click', () => {
+    allDoctorsTab.classList.add('border-primary', 'text-primary');
+    recentTab.classList.remove('border-primary', 'text-primary');
+    allDoctorsList.classList.remove('hidden');
+    recentChats.classList.add('hidden');
+});
+
+// Doctor selection
+const chatItems = document.querySelectorAll('.chat-item');
+chatItems.forEach(item => {
+    item.addEventListener('click', () => {
+        document.getElementById('individualChat').classList.remove('hidden');
+        document.getElementById('chatDoctorName').textContent = item.querySelector('h4').textContent;
+        document.getElementById('chatDoctorImage').src = item.querySelector('img').src;
+        document.querySelectorAll('.chat-item').forEach(i => i.classList.remove('bg-gray-100', 'dark:bg-gray-800'));
+        item.classList.add('bg-gray-100', 'dark:bg-gray-800');
+    });
+});
+
+
+
+// Send button functionality
+const sendMessageBtn = document.getElementById('sendMessageBtn');
+const messageInput = document.getElementById('messageInput');
+const chatMessages = document.getElementById('chatMessages');
+
+function sendMessage() {
+    const messageText = messageInput.value.trim();
+    if (!messageText) return;
+
+    const messageEl = document.createElement('div');
+    messageEl.className = 'chat-message sent p-3 bg-primary text-white rounded-lg';
+    messageEl.innerHTML = `<p>${messageText}</p><p class="text-xs text-right mt-1 text-white text-opacity-70">${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>`;
+
+    chatMessages.appendChild(messageEl);
+    messageInput.value = '';
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+sendMessageBtn.addEventListener('click', sendMessage);
+messageInput.addEventListener('keypress', e => {
+    if (e.key === 'Enter') sendMessage();
+});
     </script>
 </body>
 
