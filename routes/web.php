@@ -26,7 +26,7 @@ Route::post('/blogs', [LandingPageController::class, 'blogs'])->name('blogs');
 Route::post('/testimony', [LandingPageController::class, 'testimony'])->name('testimony');
 Route::get('/index', [LandingPageController::class, 'Index'])->name('showLanding');
 Route::get('/user/index', [PatientController::class, 'UserIndex'])->name('ShowUserLanding');
-Route::post('/register', [AuthController::class, 'register'])->name('register')->middleware('web');
+Route::get('/register', [AuthController::class, 'register'])->name('register')->middleware('web');
 Route::post('/login', [AuthController::class, 'login'])->name('login')->middleware('web');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
@@ -45,6 +45,6 @@ Route::post('/dashboard/logout', [DoctorsDashboardController::class, 'logout'])-
 
 //Route::get('/chat', [ChatController::class, 'index']);
 //Route::post('/chat', [ChatController::class, 'chat']);
-Route::view('/index', 'welcome'); 
+Route::view('/chat', 'welcome'); 
 
 

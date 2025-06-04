@@ -16,10 +16,13 @@ return new class extends Migration
     $table->foreignId('conversation_id')->constrained('conversations')->onDelete('cascade');
     $table->foreignId('sender_id')->constrained('users')->onDelete('cascade');
     $table->foreignId('receiver_id')->constrained('users')->onDelete('cascade');
-    $table->boolean('read')->default(false);
+    $table->boolean('read_at')->default(false);
     $table->text('body')->nullable();
-    $table->string('type')->nullable();
+    
     $table->timestamps();
+
+    $table->timestamps('reveiver_deleted_at')->nullable();
+     $table->timestamps('sender_deleted_at')->nullable();
 });
 
     }
