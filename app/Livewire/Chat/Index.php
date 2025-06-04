@@ -4,10 +4,10 @@ namespace App\Livewire\Chat;
 
 use Livewire\Component;
 
-class SendMessage extends Component
+class Index extends Component
 {
     public function render()
     {
-        return view('livewire.chat.send-message');
+        return view('livewire.chat.index');
     }
 }

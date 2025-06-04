@@ -1,4 +1,5 @@
 <?php
+use App\Http\Livewire\Index;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\DoctorsDashboardController;
 use App\Http\Controllers\User\AuthController;
@@ -42,6 +43,8 @@ Route::post('/dashboard/logout', [DoctorsDashboardController::class, 'logout'])-
 
 //open ai routes
 
-Route::get('/chat', [ChatController::class, 'index']);
-Route::post('/chat', [ChatController::class, 'chat']);
+//Route::get('/chat', [ChatController::class, 'index']);
+//Route::post('/chat', [ChatController::class, 'chat']);
+Route::view('/index', 'welcome'); 
+
 
